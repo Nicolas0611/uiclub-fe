@@ -1,14 +1,9 @@
 "use client";
 
+import { LinkItemProps } from "@/interfaces/link-item-interface";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { JSX } from "react";
 
-interface LinkItemProps {
-  path: string;
-  icon: JSX.Element;
-  title: string;
-}
 const LinkItem = ({ path, icon, title }: LinkItemProps) => {
   const currentPath = usePathname();
   const isActivePath = currentPath === path;

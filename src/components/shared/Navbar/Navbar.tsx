@@ -32,7 +32,7 @@ const links = [
 
 const Navbar = () => {
   return (
-    <header className="h-20 justify-between items-center flex  px-20 ">
+    <header className="h-20 justify-between items-center flex  px-20">
       <Link href="/">
         <Image src="/logo.svg" alt="logo" width={130} height={130} />
       </Link>
