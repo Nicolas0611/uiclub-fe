@@ -15,7 +15,7 @@ RUN \
   fi
 
 # Copy application files
-COPY . .
+COPY . /app
 
 # Expose the development port
 EXPOSE 3000
