@@ -1,5 +1,6 @@
 import ProfileContainer from "@/components/custom/ProfileContainer";
 
+//Todo Add Metadata.
 export default function Home() {
   return (
     <section className="py-10 px-20">
