@@ -1,32 +1,23 @@
 import Image from "next/image";
 import LinkItem from "./LinkItem";
-import {
-  DocumentTextIcon,
-  NewspaperIcon,
-  DocumentPlusIcon,
-} from "@heroicons/react/24/outline";
 import Link from "next/link";
 
 const links = [
   {
     path: "/blog",
     title: "Blog",
-    icon: <DocumentTextIcon className="size-6" />,
   },
   {
     path: "/news",
     title: "News",
-    icon: <NewspaperIcon />,
   },
   {
     path: "/latest",
     title: "Latest",
-    icon: <DocumentPlusIcon />,
   },
   {
-    path: "/designsystems",
+    path: "/design-systems",
     title: "Design Systems",
-    icon: <DocumentPlusIcon />,
   },
 ];
 
@@ -38,12 +29,7 @@ const Navbar = () => {
       </Link>
       <ul className="flex gap-4">
         {links.map((link) => (
-          <LinkItem
-            key={link.path}
-            path={link.path}
-            icon={link.icon}
-            title={link.title}
-          />
+          <LinkItem key={link.path} path={link.path} title={link.title} />
         ))}
       </ul>
     </header>

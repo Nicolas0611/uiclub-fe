@@ -6,7 +6,9 @@ export default function Home() {
     <section className="py-10 px-20">
       <div className="flex gap-4">
         <ProfileContainer />
-        <div className="bg-slate-600 w-1/2">hola</div>
+        <div className="bg-white border-2 border-neutral-100 rounded-xl w-1/2">
+          hola
+        </div>
       </div>
     </section>
   );
