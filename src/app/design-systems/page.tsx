@@ -1,11 +1,30 @@
-function DesignSystemsPage() {
+import { https } from "@/lib/axios";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Design Systems",
+  description: "Design System Descripton for metadata",
+};
+const fetchDesignSystems = async () => {
+  try {
+    const response = await https.get("design-libraries/design-systems/");
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching design systems:", error);
+    console.log(error);
+  }
+};
+
+async function DesignSystemsPage() {
+  await fetchDesignSystems();
   return (
-    <section className="py-10 px-20">
+    <section className="container mx-auto px-4 py-10">
       <div className="flex flex-col gap-5">
         <span className="text-base text-primary font-semibold">
           2024 · Design Systems and UI Libraries
         </span>
-        <h2 className="text-5xl">List of the top 20 Benchmark Systems</h2>
+        <h2 className="text-4xl">List of the top 20 Benchmark Systems</h2>
         <p className="text-neutral-500 w-3/4">
           This is the list of the most popular Design Systems and UI libraries,
           used as the leading Systems Benchmarks by thousands of companies,
