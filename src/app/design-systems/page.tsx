@@ -1,23 +1,35 @@
+import { DesignSystem } from "@/interfaces/design-system-interface";
 import { https } from "@/lib/axios";
+import {
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Divider,
+  Image,
+  Link,
+} from "@heroui/react";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Design Systems",
   description: "Design System Descripton for metadata",
 };
-const fetchDesignSystems = async () => {
+const fetchDesignSystems = async (): Promise<DesignSystem[]> => {
   try {
-    const response = await https.get("design-libraries/design-systems/");
+    const response = await https.get<DesignSystem[]>(
+      "design-libraries/design-systems/"
+    );
     console.log(response.data);
-    return response.data;
+    return response.status === 200 ? response.data : [];
   } catch (error) {
     console.error("Error fetching design systems:", error);
-    console.log(error);
+    return [];
   }
 };
 
 async function DesignSystemsPage() {
-  await fetchDesignSystems();
+  const designSystems = await fetchDesignSystems();
   return (
     <section className="container mx-auto px-4 py-10">
       <div className="flex flex-col gap-5">
@@ -34,7 +46,41 @@ async function DesignSystemsPage() {
           Atlassian, Airbnb, and IBM, among others.
         </p>
       </div>
-      <main>components here</main>
+      <main className="grid grid-cols-3 gap-2 py-10">
+        {designSystems.map((designSystem) => (
+          <Card key={designSystem.id} shadow="sm" className="max-w-[400px]">
+            <CardHeader className="flex gap-3">
+              <Image
+                alt="heroui logo"
+                height={40}
+                radius="sm"
+                src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
+                width={40}
+              />
+              <div className="flex flex-col">
+                <p className="text-md">HeroUI</p>
+                <p className="text-small text-default-500">heroui.com</p>
+              </div>
+            </CardHeader>
+            <Divider />
+            <CardBody>
+              <p className="text-sm">
+                Make beautiful websites regardless of your design experience.
+              </p>
+            </CardBody>
+            <Divider />
+            <CardFooter>
+              <Link
+                isExternal
+                showAnchorIcon
+                href="https://github.com/heroui-inc/heroui"
+              >
+                Visit source code on GitHub.
+              </Link>
+            </CardFooter>
+          </Card>
+        ))}
+      </main>
     </section>
   );
 }

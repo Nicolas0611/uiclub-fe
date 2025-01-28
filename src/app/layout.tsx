@@ -1,7 +1,8 @@
+import { Navbar } from "@/components/shared";
+import { HeroUIProviders } from "@/providers/HeroUIProvider";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/components/shared";
 
 const poppins = Poppins({ weight: ["400", "700"], subsets: ["latin"] });
 
@@ -16,10 +17,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="light">
       <body className={`${poppins.className} antialiased bg-background`}>
-        <Navbar />
-        {children}
+        <HeroUIProviders>
+          <Navbar />
+          {children}
+        </HeroUIProviders>
       </body>
     </html>
   );

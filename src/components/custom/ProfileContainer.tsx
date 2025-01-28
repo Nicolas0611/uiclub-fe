@@ -1,13 +1,12 @@
+import { Card, CardBody, CardFooter, CardHeader } from "@heroui/react";
 import Image from "next/image";
-import React from "react";
-import LinkButton from "../shared/LinkButton/LinkButton";
-import { LinkItemProps } from "@/interfaces/link-item-interface";
+import Button, { ButtonProps } from "../shared/Button/Button";
 
 const ProfileContainer = () => {
   interface ContentProps {
     title: string;
     description: string;
-    links: LinkItemProps[];
+    links: ButtonProps[];
   }
   const content: ContentProps = {
     title: "Welcome to UI Club",
@@ -16,44 +15,49 @@ const ProfileContainer = () => {
     links: [
       {
         title: "View Components",
-        variant: "contained",
+        variant: "solid",
         path: "/design-systems",
       },
       {
         title: "View Design News",
-        variant: "outlined",
+        variant: "bordered",
         path: "/design-systems",
       },
     ],
   };
 
   return (
-    <section className="flex flex-col items-center py-20 gap-7 bg-white border-2 border-neutral-100 w-full flex-grow rounded-xl ">
-      <Image
-        src="/logoProfile.svg"
-        alt="profile"
-        width={120}
-        height={120}
-        className="rounded-full"
-      />
-      <div className="flex flex-col items-center gap-1">
-        <h1 className="capitalized text-2xl">{content.title}</h1>
-        <p className="capitalized text-neutral-500 text-center w-2/4">
-          {content.description}
-        </p>
-      </div>
-
-      <div className="flex gap-3">
-        {content.links.map((link, index) => (
-          <LinkButton
-            key={`link_${index}`}
-            path={link.path}
-            title={link.title}
-            variant={link.variant}
-          />
-        ))}
-      </div>
-    </section>
+    <Card shadow="sm" className="w-full flex-grow p-5 gap-1">
+      <CardHeader className="justify-center">
+        <Image
+          src="/logoProfile.svg"
+          alt="profile"
+          width={120}
+          height={120}
+          className="rounded-full"
+        />
+      </CardHeader>
+      <CardBody>
+        <div className="flex flex-col gap-2 align-center justify-center">
+          <p className="text-2xl text-center">{content.title}</p>
+          <p className="text-small text-default-500  text-center px-10">
+            {content.description}
+          </p>
+        </div>
+      </CardBody>
+      <CardFooter className="justify-center">
+        <div className="flex gap-3">
+          {content.links.map((link, index) => (
+            <Button
+              key={`link_${index}`}
+              path={link.path}
+              title={link.title}
+              variant={link.variant}
+            />
+          ))}
+        </div>
+      </CardFooter>
+    </Card>
   );
 };
 
