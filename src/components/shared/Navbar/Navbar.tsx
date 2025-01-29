@@ -1,6 +1,6 @@
 import Image from "next/image";
-import LinkItem from "./LinkItem";
 import Link from "next/link";
+import LinkItem from "./LinkItem";
 
 const links = [
   {
@@ -23,7 +23,7 @@ const links = [
 
 const Navbar = () => {
   return (
-    <header className="container mx-auto px-4 h-20 justify-between items-center flex">
+    <header className="container mx-auto px-4 h-20 justify-between items-center flex z-40">
       <Link href="/">
         <Image src="/logo.svg" alt="logo" width={130} height={130} />
       </Link>

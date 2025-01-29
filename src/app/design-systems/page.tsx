@@ -1,5 +1,4 @@
-import { Card } from "@/components/shared/Card/Card";
-import { CardBody } from "@/design-systems/components/CardBody/CardBody";
+import { DesignSystemGrid } from "@/design-systems/components/DesignSystemGrid/DesignSystemGrid";
 import { DesignSystem } from "@/interfaces/design-system-interface";
 import { https } from "@/lib/axios";
 import { Metadata } from "next";
@@ -24,14 +23,16 @@ const fetchDesignSystems = async (): Promise<DesignSystem[]> => {
 
 async function DesignSystemsPage() {
   const designSystems = await fetchDesignSystems();
+  //TODO: CREATE LAYOUT COMPONENT AND FIX GRADIENT
   return (
-    <section className="container mx-auto px-4 py-10">
+    <section className="relative container mx-auto px-4 py-10 ">
+      <div className="absolute -right-60 h-60 w-[36rem] transform-gpu md:bg-[linear-gradient(115deg,var(--tw-gradient-stops))] from-[#fff1be] from-28% via-[#ee87cb] via-70% to-[#b060ff] rotate-[-10deg] rounded-full blur-3xl "></div>
       <div className="flex flex-col gap-5">
         <span className="text-base text-primary font-semibold">
           2024 · Design Systems and UI Libraries
         </span>
         <h2 className="text-4xl">List of the top 20 Benchmark Systems</h2>
-        <p className="text-neutral-500 w-3/4">
+        <p className="text-neutral-500 w-[65%]">
           This is the list of the most popular Design Systems and UI libraries,
           used as the leading Systems Benchmarks by thousands of companies,
           startups, designers, and developers around the world. This list is the
@@ -40,17 +41,7 @@ async function DesignSystemsPage() {
           Atlassian, Airbnb, and IBM, among others.
         </p>
       </div>
-      <main className="grid grid-cols-3 sm:grid sm:grid-cols-1 gap-2 py-10">
-        {designSystems.map((designSystem) => (
-          <Card
-            key={designSystem.id}
-            title={designSystem.name}
-            description={designSystem.description}
-            url={designSystem.company_name}
-            slot={<CardBody quantity={designSystem.quantity_components} />}
-          />
-        ))}
-      </main>
+      <DesignSystemGrid designSystems={designSystems} />
     </section>
   );
 }

@@ -30,8 +30,8 @@ export const Card = ({
     <HeroCard
       isHoverable={isHoverable}
       isPressable={isPressable}
-      shadow="sm"
-      className="max-w-[400px]"
+      shadow="none"
+      className="max-w-[400px] border-1 border-solid border-gray-200"
     >
       <CardHeader className="flex gap-3">
         <Image

@@ -6,7 +6,10 @@ export interface DesignSystem {
   name: string;
   version: string;
   quantity_components: number;
+  popularity: Popularity;
 }
+
+export type Popularity = "Medium" | "High" | "Low";
 
 export interface Component {
   name: string;
