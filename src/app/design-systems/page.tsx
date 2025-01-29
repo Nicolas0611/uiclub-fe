@@ -1,20 +1,15 @@
+import { Card } from "@/components/shared/Card/Card";
+import { CardBody } from "@/design-systems/components/CardBody/CardBody";
 import { DesignSystem } from "@/interfaces/design-system-interface";
 import { https } from "@/lib/axios";
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Divider,
-  Image,
-  Link,
-} from "@heroui/react";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Design Systems",
   description: "Design System Descripton for metadata",
 };
+
+//todo: replace with server actions?
 const fetchDesignSystems = async (): Promise<DesignSystem[]> => {
   try {
     const response = await https.get<DesignSystem[]>(
@@ -22,9 +17,8 @@ const fetchDesignSystems = async (): Promise<DesignSystem[]> => {
     );
     console.log(response.data);
     return response.status === 200 ? response.data : [];
-  } catch (error) {
-    console.error("Error fetching design systems:", error);
-    return [];
+  } catch {
+    throw "Error fetching design systems:";
   }
 };
 
@@ -46,39 +40,15 @@ async function DesignSystemsPage() {
           Atlassian, Airbnb, and IBM, among others.
         </p>
       </div>
-      <main className="grid grid-cols-3 gap-2 py-10">
+      <main className="grid grid-cols-3 sm:grid sm:grid-cols-1 gap-2 py-10">
         {designSystems.map((designSystem) => (
-          <Card key={designSystem.id} shadow="sm" className="max-w-[400px]">
-            <CardHeader className="flex gap-3">
-              <Image
-                alt="heroui logo"
-                height={40}
-                radius="sm"
-                src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
-                width={40}
-              />
-              <div className="flex flex-col">
-                <p className="text-md">HeroUI</p>
-                <p className="text-small text-default-500">heroui.com</p>
-              </div>
-            </CardHeader>
-            <Divider />
-            <CardBody>
-              <p className="text-sm">
-                Make beautiful websites regardless of your design experience.
-              </p>
-            </CardBody>
-            <Divider />
-            <CardFooter>
-              <Link
-                isExternal
-                showAnchorIcon
-                href="https://github.com/heroui-inc/heroui"
-              >
-                Visit source code on GitHub.
-              </Link>
-            </CardFooter>
-          </Card>
+          <Card
+            key={designSystem.id}
+            title={designSystem.name}
+            description={designSystem.description}
+            url={designSystem.company_name}
+            slot={<CardBody quantity={designSystem.quantity_components} />}
+          />
         ))}
       </main>
     </section>
