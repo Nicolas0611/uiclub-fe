@@ -1,24 +1,10 @@
+import { fetchDesignSystems } from "@/design-systems/actions/design-actions";
 import { DesignSystemGrid } from "@/design-systems/components/DesignSystemGrid/DesignSystemGrid";
-import { DesignSystem } from "@/interfaces/design-system-interface";
-import { https } from "@/lib/axios";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Design Systems",
   description: "Design System Descripton for metadata",
-};
-
-//todo: replace with server actions?
-const fetchDesignSystems = async (): Promise<DesignSystem[]> => {
-  try {
-    const response = await https.get<DesignSystem[]>(
-      "design-libraries/design-systems/"
-    );
-    console.log(response.data);
-    return response.status === 200 ? response.data : [];
-  } catch {
-    throw "Error fetching design systems:";
-  }
 };
 
 async function DesignSystemsPage() {
