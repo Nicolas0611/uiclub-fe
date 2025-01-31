@@ -8,7 +8,7 @@ interface DSGripdProps {
 }
 export const DesignSystemGrid = ({ designSystems }: DSGripdProps) => {
   return (
-    <section className="flex flex-col gap-5 py-12">
+    <section className="flex flex-col gap-4 py-12">
       <h3 className="text-lg">Top Design Systems</h3>
       <Divider />
       <div className="grid grid-cols-3 gap-2 ">
@@ -22,6 +22,7 @@ export const DesignSystemGrid = ({ designSystems }: DSGripdProps) => {
               <CardBody
                 quantity={designSystem.quantity_components}
                 popularity={designSystem.popularity}
+                is_updated={designSystem.is_updated}
               />
             }
           />

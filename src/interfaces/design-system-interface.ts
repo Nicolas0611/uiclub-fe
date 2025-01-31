@@ -7,6 +7,7 @@ export interface DesignSystem {
   version: string;
   quantity_components: number;
   popularity: Popularity;
+  is_updated: boolean;
 }
 
 export type Popularity = "Medium" | "High" | "Low";
