@@ -23,7 +23,7 @@ const links = [
 
 const Navbar = () => {
   return (
-    <header className="container mx-auto px-4 h-20 justify-between items-center flex z-40">
+    <header className="container mx-auto px-4 h-20 justify-between items-center flex bg-transparent">
       <Link href="/">
         <Image src="/logo.svg" alt="logo" width={130} height={130} />
       </Link>
