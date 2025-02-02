@@ -17,19 +17,16 @@ async function DesignSystemsPage() {
   const designSystems = await fetchDesignSystems();
   //TODO: CREATE LAYOUT COMPONENT AND FIX GRADIENT
   return (
-    <div className="relative">
-      <div className="z-10 absolute -right-60 h-60 w-[36rem] transform-gpu md:bg-[linear-gradient(115deg,var(--tw-gradient-stops))] from-[#fff1be] from-28% via-[#ee87cb] via-70% to-[#b060ff] rotate-[-10deg] rounded-full blur-3xl "></div>
-      <section className="container mx-auto px-4 py-10">
-        <div className="flex flex-col gap-5">
-          <span className="text-base text-primary font-semibold">
-            {content.preTitle}
-          </span>
-          <h2 className="text-4xl">{content.title}</h2>
-          <p className="text-neutral-500 w-[65%]">{content.parragraph}</p>
-        </div>
-        <DesignSystemGrid designSystems={designSystems} />
-      </section>
-    </div>
+    <section className="container mx-auto px-4 py-10">
+      <div className="flex flex-col gap-5">
+        <span className="text-base text-primary font-semibold">
+          {content.preTitle}
+        </span>
+        <h2 className="text-4xl">{content.title}</h2>
+        <p className="text-neutral-500 w-[65%]">{content.parragraph}</p>
+      </div>
+      <DesignSystemGrid designSystems={designSystems} />
+    </section>
   );
 }
 
