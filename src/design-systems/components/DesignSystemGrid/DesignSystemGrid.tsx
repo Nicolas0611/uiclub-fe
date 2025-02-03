@@ -21,7 +21,7 @@ export const DesignSystemGrid = ({ designSystems }: DSGripdProps) => {
             <Card
               key={designSystem.id}
               title={designSystem.name}
-              description={designSystem.description}
+              description={designSystem.short_description}
               url={designSystem.company_name}
               slot={
                 <CardBody

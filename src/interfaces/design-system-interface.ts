@@ -1,6 +1,7 @@
 export interface DesignSystem {
   id: number;
-  description: string;
+  short_description: string;
+  large_description: string;
   company_name: string;
   components: Component[];
   name: string;

@@ -25,7 +25,7 @@ export default async function DesignDetailPage({
 
           <h2 className="text-4xl">{designSystem?.name}</h2>
           <p className="text-neutral-500 w-[65%]">
-            {designSystem?.description}
+            {designSystem?.large_description}
           </p>
         </div>
       </section>
