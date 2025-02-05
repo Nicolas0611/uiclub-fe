@@ -1,4 +1,5 @@
 import { fetchDesignSystemsById } from "@/design-systems/actions/design-actions";
+import ComponentsGrid from "@/design-systems/components/ComponentsGrid/ComponentsGrid";
 import { Chip, Divider } from "@heroui/react";
 
 export default async function DesignDetailPage({
@@ -43,6 +44,7 @@ export default async function DesignDetailPage({
           </div>
           <Divider />
         </div>
+        <ComponentsGrid />
       </section>
     </div>
   );
