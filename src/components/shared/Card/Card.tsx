@@ -42,7 +42,7 @@ export const Card = ({
           width={40}
         />
         <div className="flex flex-col">
-          <p className="text-md">{title}</p>
+          <p className="text-md text-start">{title}</p>
           <p className="text-small text-left text-default-500">{url}</p>
         </div>
       </CardHeader>

@@ -44,7 +44,7 @@ export default async function DesignDetailPage({
           </div>
           <Divider />
         </div>
-        <ComponentsGrid />
+        <ComponentsGrid components={designSystem?.components} />
       </section>
     </div>
   );
