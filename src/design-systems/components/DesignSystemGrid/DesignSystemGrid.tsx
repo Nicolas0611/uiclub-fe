@@ -1,38 +1,29 @@
-import { Card } from "@/components/shared/Card/Card";
+import { SwitchTabs } from "@/components/shared";
 import { DesignSystem } from "@/interfaces/design-system-interface";
-import { Divider } from "@heroui/react";
-import Link from "next/link";
-import { CardBody } from "../CardBody/CardBody";
+import { QueueListIcon, TableCellsIcon } from "@heroicons/react/24/outline";
+import GridCards from "./GridCards";
 
 interface DSGripdProps {
   designSystems: DesignSystem[];
 }
 export const DesignSystemGrid = ({ designSystems }: DSGripdProps) => {
+  const Tabs = [
+    {
+      key: "grid",
+      title: <TableCellsIcon className="size-5" />,
+      children: <GridCards designSystems={designSystems} />,
+    },
+    {
+      key: "list",
+      title: <QueueListIcon className="size-5" />,
+      children: <p>List</p>,
+    },
+  ];
+  //! TODO REPLACE replaceBackendWithLocalhost() fn BACKEND WITH ACTUAL real SOLUTION
   return (
     <section className="flex flex-col gap-4 py-12">
-      <h3 className="text-lg">Top Design Systems</h3>
-      <Divider />
-      <div className="grid grid-cols-3 gap-2 ">
-        {designSystems.map((designSystem) => (
-          <Link
-            key={designSystem.id}
-            href={`/design-systems/${designSystem.id}`}
-          >
-            <Card
-              key={designSystem.id}
-              title={designSystem.name}
-              description={designSystem.short_description}
-              url={designSystem.company_name}
-              slot={
-                <CardBody
-                  quantity={designSystem.quantity_components}
-                  popularity={designSystem.popularity}
-                  is_updated={designSystem.is_updated}
-                />
-              }
-            />
-          </Link>
-        ))}
+      <div className="flex items-center justify-between w-full">
+        <SwitchTabs title="Top Design Systems" defaultKey="grid" tabs={Tabs} />
       </div>
     </section>
   );

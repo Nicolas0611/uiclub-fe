@@ -16,6 +16,7 @@ export interface CardProps {
   description: string;
   slot?: React.ReactNode;
   showFooter?: boolean;
+  img: string;
 }
 export const Card = ({
   isHoverable = true,
@@ -24,6 +25,7 @@ export const Card = ({
   url,
   description,
   slot,
+  img,
   showFooter = false,
 }: CardProps) => {
   return (
@@ -34,13 +36,7 @@ export const Card = ({
       className="max-w-[400px] border-1 border-solid border-gray-200"
     >
       <CardHeader className="flex gap-3">
-        <Image
-          alt="heroui logo"
-          height={40}
-          radius="sm"
-          src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
-          width={40}
-        />
+        <Image alt="heroui logo" height={40} radius="sm" src={img} width={40} />
         <div className="flex flex-col">
           <p className="text-md text-start">{title}</p>
           <p className="text-small text-left text-default-500">{url}</p>

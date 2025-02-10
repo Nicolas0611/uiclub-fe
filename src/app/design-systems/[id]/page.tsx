@@ -7,7 +7,8 @@ export default async function DesignDetailPage({
 }: {
   params: { id: string };
 }) {
-  const designSystem = await fetchDesignSystemsById({ id: params.id });
+  const { id } = await params;
+  const designSystem = await fetchDesignSystemsById({ id });
   const isUpdated = designSystem?.is_updated
     ? { text: "Updated", color: "success" as const }
     : { text: "Outdated", color: "danger" as const };
@@ -44,7 +45,9 @@ export default async function DesignDetailPage({
           </div>
           <Divider />
         </div>
-        <ComponentsGrid components={designSystem?.components} />
+        {designSystem?.components && (
+          <ComponentsGrid components={designSystem?.components} />
+        )}
       </section>
     </div>
   );
