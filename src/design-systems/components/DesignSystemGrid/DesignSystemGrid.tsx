@@ -2,6 +2,7 @@ import { SwitchTabs } from "@/components/shared";
 import { DesignSystem } from "@/interfaces/design-system-interface";
 import { QueueListIcon, TableCellsIcon } from "@heroicons/react/24/outline";
 import GridCards from "./GridCards";
+import ListCards from "./ListCards";
 
 interface DSGripdProps {
   designSystems: DesignSystem[];
@@ -16,7 +17,7 @@ export const DesignSystemGrid = ({ designSystems }: DSGripdProps) => {
     {
       key: "list",
       title: <QueueListIcon className="size-5" />,
-      children: <p>List</p>,
+      children: <ListCards designSystems={designSystems} />,
     },
   ];
   //! TODO REPLACE replaceBackendWithLocalhost() fn BACKEND WITH ACTUAL real SOLUTION

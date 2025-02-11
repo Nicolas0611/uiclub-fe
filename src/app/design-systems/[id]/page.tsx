@@ -13,7 +13,7 @@ export default async function DesignDetailPage({
     ? { text: "Updated", color: "success" as const }
     : { text: "Outdated", color: "danger" as const };
   return (
-    <div className="container mx-auto px-4 py-10">
+    <div className="container mx-auto px-4">
       <section className="container mx-auto px-4 py-10">
         <div className="flex flex-col gap-5">
           <div className="flex gap-2">
