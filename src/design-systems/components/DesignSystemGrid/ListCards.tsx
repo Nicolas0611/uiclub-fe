@@ -1,6 +1,6 @@
 import { DesignSystem } from "@/interfaces/design-system-interface";
 import { replaceBackendWithLocalhost } from "@/utils";
-import { Card, CardBody, Image } from "@heroui/react";
+import { Card, CardBody, Chip, Image } from "@heroui/react";
 import Link from "next/link";
 
 interface Props {
@@ -8,6 +8,8 @@ interface Props {
 }
 
 const ListCards = ({ designSystems }: Props) => {
+  type StateTypes = "success" | "warning" | "danger";
+
   return (
     <div className="flex flex-col gap-3">
       {designSystems.map((designSystem) => (
@@ -28,7 +30,24 @@ const ListCards = ({ designSystems }: Props) => {
               />
 
               <div className="flex flex-col">
-                <p className="text-medium">{designSystem.name}</p>
+                <div className="flex items-center flex-row gap-2">
+                  <p className="text-medium">{designSystem.name}</p>
+                  <Chip
+                    radius="sm"
+                    size="sm"
+                    variant="flat"
+                    color={
+                      {
+                        Medium: "warning",
+                        High: "success",
+                        Low: "danger",
+                      }[designSystem.popularity] as StateTypes
+                    }
+                  >
+                    {designSystem.popularity}
+                  </Chip>
+                </div>
+
                 <p className="text-small text-default-400">
                   {designSystem.short_description}
                 </p>
