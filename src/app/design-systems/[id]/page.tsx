@@ -1,3 +1,4 @@
+import { Breadcrumb } from "@/components/shared";
 import { fetchDesignSystemsById } from "@/design-systems/actions/design-actions";
 import ComponentsGrid from "@/design-systems/components/ComponentsGrid/ComponentsGrid";
 import { Chip, Divider } from "@heroui/react";
@@ -44,6 +45,7 @@ export default async function DesignDetailPage({
             </div>
           </div>
           <Divider />
+          <Breadcrumb />
         </div>
         {designSystem?.components && (
           <ComponentsGrid components={designSystem?.components} />

@@ -14,6 +14,7 @@ async function DesignSystemsPage() {
     parragraph:
       " This is the list of the most popular Design Systems and UI libraries, used as the leading Systems Benchmarks by thousands of companies, startups, designers, and developers around the world. This list is the result of exhaustive research, which included a survey of hundreds of designers and developers working at leading companies, such as Google, Atlassian, Airbnb, and IBM, among others.",
   };
+
   const designSystems = await fetchDesignSystems();
   return (
     <section className="container mx-auto px-4 py-10">

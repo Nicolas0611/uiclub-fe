@@ -7,15 +7,16 @@ interface ComponentsProps {
 }
 const ComponentsGrid = ({ components }: ComponentsProps) => {
   return (
-    <div className="grid grid-cols-4 gap-7 py-10">
+    <div className="grid grid-cols-4 gap-7 py-7">
       {components.map((component, index) => (
         <Card
           key={index}
           isPressable
-          shadow="sm"
+          shadow="none"
+          className="border-1 border-solid border-gray-200"
           onPress={() => console.log("item pressed")}
         >
-          <CardBody className="overflow-visible p-0">
+          <CardBody className="overflow-visible p-3">
             <Image
               alt={`${component.name}_img`}
               className="w-full object-cover h-[140px]"
