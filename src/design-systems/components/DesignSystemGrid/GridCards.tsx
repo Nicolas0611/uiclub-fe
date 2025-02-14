@@ -9,10 +9,14 @@ interface Props {
 }
 
 const GridCards = ({ designSystems }: Props) => {
+  //!TODO INSTEAD PASS AN SLUG INSTEAD OF THE DESIGN SYSTEM ID
   return (
     <div className="grid grid-cols-3 gap-2 ">
       {designSystems.map((designSystem) => (
-        <Link key={designSystem.id} href={`/design-systems/${designSystem.id}`}>
+        <Link
+          key={designSystem.id}
+          href={`/design-systems/${designSystem.slug}`}
+        >
           <Card
             img={replaceBackendWithLocalhost(designSystem.thumbnail_image)}
             key={designSystem.id}

@@ -6,10 +6,10 @@ import { Chip, Divider } from "@heroui/react";
 export default async function DesignDetailPage({
   params,
 }: {
-  params: { id: string };
+  params: { slug: string };
 }) {
-  const { id } = await params;
-  const designSystem = await fetchDesignSystemsById({ id });
+  const { slug } = await params;
+  const designSystem = await fetchDesignSystemsById({ slug });
   const isUpdated = designSystem?.is_updated
     ? { text: "Updated", color: "success" as const }
     : { text: "Outdated", color: "danger" as const };

@@ -10,6 +10,7 @@ export interface DesignSystem {
   popularity: Popularity;
   is_updated: boolean;
   thumbnail_image: string;
+  slug: string;
 }
 
 export type Popularity = "Medium" | "High" | "Low";

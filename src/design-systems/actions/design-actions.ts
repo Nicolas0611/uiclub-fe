@@ -15,16 +15,16 @@ export const fetchDesignSystems = async (): Promise<DesignSystem[]> => {
 };
 
 export const fetchDesignSystemsById = async ({
-  id,
+  slug,
 }: {
-  id: string;
+  slug: string;
 }): Promise<DesignSystem | null> => {
   try {
     const response = await https.get<DesignSystem>(
-      `design-libraries/design-systems/${id}/`
+      `design-libraries/design-systems/${slug}/`
     );
     return response.status === 200 ? response.data : null;
   } catch {
-    throw `Error fetching design systems id #${id}`;
+    throw `Error fetching design systems id #${slug}`;
   }
 };
