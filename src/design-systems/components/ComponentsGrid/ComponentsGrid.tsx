@@ -7,7 +7,7 @@ interface ComponentsProps {
 }
 const ComponentsGrid = ({ components }: ComponentsProps) => {
   return (
-    <div className="grid grid-cols-4 gap-7 py-7">
+    <div className="grid grid-cols-4 gap-7 py-4">
       {components.map((component, index) => (
         <Card
           key={index}
