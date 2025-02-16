@@ -12,6 +12,7 @@ export default {
   theme: {
     extend: {
       colors: {
+        primary_light: "var(--primary-25)",
         primary: "var(--primary)",
         primary_dark: "var(--primary-dark)",
       },

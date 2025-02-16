@@ -11,6 +11,11 @@ export interface DesignSystem {
   is_updated: boolean;
   thumbnail_image: string;
   slug: string;
+  links?: {
+    web: string;
+    storybook: string;
+    figma: string;
+  };
 }
 
 export type Popularity = "Medium" | "High" | "Low";
