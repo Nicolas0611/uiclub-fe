@@ -4,6 +4,7 @@ import {
   GlobeAmericasIcon,
   PaintBrushIcon,
 } from "@heroicons/react/24/outline";
+import { Chip } from "@heroui/react";
 import clsx from "clsx";
 import Link from "next/link";
 
@@ -32,8 +33,10 @@ const ContainerLinks = ({ designSystem }: Props) => {
     <div className="flex justify-between w-full border-1 border-solid border-gray-200 h-[12rem] rounded-2xl overflow-hidden">
       {detailLinks.map((link, index) => (
         <Link
-          className="w-full flex flex-col justify-between"
-          key={index}
+          className={`w-full flex flex-col justify-between ${
+            link.link ? "pointer-events-auto" : "pointer-events-none"
+          }`}
+          key={`link_${index}`}
           target="_blank"
           href={link.link || ""}
         >
@@ -45,8 +48,15 @@ const ContainerLinks = ({ designSystem }: Props) => {
             )}
           >
             <div className="h-full flex flex-col justify-between">
-              <div className="w-fit rounded-full border-1 border-solid border-gray-200 p-3 ">
-                {link.icon}
+              <div className="flex items-center justify-between">
+                <div className="w-fit rounded-full border-1 border-solid border-gray-200 p-3 ">
+                  {link.icon}
+                </div>
+                {!link.link && (
+                  <Chip radius="sm" size="sm" variant="flat" color="default">
+                    Not available
+                  </Chip>
+                )}
               </div>
               <p>{link.title}</p>
             </div>
