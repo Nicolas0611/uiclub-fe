@@ -13,7 +13,10 @@ const ListCards = ({ designSystems }: Props) => {
   return (
     <div className="flex flex-col gap-3">
       {designSystems.map((designSystem) => (
-        <Link key={designSystem.id} href={`/design-systems/${designSystem.id}`}>
+        <Link
+          key={designSystem.id}
+          href={`/design-systems/${designSystem.slug}`}
+        >
           <Card
             key={designSystem.id}
             isPressable

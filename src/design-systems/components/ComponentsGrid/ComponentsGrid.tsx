@@ -20,7 +20,11 @@ const ComponentsGrid = ({ components }: ComponentsProps) => {
             <Image
               alt={`${component.name}_img`}
               className="w-full object-cover h-[140px]"
-              src="/assets/Button.png"
+              src={
+                component.name
+                  ? `/assets/${component.name}.png`
+                  : "/assets/Button.png"
+              }
               width="100%"
               height="100%"
             />
