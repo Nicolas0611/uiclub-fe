@@ -14,7 +14,7 @@ const ComponentsGrid = ({ components }: ComponentsProps) => {
           isPressable
           shadow="none"
           className="border-1 border-solid border-gray-200"
-          onPress={() => console.log("item pressed")}
+          onPress={() => console.log({ name: component.name })}
         >
           <CardBody className="overflow-visible p-3">
             <Image
