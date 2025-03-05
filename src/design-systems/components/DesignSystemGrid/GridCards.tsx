@@ -9,7 +9,6 @@ interface Props {
 }
 
 const GridCards = ({ designSystems }: Props) => {
-  //!TODO INSTEAD PASS AN SLUG INSTEAD OF THE DESIGN SYSTEM ID
   return (
     <div className="grid grid-cols-3 gap-2 ">
       {designSystems.map((designSystem) => (
