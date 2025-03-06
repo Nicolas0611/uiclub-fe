@@ -3,10 +3,17 @@
 import { DesignSystem } from "@/interfaces/design-system-interface";
 import { https } from "@/lib/axios";
 
-export const fetchDesignSystems = async (): Promise<DesignSystem[]> => {
+export const fetchDesignSystems = async (
+  search?: string
+): Promise<DesignSystem[]> => {
   try {
     const response = await https.get<DesignSystem[]>(
-      "design-libraries/design-systems/"
+      "design-libraries/design-systems/",
+      {
+        params: {
+          search: search,
+        },
+      }
     );
     return response.status === 200 ? response.data : [];
   } catch {
