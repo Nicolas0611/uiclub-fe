@@ -10,7 +10,7 @@ interface Props {
 
 const GridCards = ({ designSystems }: Props) => {
   return (
-    <div className="grid grid-cols-3 gap-2 ">
+    <div className="grid grid-cols-3 gap-3">
       {designSystems.map((designSystem) => (
         <Link
           key={designSystem.id}
