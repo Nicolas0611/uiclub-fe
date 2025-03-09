@@ -7,7 +7,7 @@ import { Chip } from "@heroui/react";
 export default async function DesignDetailPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
   const designSystem = await fetchDesignSystemsById({ slug });
