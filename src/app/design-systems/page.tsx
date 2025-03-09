@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 async function DesignSystemsPage({
   searchParams,
 }: {
-  searchParams: { search: string };
+  searchParams: Promise<{ search: string }>;
 }) {
   const { search } = await searchParams;
 
