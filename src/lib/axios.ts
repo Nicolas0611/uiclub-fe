@@ -7,3 +7,5 @@ export const https = axios.create({
     "Content-Type": "application/json",
   },
 });
+
+console.log("API URL", process.env.NEXT_PUBLIC_API_URL);
