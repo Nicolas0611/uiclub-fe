@@ -2,8 +2,9 @@
 
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { Divider, Input, Tab, Tabs } from "@heroui/react";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 
 interface TabProps {
   title?: string;
@@ -11,26 +12,41 @@ interface TabProps {
   tabs: { key: string | null; title: ReactNode; children: ReactNode }[];
 }
 
+function handleSearch(
+  term: string,
+  router: AppRouterInstance,
+  pathname: string,
+  searchParams: URLSearchParams
+) {
+  const params = new URLSearchParams(searchParams);
+  if (term) {
+    params.set("search", term);
+  } else {
+    params.delete("search");
+  }
+  router.replace(`${pathname}?${params.toString()}`);
+}
+
 const SwitchTab = ({ tabs, defaultKey, title }: TabProps) => {
   const [selected, setSelected] = useState<string>(defaultKey);
+  const [searchTerm, setSearchTerm] = useState<string>("");
+
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
-  const search = searchParams.get("search") ?? "";
 
   const handleSelect = (key: string) => {
     setSelected(key);
   };
-  //! add debounced handleSearch
-  function handleSearch(term: string) {
-    const params = new URLSearchParams(searchParams);
-    if (term) {
-      params.set("search", term);
-    } else {
-      params.delete("search");
-    }
-    router.replace(`${pathname}?${params.toString()}`);
-  }
+
+  useEffect(() => {
+    const delayDebounce = setTimeout(() => {
+      handleSearch(searchTerm, router, pathname, searchParams);
+    }, 500); // Delay in ms
+
+    return () => clearTimeout(delayDebounce);
+  }, [searchTerm]);
+
   return (
     <div className="flex w-full flex-col">
       {title && <h3 className="text-lg pb-3">{title}</h3>}
@@ -44,13 +60,13 @@ const SwitchTab = ({ tabs, defaultKey, title }: TabProps) => {
             input: "text-small",
             inputWrapper: "h-full font-normal text-default-500",
           }}
-          value={search}
+          value={searchTerm}
           placeholder="Type to search..."
           size="sm"
           startContent={<MagnifyingGlassIcon className="size-5" />}
           type="search"
           onChange={(e) => {
-            handleSearch(e.target.value);
+            setSearchTerm(e.target.value);
           }}
         />
         <Tabs
