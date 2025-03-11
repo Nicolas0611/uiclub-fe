@@ -4,7 +4,8 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Design Systems",
-  description: "Design System Descripton for metadata",
+  description:
+    "A comprehensive repository of various design systems, UI frameworks, and component libraries. Compare and explore industry-leading design guidelines.",
 };
 
 async function DesignSystemsPage({
