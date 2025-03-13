@@ -29,8 +29,12 @@ async function DesignSystemsPage({
         <span className="text-base text-primary font-semibold">
           {content.preTitle}
         </span>
-        <h2 className="text-4xl">{content.title}</h2>
-        <p className="text-neutral-500 w-[65%]">{content.parragraph}</p>
+        <h2 className="text-2xl md:text-3xl lg:text-4xl leading-tight">
+          {content.title}
+        </h2>
+        <p className="text-neutral-500 sm:w-full md:w-[75%] lg:w-[65%] ">
+          {content.parragraph}
+        </p>
       </div>
       <DesignSystemGrid designSystems={designSystems} />
     </section>
