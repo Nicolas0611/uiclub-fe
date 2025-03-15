@@ -1,4 +1,4 @@
-import { Navbar } from "@/components/shared";
+import { Header } from "@/components/shared";
 import { HeroUIProviders } from "@/providers/HeroUIProvider";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
@@ -20,7 +20,7 @@ export default function RootLayout({
     <html lang="en" className="light">
       <body className={`${poppins.className} antialiased overflow-x-hidden`}>
         <HeroUIProviders>
-          <Navbar />
+          <Header />
           {children}
         </HeroUIProviders>
       </body>
