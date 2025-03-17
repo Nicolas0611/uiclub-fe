@@ -1,159 +1,71 @@
 "use client";
 
-import type { NavbarProps } from "@heroui/react";
-
 import {
   Button,
-  Divider,
+  Image,
   Link,
   Navbar,
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-  NavbarMenu,
-  NavbarMenuItem,
-  NavbarMenuToggle,
-  cn,
 } from "@heroui/react";
-import Image from "next/image";
-import React from "react";
+import { usePathname } from "next/navigation";
 
-const menuItems = [
-  "About",
-  "Blog",
-  "Customers",
-  "Pricing",
-  "Enterprise",
-  "Changelog",
-  "Documentation",
-  "Contact Us",
+const links = [
+  {
+    path: "/blog",
+    title: "Blog",
+  },
+  {
+    path: "/news",
+    title: "News",
+  },
+  {
+    path: "/latest",
+    title: "Latest",
+  },
+  {
+    path: "/design-systems",
+    title: "Design Systems",
+  },
 ];
+const Header = () => {
+  const currentPath = usePathname();
 
-//todo: hola
-const BasicNavbar = React.forwardRef<HTMLElement, NavbarProps>(
-  ({ classNames = {}, ...props }, ref) => {
-    const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-
-    return (
-      <Navbar
-        ref={ref}
-        {...props}
-        classNames={{
-          base: cn("border-default-100 bg-transparent", {
-            "bg-default-200/50 dark:bg-default-100/50": isMenuOpen,
-          }),
-          wrapper: "w-full justify-center",
-          item: "hidden md:flex",
-          ...classNames,
-        }}
-        height="60px"
-        isMenuOpen={isMenuOpen}
-        onMenuOpenChange={setIsMenuOpen}
-      >
-        {/* Left Content */}
-        <NavbarBrand>
+  return (
+    <Navbar maxWidth="xl" isBlurred={true}>
+      <NavbarBrand>
+        <Link href="/">
           <Image src="/logo.svg" alt="logo" width={130} height={130} />
-        </NavbarBrand>
-
-        {/* Center Content */}
-        <NavbarContent justify="center">
+        </Link>
+      </NavbarBrand>
+      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+        {links.map((link) => (
           <NavbarItem
-            isActive
-            className="data-[active='true']:font-medium[date-active='true']"
+            isActive={link.path === currentPath}
+            className="text-purple-800"
+            aria-current="page"
+            key={link.path}
           >
             <Link
-              aria-current="page"
-              className="text-default-foreground"
-              href="#"
-              size="sm"
+              aria-current={link.path === currentPath ? "page" : undefined}
+              color={link.path === currentPath ? "primary" : "foreground"}
+              href={link.path}
             >
-              Home
+              {link.title}
             </Link>
           </NavbarItem>
-          <NavbarItem>
-            <Link className="text-default-500" href="#" size="sm">
-              Features
-            </Link>
-          </NavbarItem>
-          <NavbarItem>
-            <Link className="text-default-500" href="#" size="sm">
-              Customers
-            </Link>
-          </NavbarItem>
-          <NavbarItem>
-            <Link className="text-default-500" href="#" size="sm">
-              About Us
-            </Link>
-          </NavbarItem>
-          <NavbarItem>
-            <Link className="text-default-500" href="#" size="sm">
-              Integrations
-            </Link>
-          </NavbarItem>
-        </NavbarContent>
+        ))}
+      </NavbarContent>
+      <NavbarContent justify="end">
+        <NavbarItem>
+          <Button as={Link} href="/" color="primary" variant="solid">
+            Road map ✨
+          </Button>
+        </NavbarItem>
+      </NavbarContent>
+    </Navbar>
+  );
+};
 
-        {/* Right Content */}
-        <NavbarContent className="hidden md:flex" justify="end">
-          <NavbarItem className="ml-2 !flex gap-2">
-            <Button className="text-default-500" radius="full" variant="light">
-              Login
-            </Button>
-            <Button
-              className="bg-default-foreground font-medium text-background"
-              color="secondary"
-              radius="full"
-              variant="flat"
-            >
-              Get Started
-            </Button>
-          </NavbarItem>
-        </NavbarContent>
-
-        <NavbarMenuToggle className="text-default-400 md:hidden" />
-
-        <NavbarMenu
-          className="top-[calc(var(--navbar-height)_-_1px)] max-h-fit bg-default-200/50 pb-6 pt-6 shadow-medium backdrop-blur-md backdrop-saturate-150 dark:bg-default-100/50"
-          motionProps={{
-            initial: { opacity: 0, y: -20 },
-            animate: { opacity: 1, y: 0 },
-            exit: { opacity: 0, y: -20 },
-            transition: {
-              ease: "easeInOut",
-              duration: 0.2,
-            },
-          }}
-        >
-          <NavbarMenuItem>
-            <Button fullWidth as={Link} href="/#" variant="faded">
-              Sign In
-            </Button>
-          </NavbarMenuItem>
-          <NavbarMenuItem className="mb-4">
-            <Button
-              fullWidth
-              as={Link}
-              className="bg-foreground text-background"
-              href="/#"
-            >
-              Get Started
-            </Button>
-          </NavbarMenuItem>
-          {menuItems.map((item, index) => (
-            <NavbarMenuItem key={`${item}-${index}`}>
-              <Link className="mb-2 w-full text-default-500" href="#" size="md">
-                {item}
-              </Link>
-              {index < menuItems.length - 1 && (
-                <Divider className="opacity-50" />
-              )}
-            </NavbarMenuItem>
-          ))}
-        </NavbarMenu>
-      </Navbar>
-    );
-  }
-);
-
-BasicNavbar.displayName = "BasicNavbar";
-
-export default BasicNavbar;
+export default Header;
