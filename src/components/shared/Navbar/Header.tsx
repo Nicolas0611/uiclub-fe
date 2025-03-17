@@ -48,7 +48,6 @@ const Header = () => {
             key={link.path}
           >
             <Link
-              aria-current={link.path === currentPath ? "page" : undefined}
               color={link.path === currentPath ? "primary" : "foreground"}
               href={link.path}
             >
