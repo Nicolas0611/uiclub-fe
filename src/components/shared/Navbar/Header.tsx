@@ -58,7 +58,7 @@ const Header = () => {
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem>
-          <Button as={Link} href="/" color="primary" variant="solid">
+          <Button as={Link} href="/roadmap" color="primary" variant="solid">
             Road map ✨
           </Button>
         </NavbarItem>
