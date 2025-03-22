@@ -39,7 +39,7 @@ const Header = () => {
           <Image src="/logo.svg" alt="logo" width={130} height={130} />
         </Link>
       </NavbarBrand>
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+      <NavbarContent className="hidden sm:flex gap-8" justify="center">
         {links.map((link) => (
           <NavbarItem
             isActive={link.path === currentPath}
