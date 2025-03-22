@@ -1,4 +1,5 @@
 import { Card } from "@/components/shared/Card/Card";
+import EmptyState from "@/components/shared/EmptyState/EmptyState";
 import { DesignSystem } from "@/interfaces/design-system-interface";
 import { replaceBackendWithLocalhost } from "@/utils";
 import Link from "next/link";
@@ -9,6 +10,14 @@ interface Props {
 }
 
 const GridCards = ({ designSystems }: Props) => {
+  if (designSystems.length === 0)
+    return (
+      <EmptyState
+        showLink={false}
+        title="No results found"
+        description="Try with a different word"
+      />
+    );
   return (
     <div className="grid grid-cols-3 gap-3">
       {designSystems.map((designSystem) => (
