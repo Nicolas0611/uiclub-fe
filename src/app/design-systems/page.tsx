@@ -32,7 +32,7 @@ async function DesignSystemsPage({
         <h2 className="text-2xl md:text-3xl lg:text-4xl leading-tight">
           {content.title}
         </h2>
-        <p className="text-neutral-500 sm:w-full md:w-[75%] lg:w-[65%] ">
+        <p className="text-neutral-500 text-sm w-full md:w-[75%] md:text-medium lg:w-[65%] ">
           {content.parragraph}
         </p>
       </div>

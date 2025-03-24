@@ -16,7 +16,7 @@ const ComponentsGrid = ({ components }: ComponentsProps) => {
     return getImage(componentName) || relatedNames.map(getImage).find(Boolean);
   };
   return (
-    <div className="grid grid-cols-4 gap-7 py-6">
+    <div className="grid grid-cols-1 gap-6 py-6 md:grid-cols-2 lg:grid-cols-3">
       {components.map((component, index) => (
         <Card
           key={index}

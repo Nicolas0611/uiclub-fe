@@ -33,7 +33,8 @@ export const Card = ({
       isHoverable={isHoverable}
       isPressable={isPressable}
       shadow="none"
-      className="max-w-[400px] border-1 border-solid border-gray-200"
+      className="border-1 border-solid border-gray-200"
+      fullWidth
     >
       <CardHeader className="flex gap-3">
         <Image alt="heroui logo" height={40} radius="sm" src={img} width={40} />
@@ -44,7 +45,7 @@ export const Card = ({
       </CardHeader>
       <Divider />
       <CardBody>
-        <p className="text-sm text-neutral-500">{description} </p>
+        <p className="text-sm text-neutral-500 line-clamp-3">{description} </p>
         {slot && <div className="pt-4">{slot}</div>}
       </CardBody>
       {showFooter && (
