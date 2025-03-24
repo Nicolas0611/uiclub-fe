@@ -1,11 +1,20 @@
 "use client";
 
+import { IMAGES } from "@/constants";
 import { Component } from "@/interfaces/design-system-interface";
 import { Card, CardBody, CardFooter, Image } from "@heroui/react";
 interface ComponentsProps {
   components: Component[];
 }
 const ComponentsGrid = ({ components }: ComponentsProps) => {
+  const verifyRelatedNameForImage = (
+    componentName: string,
+    relatedNames: Array<string>
+  ): string | undefined => {
+    const getImage = (name: string) =>
+      IMAGES[name.toUpperCase().replace(/\s+/g, "")];
+    return getImage(componentName) || relatedNames.map(getImage).find(Boolean);
+  };
   return (
     <div className="grid grid-cols-4 gap-7 py-6">
       {components.map((component, index) => (
@@ -14,17 +23,18 @@ const ComponentsGrid = ({ components }: ComponentsProps) => {
           isPressable
           shadow="none"
           className="border-1 border-solid border-gray-200"
-          onPress={() => console.log({ name: component.name })}
+          onPress={() =>
+            console.log({ name: component.name.toUpperCase().replace(" ", "") })
+          }
         >
           <CardBody className="overflow-visible p-3">
             <Image
               alt={`${component.name}_img`}
               className="w-full object-cover h-[140px]"
-              src={
-                component.name
-                  ? `/assets/${component.name}.png`
-                  : "/assets/Button.png"
-              }
+              src={`/assets/${verifyRelatedNameForImage(
+                component.name,
+                component.related_names
+              )}.png`}
               width="100%"
               height="100%"
             />

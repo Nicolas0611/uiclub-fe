@@ -25,4 +25,5 @@ export interface Component {
   description: string;
   type: string;
   company_name: string;
+  related_names: Array<string>;
 }
