@@ -20,7 +20,7 @@ export default async function DesignDetailPage({
       <section className="container mx-auto px-4 py-10">
         <div className="flex flex-col gap-5">
           <Breadcrumb />
-          <h2 className="text-4xl">{designSystem?.name}</h2>
+          <h2 className="text-3xl md:text-4xl">{designSystem?.name}</h2>
           <div className="flex gap-2">
             <Chip radius="sm" size="sm" variant="flat" color={isUpdated.color}>
               {isUpdated.text}
@@ -29,7 +29,7 @@ export default async function DesignDetailPage({
               Popularity: {designSystem?.popularity}
             </Chip>
           </div>
-          <p className="text-neutral-500 w-[65%]">
+          <p className="text-neutral-500 text-sm w-full lg:w-[65%] md:text-medium">
             {designSystem?.large_description}
           </p>
           <ContainerLinks designSystem={designSystem} />

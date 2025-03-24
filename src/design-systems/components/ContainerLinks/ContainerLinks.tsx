@@ -30,7 +30,7 @@ const ContainerLinks = ({ designSystem }: Props) => {
     },
   ];
   return (
-    <div className="flex justify-between w-full border-1 border-solid border-gray-200 h-[12rem] rounded-2xl overflow-hidden">
+    <div className="flex flex-col justify-between w-full border-1 border-solid border-gray-200 rounded-2xl overflow-hidden md:flex-row md:h-[12rem]">
       {detailLinks.map((link, index) => (
         <Link
           className={`w-full flex flex-col justify-between ${
@@ -42,9 +42,9 @@ const ContainerLinks = ({ designSystem }: Props) => {
         >
           <div
             className={clsx(
-              "h-full p-5 flex flex-col justify-between border-r border-gray-200 transition-colors",
+              "h-full p-5 flex flex-col justify-between border-b border-gray-200 transition-colors md:border-r md:border-b-0",
               link.link ? "bg-white hover:bg-slate-50" : "bg-slate-50",
-              index === detailLinks.length - 1 && "border-r-0"
+              index === detailLinks.length - 1 && "border-b-0 md:border-r-0"
             )}
           >
             <div className="h-full flex flex-col justify-between">
