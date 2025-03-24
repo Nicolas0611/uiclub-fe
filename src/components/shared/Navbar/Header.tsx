@@ -2,6 +2,7 @@
 
 import {
   Button,
+  Chip,
   Image,
   Link,
   Navbar,
@@ -34,10 +35,13 @@ const Header = () => {
 
   return (
     <Navbar maxWidth="xl" isBlurred={true}>
-      <NavbarBrand>
+      <NavbarBrand className="flex items-end gap-2">
         <Link href="/">
-          <Image src="/logo.svg" alt="logo" width={130} height={130} />
+          <Image src="/logo.svg" alt="logo" width={130} />
         </Link>
+        <Chip size="sm" color="secondary" variant="flat">
+          {process.env.NEXT_PUBLIC_VERSION}
+        </Chip>
       </NavbarBrand>
       <NavbarContent className="hidden sm:flex gap-8" justify="center">
         {links.map((link) => (
