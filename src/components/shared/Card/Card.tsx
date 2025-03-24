@@ -10,7 +10,6 @@ import {
 
 export interface CardProps {
   isHoverable?: boolean;
-  isPressable?: boolean;
   title: string;
   url: string;
   description: string;
@@ -20,7 +19,6 @@ export interface CardProps {
 }
 export const Card = ({
   isHoverable = true,
-  isPressable = true,
   title,
   url,
   description,
@@ -31,7 +29,6 @@ export const Card = ({
   return (
     <HeroCard
       isHoverable={isHoverable}
-      isPressable={isPressable}
       shadow="none"
       className="border-1 border-solid border-gray-200"
       fullWidth
