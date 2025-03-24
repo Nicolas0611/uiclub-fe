@@ -16,8 +16,8 @@ export const fetchDesignSystems = async (
       }
     );
     return response.status === 200 ? response.data : [];
-  } catch {
-    throw "Error fetching design systems:";
+  } catch (error) {
+    throw `Error fetching design systems ${error}`;
   }
 };
 
@@ -31,7 +31,7 @@ export const fetchDesignSystemsById = async ({
       `design-libraries/design-systems/${slug}/`
     );
     return response.status === 200 ? response.data : null;
-  } catch {
-    throw `Error fetching design systems id #${slug}`;
+  } catch (error) {
+    throw `Error fetching design systems id #${slug} - ${error}`;
   }
 };
