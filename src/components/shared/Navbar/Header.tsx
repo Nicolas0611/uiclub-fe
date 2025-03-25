@@ -9,6 +9,9 @@ import {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
+  NavbarMenu,
+  NavbarMenuItem,
+  NavbarMenuToggle,
 } from "@heroui/react";
 import { usePathname } from "next/navigation";
 
@@ -43,7 +46,7 @@ const Header = () => {
           {process.env.NEXT_PUBLIC_VERSION}
         </Chip>
       </NavbarBrand>
-      <NavbarContent className="hidden sm:flex gap-8" justify="center">
+      <NavbarContent className="hidden gap-8 md:flex" justify="center">
         {links.map((link) => (
           <NavbarItem
             isActive={link.path === currentPath}
@@ -60,13 +63,31 @@ const Header = () => {
           </NavbarItem>
         ))}
       </NavbarContent>
+
       <NavbarContent justify="end">
+        <NavbarMenuToggle className=" md:hidden" />
+
         <NavbarItem>
           <Button as={Link} href="/roadmap" color="primary" variant="solid">
             Road map ✨
           </Button>
         </NavbarItem>
       </NavbarContent>
+
+      <NavbarMenu>
+        {links.map((link, index) => (
+          <NavbarMenuItem key={`${link}-${index}`}>
+            <Link
+              className="w-full"
+              color={link.path === currentPath ? "primary" : "foreground"}
+              href={link.path}
+              size="lg"
+            >
+              {link.title}
+            </Link>
+          </NavbarMenuItem>
+        ))}
+      </NavbarMenu>
     </Navbar>
   );
 };
