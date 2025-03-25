@@ -10,3 +10,22 @@ export const IMAGES: Record<string, string> = {
   TOAST: "Toast",
   TOOLTIP: "Tooltip",
 };
+
+export const LINKS = [
+  {
+    path: "/blog",
+    title: "Blog",
+  },
+  {
+    path: "/figma",
+    title: "Figma",
+  },
+  {
+    path: "/components",
+    title: "Components",
+  },
+  {
+    path: "/design-systems",
+    title: "Design Systems",
+  },
+];
