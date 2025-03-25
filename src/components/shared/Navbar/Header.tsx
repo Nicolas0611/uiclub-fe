@@ -21,12 +21,12 @@ const links = [
     title: "Blog",
   },
   {
-    path: "/news",
-    title: "News",
+    path: "/figma",
+    title: "Figma",
   },
   {
-    path: "/latest",
-    title: "Latest",
+    path: "/components",
+    title: "Components",
   },
   {
     path: "/design-systems",
