@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="light">
-      <body className={`${poppins.className} antialiased overflow-x-hidden`}>
+      <body className={`${poppins.className} antialiased`}>
         <HeroUIProviders>
           <Header />
           {children}
