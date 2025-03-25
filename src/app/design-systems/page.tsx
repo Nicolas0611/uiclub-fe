@@ -24,7 +24,7 @@ async function DesignSystemsPage({
 
   const designSystems = await fetchDesignSystems(search);
   return (
-    <section className="container mx-auto px-4 py-10">
+    <section className="container mx-auto px-4 py-10 ">
       <div className="flex flex-col gap-5">
         <span className="text-base text-primary font-semibold">
           {content.preTitle}
