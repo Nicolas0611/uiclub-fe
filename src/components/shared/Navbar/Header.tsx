@@ -1,5 +1,6 @@
 "use client";
 
+import { LINKS } from "@/constants";
 import {
   Button,
   Chip,
@@ -15,24 +16,6 @@ import {
 } from "@heroui/react";
 import { usePathname } from "next/navigation";
 
-const links = [
-  {
-    path: "/blog",
-    title: "Blog",
-  },
-  {
-    path: "/figma",
-    title: "Figma",
-  },
-  {
-    path: "/components",
-    title: "Components",
-  },
-  {
-    path: "/design-systems",
-    title: "Design Systems",
-  },
-];
 const Header = () => {
   const currentPath = usePathname();
 
@@ -47,7 +30,7 @@ const Header = () => {
         </Chip>
       </NavbarBrand>
       <NavbarContent className="hidden gap-8 md:flex" justify="center">
-        {links.map((link) => (
+        {LINKS.map((link) => (
           <NavbarItem
             isActive={link.path === currentPath}
             className="text-purple-800"
@@ -75,7 +58,7 @@ const Header = () => {
       </NavbarContent>
 
       <NavbarMenu>
-        {links.map((link, index) => (
+        {LINKS.map((link, index) => (
           <NavbarMenuItem key={`${link}-${index}`}>
             <Link
               className="w-full"
