@@ -15,17 +15,21 @@ export const LINKS = [
   {
     path: "/blog",
     title: "Blog",
+    isDisabled: true,
   },
   {
     path: "/figma",
     title: "Figma",
+    isDisabled: true,
   },
   {
     path: "/components",
     title: "Components",
+    isDisabled: true,
   },
   {
     path: "/design-systems",
     title: "Design Systems",
+    isDisabled: false,
   },
 ];
