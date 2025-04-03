@@ -2,6 +2,7 @@
 
 import { LINKS } from "@/constants";
 import {
+  Badge,
   Button,
   Chip,
   Image,
@@ -37,12 +38,22 @@ const Header = () => {
             aria-current="page"
             key={link.path}
           >
-            <Link
-              color={link.path === currentPath ? "primary" : "foreground"}
-              href={link.path}
+            <Badge
+              color="primary"
+              showOutline={false}
+              content="soon"
+              size="sm"
+              isInvisible={!link.isDisabled}
+              variant="shadow"
             >
-              {link.title}
-            </Link>
+              <Link
+                color={link.path === currentPath ? "primary" : "foreground"}
+                href={link.path}
+                isDisabled={link.isDisabled}
+              >
+                {link.title}
+              </Link>
+            </Badge>
           </NavbarItem>
         ))}
       </NavbarContent>
@@ -60,14 +71,24 @@ const Header = () => {
       <NavbarMenu>
         {LINKS.map((link, index) => (
           <NavbarMenuItem key={`${link}-${index}`}>
-            <Link
-              className="w-full"
-              color={link.path === currentPath ? "primary" : "foreground"}
-              href={link.path}
-              size="lg"
+            <Badge
+              color="primary"
+              showOutline={false}
+              content="soon"
+              size="sm"
+              isInvisible={!link.isDisabled}
+              variant="shadow"
             >
-              {link.title}
-            </Link>
+              <Link
+                className="w-full"
+                color={link.path === currentPath ? "primary" : "foreground"}
+                href={link.path}
+                size="lg"
+                isDisabled={link.isDisabled}
+              >
+                {link.title}
+              </Link>
+            </Badge>
           </NavbarMenuItem>
         ))}
       </NavbarMenu>
