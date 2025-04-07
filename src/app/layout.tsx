@@ -10,8 +10,28 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "uiclub",
-  description: "UI Club for UX/UI Designers and Developers",
+  title: "UI Club — A Curated Repository of Design Systems",
+  description:
+    "Discover reusable components, specs, and real-world UI patterns in one place. Rated and ready to use. Join the Club, Design Smarter.",
+  keywords: [
+    "UI Club",
+    "design systems",
+    "UI components",
+    "frontend",
+    "developer tools",
+    "React UI",
+    "component library",
+  ],
+  authors: [{ name: "UI Club Team" }],
+  creator: "UI Club",
+  openGraph: {
+    title: "UI Club — A Curated Repository of Design Systems",
+    description:
+      "Explore top-rated UI components with previews, specs, and usage guides. Build better, faster.",
+    url: "https://uiclub-fe.vercel.app", // replace with your actual domain
+    siteName: "UI Club",
+    type: "website",
+  },
 };
 
 export default function RootLayout({

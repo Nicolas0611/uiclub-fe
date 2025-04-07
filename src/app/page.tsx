@@ -1,38 +1,4 @@
 import Button, { ButtonProps } from "@/components/shared/Button/Button";
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "UI Club — A Curated Repository of Design Systems",
-  description:
-    "Discover reusable components, specs, and real-world UI patterns in one place. Rated and ready to use. Join the Club, Design Smarter.",
-  keywords: [
-    "UI Club",
-    "design systems",
-    "UI components",
-    "frontend",
-    "developer tools",
-    "React UI",
-    "component library",
-  ],
-  authors: [{ name: "UI Club Team" }],
-  creator: "UI Club",
-  openGraph: {
-    title: "UI Club — A Curated Repository of Design Systems",
-    description:
-      "Explore top-rated UI components with previews, specs, and usage guides. Build better, faster.",
-    url: "https://uiclub.dev", // replace with your actual domain
-    siteName: "UI Club",
-    images: [
-      {
-        url: "https://uiclub.dev/og-image.png", // add your OG image here
-        width: 1200,
-        height: 630,
-        alt: "UI Club – Preview of components",
-      },
-    ],
-    type: "website",
-  },
-};
 
 export default function Home() {
   interface ContentProps {
