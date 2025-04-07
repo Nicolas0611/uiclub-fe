@@ -26,4 +26,5 @@ export interface Component {
   type: string;
   company_name: string;
   related_names: Array<string>;
+  link_to_site: string;
 }

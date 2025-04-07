@@ -3,6 +3,7 @@
 import { IMAGES } from "@/constants";
 import { Component } from "@/interfaces/design-system-interface";
 import { Card, CardBody, CardFooter, Image } from "@heroui/react";
+import Link from "next/link";
 interface ComponentsProps {
   components: Component[];
 }
@@ -15,10 +16,13 @@ const ComponentsGrid = ({ components }: ComponentsProps) => {
       IMAGES[name.toUpperCase().replace(/\s+/g, "")];
     return getImage(componentName) || relatedNames.map(getImage).find(Boolean);
   };
+
   return (
     <div className="grid grid-cols-1 gap-6 py-6 md:grid-cols-2 lg:grid-cols-3">
       {components.map((component, index) => (
         <Card
+          href={component?.link_to_site || "#"}
+          as={Link}
           key={index}
           isPressable
           shadow="none"
