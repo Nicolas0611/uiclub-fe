@@ -1,15 +1,6 @@
 import { Button as HeroButton } from "@heroui/react";
 import Link from "next/link";
 
-interface LinkWrapperProps {
-  children: React.ReactNode;
-  path: string | undefined;
-}
-
-const LinkWrapper = ({ children, path }: LinkWrapperProps) => {
-  return path ? <Link href={path}>{children}</Link> : <>{children}</>;
-};
-
 export interface ButtonProps {
   path?: string;
   title: string;
@@ -36,11 +27,9 @@ const Button = ({
   variant = "solid",
 }: ButtonProps) => {
   return (
-    <LinkWrapper path={path}>
-      <HeroButton color={color} variant={variant}>
-        {title}
-      </HeroButton>
-    </LinkWrapper>
+    <HeroButton as={Link} href={path} color={color} variant={variant}>
+      {title}
+    </HeroButton>
   );
 };
 
