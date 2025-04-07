@@ -1,15 +1,18 @@
+import HomePill from "@/components/custom/HomePill/HomePill";
 import Button, { ButtonProps } from "@/components/shared/Button/Button";
 
+interface ContentProps {
+  preTitle: string;
+  title: string;
+  description: string;
+  links: ButtonProps[];
+}
 export default function Home() {
-  interface ContentProps {
-    title: string;
-    description: string;
-    links: ButtonProps[];
-  }
   const content: ContentProps = {
+    preTitle: "Last updated 6 April, 2025 ✨",
     title: "Welcome to UI Club",
     description:
-      "Streamline your workflow by leveraging the combined expertise of leading Design Systems and UI libraries, all synthesized in one convenient place to help you research, define, and create UI components effortlessly.",
+      "UI Club is a curated repository of reusable UI components and design systems — a one-stop destination for designers and developers looking to explore, evaluate, and integrate quality UI elements into their projects.",
     links: [
       {
         title: "View Components",
@@ -39,21 +42,14 @@ export default function Home() {
           ></div>
         </div>
         <div className="mx-auto max-w-3xl py-20 z-10">
-          <div className="hidden sm:mb-8 sm:flex sm:justify-center">
-            <div className="relative rounded-full px-3 bg-primary_light py-1 text-sm/6 text-gray-600 ring-1 ring-primary hover:ring-primary_dark">
-              Last updated 6 April, 2025 ✨
-            </div>
-          </div>
+          <HomePill title={content.preTitle} />
           <div className="text-center">
             <h1 className="text-5xl text-neutral-800 font-medium tracking-tight text-balance sm:text-6xl lg:text-7xl">
               Join the <span className="text-primary">Club</span>, Design
               Smarter. Ship Faster.
             </h1>
             <p className="mt-8 text-lg font-regular text-pretty text-gray-500 sm:text-xl/8">
-              UI Club is a curated repository of reusable UI components and
-              design systems — a one-stop destination for designers and
-              developers looking to explore, evaluate, and integrate quality UI
-              elements into their projects.
+              {content.description}
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               {content.links.map((link, index) => (
