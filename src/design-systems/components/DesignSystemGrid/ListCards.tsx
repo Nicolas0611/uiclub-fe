@@ -24,13 +24,17 @@ const ListCards = ({ designSystems }: Props) => {
             className="w-full border-1 border-solid border-gray-200"
           >
             <CardBody className="flex h-full flex-row items-start gap-3 p-4">
-              <Image
-                alt="company_logo"
-                height={40}
-                radius="sm"
-                src={replaceBackendWithLocalhost(designSystem.thumbnail_image)}
-                width={40}
-              />
+              <div className="flex-shrink-0">
+                <Image
+                  alt="company_logo"
+                  height={40}
+                  radius="sm"
+                  src={replaceBackendWithLocalhost(
+                    designSystem.thumbnail_image
+                  )}
+                  width={40}
+                />
+              </div>
 
               <div className="flex flex-col">
                 <div className="flex items-center flex-row gap-2">
