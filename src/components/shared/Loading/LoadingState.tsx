@@ -12,7 +12,7 @@ const LoadingState = () => {
         animationData={animationData}
         loop
         autoplay
-        style={{ height: 400, width: 400 }}
+        style={{ height: 300, width: 300 }}
       />
     </div>
   );
