@@ -2,7 +2,7 @@
 
 import { IMAGES } from "@/constants";
 import { Component } from "@/interfaces/design-system-interface";
-import { Card, CardBody, CardFooter, Image } from "@heroui/react";
+import { Card, CardBody, CardFooter, Chip, Image } from "@heroui/react";
 import Link from "next/link";
 interface ComponentsProps {
   components: Component[];
@@ -45,7 +45,9 @@ const ComponentsGrid = ({ components }: ComponentsProps) => {
           </CardBody>
           <CardFooter className="text-small justify-between">
             <p>{component.name}</p>
-            <p className="text-default-500">{component.type}</p>
+            <Chip size="sm" color="success" variant="dot">
+              {component?.type}
+            </Chip>
           </CardFooter>
         </Card>
       ))}
