@@ -1,4 +1,6 @@
 export const IMAGES: Record<string, string> = {
+  NAVIGATION: "Navigation",
+  AVATAR: "Avatar",
   BADGE: "Badge",
   BUTTON: "Button",
   CARD: "Card",
