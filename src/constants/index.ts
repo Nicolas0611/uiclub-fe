@@ -17,6 +17,15 @@ export const IMAGES: Record<string, string> = {
   DRAWER: "Drawer",
   DROPDOWN: "Dropdown",
   EMPTY: "Empty",
+  LIST: "List",
+  HEADER: "Header",
+  PAGINATION: "Pagination",
+  SIDEBAR: "Sidebar",
+  RANGE: "Range",
+  ICON: "Icon",
+  FORM: "Form",
+  TABLE: "Table",
+  TOGGLE: "Toggle",
 };
 
 export const LINKS = [
