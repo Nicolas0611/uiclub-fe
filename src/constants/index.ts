@@ -26,6 +26,15 @@ export const IMAGES: Record<string, string> = {
   FORM: "Form",
   TABLE: "Table",
   TOGGLE: "Toggle",
+  SPINNER: "Spinner",
+  RADIOBUTTON: "Radio Button",
+  BUTTONGROUP: "Button Group",
+  TABS: "Tabs",
+  CODE: "Code",
+  TEXTFIELD: "Text field",
+  INLINEMESSAGE: "Inline message",
+  TEXTAREA: "Text area",
+  TABLETREE: "Table tree",
 };
 
 export const LINKS = [
