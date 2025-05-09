@@ -62,7 +62,12 @@ const Header = () => {
         <NavbarMenuToggle className=" md:hidden" />
 
         <NavbarItem>
-          <Button as={Link} href="/roadmap" color="primary" variant="solid">
+          <Button
+            as={Link}
+            href="https://uiclub.supahub.com/"
+            color="primary"
+            variant="solid"
+          >
             Road map ✨
           </Button>
         </NavbarItem>

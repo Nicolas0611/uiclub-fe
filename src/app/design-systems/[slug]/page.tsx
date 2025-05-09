@@ -1,4 +1,4 @@
-import { Breadcrumb } from "@/components/shared";
+import { Breadcrumb, EmptyState } from "@/components/shared";
 import { fetchDesignSystemsById } from "@/design-systems/actions/design-actions";
 import ComponentsGrid from "@/design-systems/components/ComponentsGrid/ComponentsGrid";
 import ContainerLinks from "@/design-systems/components/ContainerLinks/ContainerLinks";
@@ -34,8 +34,16 @@ export default async function DesignDetailPage({
           </p>
           <ContainerLinks designSystem={designSystem} />
         </div>
-        {designSystem?.components && (
-          <ComponentsGrid components={designSystem?.components} />
+        {designSystem!.components.length > 0 ? (
+          <ComponentsGrid components={designSystem!.components} />
+        ) : (
+          <div className="py-10">
+            <EmptyState
+              title="We’re adding components soon."
+              description="In the meantime, enjoy this beautiful emptiness."
+              showLink={false}
+            />
+          </div>
         )}
       </section>
     </div>
