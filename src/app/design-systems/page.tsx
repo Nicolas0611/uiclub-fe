@@ -16,10 +16,10 @@ async function DesignSystemsPage({
   const { search } = await searchParams;
 
   const content = {
-    preTitle: "2024 · Design Systems and UI Libraries",
-    title: "List of the top 20 Benchmark Systems",
+    preTitle: "2025 · Design Systems and UI Libraries",
+    title: "List of the top Benchmark Systems",
     parragraph:
-      "This is the list of the most popular Design Systems and UI libraries, used as the leading Systems Benchmarks by thousands of companies, startups, designers, and developers around the world. This list is the result of exhaustive research, which included a survey of hundreds of designers and developers working at leading companies, such as Google, Atlassian, Airbnb, and IBM, among others.",
+      "This list highlights the most popular Design Systems and UI libraries, serving as key benchmarks for thousands of companies, startups, designers, and developers worldwide. It is the result of extensive research, including a survey of hundreds of professionals from leading organizations like Google, Atlassian, Airbnb, and IBM.",
   };
 
   const designSystems = await fetchDesignSystems(search);
