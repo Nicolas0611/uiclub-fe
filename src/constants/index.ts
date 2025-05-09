@@ -35,6 +35,8 @@ export const IMAGES: Record<string, string> = {
   INLINEMESSAGE: "Inline message",
   TEXTAREA: "Text area",
   TABLETREE: "Table tree",
+  MENU: "Menu",
+  SEARCH: "Search",
 };
 
 export const LINKS = [
