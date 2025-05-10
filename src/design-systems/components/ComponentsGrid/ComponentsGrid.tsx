@@ -23,13 +23,10 @@ const ComponentsGrid = ({ components }: ComponentsProps) => {
         <Card
           href={component?.link_to_site || "#"}
           as={Link}
-          key={index}
+          key={`component_${index}`}
           isPressable
           shadow="none"
           className="border-1 border-solid border-gray-200"
-          onPress={() =>
-            console.log({ name: component.name.toUpperCase().replace(" ", "") })
-          }
         >
           <CardBody className="overflow-visible p-3">
             <Image

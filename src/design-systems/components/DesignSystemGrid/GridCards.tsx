@@ -21,25 +21,23 @@ const GridCards = ({ designSystems }: Props) => {
   return (
     <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
       {designSystems.map((designSystem) => (
-        <Link
+        <Card
           key={designSystem.id}
+          as={Link}
           href={`/design-systems/${designSystem.slug}`}
-        >
-          <Card
-            img={replaceBackendWithLocalhost(designSystem.thumbnail_image)}
-            key={designSystem.id}
-            title={designSystem.name}
-            description={designSystem.short_description}
-            url={designSystem.company_name}
-            slot={
-              <CardBody
-                quantity={designSystem.quantity_components}
-                popularity={designSystem.popularity}
-                is_updated={designSystem.is_updated}
-              />
-            }
-          />
-        </Link>
+          img={replaceBackendWithLocalhost(designSystem.thumbnail_image)}
+          title={designSystem.name}
+          description={designSystem.short_description}
+          url={designSystem.company_name}
+          slot={
+            <CardBody
+              quantity={designSystem.quantity_components}
+              popularity={designSystem.popularity}
+              is_updated={designSystem.is_updated}
+            />
+          }
+          isPressable
+        />
       ))}
     </div>
   );
