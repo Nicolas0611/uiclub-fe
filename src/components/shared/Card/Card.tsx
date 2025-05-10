@@ -1,4 +1,5 @@
 import {
+  As,
   CardBody,
   CardFooter,
   CardHeader,
@@ -16,6 +17,10 @@ export interface CardProps {
   slot?: React.ReactNode;
   showFooter?: boolean;
   img: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  as: As<any>;
+  isPressable: boolean;
+  href: string;
 }
 export const Card = ({
   isHoverable = true,
@@ -25,13 +30,18 @@ export const Card = ({
   slot,
   img,
   showFooter = false,
+  as,
+  href,
 }: CardProps) => {
   return (
     <HeroCard
+      isPressable
       isHoverable={isHoverable}
       shadow="none"
       className="border-1 border-solid border-gray-200"
       fullWidth
+      as={as}
+      href={href}
     >
       <CardHeader className="flex gap-3">
         <Image alt="heroui logo" height={40} radius="sm" src={img} width={40} />
