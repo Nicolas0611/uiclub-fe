@@ -1,5 +1,8 @@
 import { Header } from "@/components/shared";
 import { HeroUIProviders } from "@/providers/HeroUIProvider";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
@@ -28,7 +31,7 @@ export const metadata: Metadata = {
     title: "UI Club — A Curated Repository of Design Systems",
     description:
       "Explore top-rated UI components with previews, specs, and usage guides. Build better, faster.",
-    url: "https://uiclub-fe.vercel.app", // replace with your actual domain
+    url: "https://uiclub-fe.vercel.app",
     siteName: "UI Club",
     type: "website",
   },
@@ -46,6 +49,8 @@ export default function RootLayout({
           <Header />
           {children}
         </HeroUIProviders>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
