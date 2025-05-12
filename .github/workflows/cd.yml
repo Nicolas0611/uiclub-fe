@@ -1,4 +1,4 @@
-name: Deploy FE Pipeline
+name: CD Pipeline
 
 on:
   push:
