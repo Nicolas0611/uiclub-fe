@@ -29,6 +29,7 @@ const GridCards = ({ designSystems }: Props) => {
           title={designSystem.name}
           description={designSystem.short_description}
           url={designSystem.company_name}
+          showTag={designSystem.is_new}
           slot={
             <CardBody
               quantity={designSystem.quantity_components}
