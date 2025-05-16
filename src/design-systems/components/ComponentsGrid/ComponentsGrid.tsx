@@ -2,7 +2,8 @@
 
 import { IMAGES } from "@/constants";
 import { Component } from "@/interfaces/design-system-interface";
-import { Card, CardBody, CardFooter, Chip, Image } from "@heroui/react";
+import { Card, CardBody, CardFooter, Chip } from "@heroui/react";
+import Image from "next/image";
 import Link from "next/link";
 interface ComponentsProps {
   components: Component[];
@@ -36,8 +37,11 @@ const ComponentsGrid = ({ components }: ComponentsProps) => {
                 component.name,
                 component.related_names
               )}.png`}
-              width="100%"
-              height="100%"
+              width={1000}
+              height={1000}
+              quality={100}
+              style={{ height: "100%" }}
+              loading="lazy"
             />
           </CardBody>
           <CardFooter className="text-small justify-between">
