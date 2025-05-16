@@ -16,6 +16,7 @@ export interface DesignSystem {
     storybook: string;
     figma: string;
   };
+  is_new: boolean;
 }
 
 export type Popularity = "Medium" | "High" | "Low";

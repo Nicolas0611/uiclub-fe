@@ -37,6 +37,10 @@ export const IMAGES: Record<string, string> = {
   TABLETREE: "Table tree",
   MENU: "Menu",
   SEARCH: "Search",
+  ALERTBANNER: "Alert banner",
+  ACCORDION: "Accordion",
+  AUTOCOMPLETE: "Autocomplete",
+  LINK: "Link",
 };
 
 export const LINKS = [
