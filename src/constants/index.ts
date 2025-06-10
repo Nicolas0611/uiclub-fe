@@ -41,6 +41,12 @@ export const IMAGES: Record<string, string> = {
   ACCORDION: "Accordion",
   AUTOCOMPLETE: "Autocomplete",
   LINK: "Link",
+  ACTIONBAR: "Action bar",
+  TRAY: "Tray",
+  HELPTEXT: "Help text",
+  LABEL: "Label",
+  NAVIGATIONBAR: "Navigation bar",
+  DIVIDER: "Divider",
 };
 
 export const LINKS = [
