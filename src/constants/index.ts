@@ -63,7 +63,7 @@ export const LINKS = [
   {
     path: "/components",
     title: "Components",
-    isDisabled: true,
+    isDisabled: false,
   },
   {
     path: "/design-systems",
