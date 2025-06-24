@@ -1,19 +1,22 @@
+import { fetchComponentList } from "@/component/actions/component-action";
+import ComponentsGrid from "@/design-systems/components/ComponentsGrid/ComponentsGrid";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Design Systems",
+  title: "Components List",
   description:
     "A comprehensive repository of various design systems, UI frameworks, and component libraries. Compare and explore industry-leading design guidelines.",
 };
 
-async function DesignSystemsPage() {
+async function ComponentsPage() {
   const content = {
-    preTitle: "2025 · Design Systems and UI Libraries",
-    title: "List of the top Benchmark Systems",
+    preTitle: "Components",
+    title: "List of Components",
     parragraph:
-      "This list highlights the most popular Design Systems and UI libraries, serving as key benchmarks for thousands of companies, startups, designers, and developers worldwide. It is the result of extensive research, including a survey of hundreds of professionals from leading organizations like Google, Atlassian, Airbnb, and IBM.",
+      "We have compiled all the wisdom and best practices from the top 20 Design Systems and UI libraries in one place. We will continue to add more components week after week.",
   };
-
+  const components = await fetchComponentList();
+  console.log(components);
   return (
     <section className="container mx-auto px-4 py-10 ">
       <div className="flex flex-col gap-5">
@@ -27,8 +30,9 @@ async function DesignSystemsPage() {
           {content.parragraph}
         </p>
       </div>
+      <ComponentsGrid components={components} />
     </section>
   );
 }
 
-export default DesignSystemsPage;
+export default ComponentsPage;
