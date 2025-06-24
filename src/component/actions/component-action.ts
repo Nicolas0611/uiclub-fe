@@ -6,6 +6,7 @@ export const fetchComponentList = async (): Promise<ComponentType[]> => {
     const response = await https.get<ComponentType[]>(
       "design-libraries/component-types/"
     );
+    console.log(response.data);
     return response.status === 200 ? response.data : [];
   } catch (error) {
     throw `Error fetching components ${error}`;
