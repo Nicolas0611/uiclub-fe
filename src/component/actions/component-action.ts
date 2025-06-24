@@ -1,9 +1,7 @@
 import { ComponentType } from "@/interfaces/design-system-interface";
 import { https } from "@/lib/axios";
 
-export const fetchComponentList = async (
-  search?: string
-): Promise<ComponentType[]> => {
+export const fetchComponentList = async (): Promise<ComponentType[]> => {
   try {
     const response = await https.get<ComponentType[]>(
       "design-libraries/component-types/"
