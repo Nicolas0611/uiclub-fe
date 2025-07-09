@@ -1,12 +1,12 @@
 "use client";
 
 import { IMAGES } from "@/constants";
-import { Component } from "@/interfaces/design-system-interface";
+import { ComponentType } from "@/interfaces/design-system-interface";
 import { Card, CardBody, CardFooter, Chip } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
 interface ComponentsProps {
-  components: Component[];
+  components: ComponentType[];
 }
 const ComponentsGrid = ({ components }: ComponentsProps) => {
   const verifyRelatedNameForImage = (
@@ -15,7 +15,7 @@ const ComponentsGrid = ({ components }: ComponentsProps) => {
   ): string | undefined => {
     const getImage = (name: string) =>
       IMAGES[name.toUpperCase().replace(/\s+/g, "")];
-    return getImage(componentName) || relatedNames.map(getImage).find(Boolean);
+    return getImage(componentName) || relatedNames?.map(getImage).find(Boolean);
   };
 
   return (
@@ -47,7 +47,7 @@ const ComponentsGrid = ({ components }: ComponentsProps) => {
           <CardFooter className="text-small justify-between">
             <p>{component.name}</p>
             <Chip size="sm" color="success" variant="dot">
-              {component?.type}
+              {component?.type || component?.category}
             </Chip>
           </CardFooter>
         </Card>

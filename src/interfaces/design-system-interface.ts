@@ -3,7 +3,7 @@ export interface DesignSystem {
   short_description: string;
   large_description: string;
   company_name: string;
-  components: Component[];
+  components: ComponentType[];
   name: string;
   version: string;
   quantity_components: number;
