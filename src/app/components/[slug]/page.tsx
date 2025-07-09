@@ -1,5 +1,5 @@
+import { fetchComponentTypeById } from "@/component/actions/component-action";
 import { Breadcrumb } from "@/components/shared";
-import { fetchComponentTypeById } from "@/design-systems/actions/design-actions";
 import { Chip } from "@heroui/react";
 
 export default async function ComponentDetailPage({

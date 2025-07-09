@@ -1,3 +1,5 @@
+export { default as APIS } from "./apis";
+
 export const IMAGES: Record<string, string> = {
   NAVIGATION: "Navigation",
   AVATAR: "Avatar",
