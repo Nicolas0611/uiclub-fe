@@ -1,6 +1,9 @@
 "use server";
 
-import { DesignSystem } from "@/interfaces/design-system-interface";
+import {
+  ComponentType,
+  DesignSystem,
+} from "@/interfaces/design-system-interface";
 import { https } from "@/lib/axios";
 
 export const fetchDesignSystems = async (
@@ -33,5 +36,20 @@ export const fetchDesignSystemsById = async ({
     return response.status === 200 ? response.data : null;
   } catch (error) {
     throw `Error fetching design systems id #${slug} - ${error}`;
+  }
+};
+
+export const fetchComponentTypeById = async ({
+  slug,
+}: {
+  slug: string;
+}): Promise<ComponentType | null> => {
+  try {
+    const response = await https.get<ComponentType>(
+      `design-libraries/component-types/${slug}/`
+    );
+    return response.status === 200 ? response.data : null;
+  } catch (error) {
+    throw `Error fetching component with slug ${slug} - ${error}`;
   }
 };
