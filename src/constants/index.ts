@@ -1,3 +1,5 @@
+export { default as APIS } from "./apis";
+
 export const IMAGES: Record<string, string> = {
   NAVIGATION: "Navigation",
   AVATAR: "Avatar",
@@ -63,7 +65,7 @@ export const LINKS = [
   {
     path: "/components",
     title: "Components",
-    isDisabled: true,
+    isDisabled: false,
   },
   {
     path: "/design-systems",

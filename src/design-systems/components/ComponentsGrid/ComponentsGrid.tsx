@@ -1,12 +1,12 @@
 "use client";
 
 import { IMAGES } from "@/constants";
-import { Component } from "@/interfaces/design-system-interface";
+import { ComponentType } from "@/interfaces/design-system-interface";
 import { Card, CardBody, CardFooter, Chip } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
 interface ComponentsProps {
-  components: Component[];
+  components: ComponentType[];
 }
 const ComponentsGrid = ({ components }: ComponentsProps) => {
   const verifyRelatedNameForImage = (
@@ -15,13 +15,14 @@ const ComponentsGrid = ({ components }: ComponentsProps) => {
   ): string | undefined => {
     const getImage = (name: string) =>
       IMAGES[name.toUpperCase().replace(/\s+/g, "")];
-    return getImage(componentName) || relatedNames.map(getImage).find(Boolean);
+    return getImage(componentName) || relatedNames?.map(getImage).find(Boolean);
   };
 
   return (
     <div className="grid grid-cols-1 gap-6 py-6 md:grid-cols-2 lg:grid-cols-3">
       {components.map((component, index) => (
         <Card
+          isHoverable={true}
           href={component?.link_to_site || "#"}
           as={Link}
           key={`component_${index}`}
@@ -47,7 +48,7 @@ const ComponentsGrid = ({ components }: ComponentsProps) => {
           <CardFooter className="text-small justify-between">
             <p>{component.name}</p>
             <Chip size="sm" color="success" variant="dot">
-              {component?.type}
+              {component?.type || component?.category}
             </Chip>
           </CardFooter>
         </Card>

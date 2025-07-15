@@ -1,5 +1,6 @@
 "use server";
 
+import { APIS } from "@/constants";
 import { DesignSystem } from "@/interfaces/design-system-interface";
 import { https } from "@/lib/axios";
 
@@ -8,7 +9,7 @@ export const fetchDesignSystems = async (
 ): Promise<DesignSystem[]> => {
   try {
     const response = await https.get<DesignSystem[]>(
-      "design-libraries/design-systems/",
+      APIS.DESIGN_LIBRARIES.DESIGN_SYSTEMS,
       {
         params: {
           search: search,
@@ -28,7 +29,7 @@ export const fetchDesignSystemsById = async ({
 }): Promise<DesignSystem | null> => {
   try {
     const response = await https.get<DesignSystem>(
-      `design-libraries/design-systems/${slug}/`
+      APIS.DESIGN_LIBRARIES.DESIGN_SYSTEMS_BY_ID(slug)
     );
     return response.status === 200 ? response.data : null;
   } catch (error) {
