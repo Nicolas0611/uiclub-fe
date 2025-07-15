@@ -22,6 +22,7 @@ const ComponentsGrid = ({ components }: ComponentsProps) => {
     <div className="grid grid-cols-1 gap-6 py-6 md:grid-cols-2 lg:grid-cols-3">
       {components.map((component, index) => (
         <Card
+          isHoverable={true}
           href={component?.link_to_site || "#"}
           as={Link}
           key={`component_${index}`}

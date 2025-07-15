@@ -1,4 +1,5 @@
 import { fetchComponentList } from "@/component/actions/component-action";
+import InputSearch from "@/component/components/InputSearch";
 import ComponentsGrid from "@/design-systems/components/ComponentsGrid/ComponentsGrid";
 import { Metadata } from "next";
 
@@ -8,14 +9,21 @@ export const metadata: Metadata = {
     "A comprehensive repository of various design systems, UI frameworks, and component libraries. Compare and explore industry-leading design guidelines.",
 };
 
-async function ComponentsPage() {
+async function ComponentsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ search: string }>;
+}) {
   const content = {
     preTitle: "Components",
     title: "List of Components",
     parragraph:
       "We have compiled all the wisdom and best practices from the top 20 Design Systems and UI libraries in one place. We will continue to add more components week after week.",
   };
-  const components = await fetchComponentList();
+
+  const { search } = await searchParams;
+
+  const components = await fetchComponentList(search);
 
   return (
     <section className="container mx-auto px-4 py-10 ">
@@ -29,6 +37,10 @@ async function ComponentsPage() {
         <p className="text-neutral-500 text-sm w-full md:w-[75%] md:text-medium lg:w-[65%] ">
           {content.parragraph}
         </p>
+      </div>
+
+      <div className="pt-8">
+        <InputSearch />
       </div>
       <ComponentsGrid components={components} />
     </section>

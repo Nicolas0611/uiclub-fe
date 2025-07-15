@@ -2,12 +2,18 @@ import { APIS } from "@/constants";
 import { ComponentType } from "@/interfaces/design-system-interface";
 import { https } from "@/lib/axios";
 
-export const fetchComponentList = async (): Promise<ComponentType[]> => {
+export const fetchComponentList = async (
+  search: string
+): Promise<ComponentType[]> => {
   try {
     const response = await https.get<ComponentType[]>(
-      APIS.DESIGN_LIBRARIES.COMPONENT_TYPES
+      APIS.DESIGN_LIBRARIES.COMPONENT_TYPES,
+      {
+        params: {
+          search: search,
+        },
+      }
     );
-    console.log(response.data);
     return response.status === 200 ? response.data : [];
   } catch (error) {
     throw `Error fetching components ${error}`;
