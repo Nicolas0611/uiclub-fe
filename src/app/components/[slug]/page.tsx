@@ -1,6 +1,7 @@
 import { fetchComponentTypeById } from "@/component/actions/component-action";
 import StatCard from "@/component/components/StatCard/StatCard";
 import { Breadcrumb } from "@/components/shared";
+import Tabs from "@/components/shared/Tabs/Tabs";
 import { Chip } from "@heroui/react";
 
 export default async function ComponentDetailPage({
@@ -10,7 +11,7 @@ export default async function ComponentDetailPage({
 }) {
   const { slug } = await params;
   const component = await fetchComponentTypeById({ slug });
-
+  console.log(component);
   return (
     <div className="container mx-auto px-4">
       <section className="container mx-auto px-4 py-10">
@@ -36,16 +37,8 @@ export default async function ComponentDetailPage({
             description="Of the Top 20 Systems include this component within their system."
           />
         </div>
-
         <div className="pt-5">
-          <div className="border border-gray-200 rounded-2xl overflow-clip">
-            <iframe
-              width="100%"
-              height="450"
-              src="https://embed.figma.com/design/2lrOAXq5fGrqOdBfhS3wwA/ADS-Components--Legacy---Community-?node-id=7999-10220&embed-host=share"
-              allowFullScreen
-            ></iframe>
-          </div>
+          <Tabs items={component?.figma_links || []} />
         </div>
       </section>
     </div>
