@@ -30,9 +30,15 @@ export interface Component {
   link_to_site: string;
 }
 
+export interface FigmaLinks {
+  id: string;
+  company_name: string;
+  url: string;
+}
 export interface ComponentType extends Component {
   name: string;
   description: string;
   category: string;
   usage_count: number;
+  figma_links: FigmaLinks[];
 }
