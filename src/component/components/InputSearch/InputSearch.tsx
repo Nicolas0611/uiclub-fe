@@ -15,7 +15,7 @@ const InputSearch = () => {
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
       handleSearch(searchTerm, router, pathname, searchParams);
-    }, 500); // Delay in ms
+    }, 500);
 
     return () => clearTimeout(delayDebounce);
   }, [searchTerm]);
