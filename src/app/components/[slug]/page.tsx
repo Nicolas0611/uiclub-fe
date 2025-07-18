@@ -1,7 +1,7 @@
 import { fetchComponentTypeById } from "@/component/actions/component-action";
+import Splitter from "@/component/components/Splitter/Splitter";
 import StatCard from "@/component/components/StatCard/StatCard";
 import { Breadcrumb } from "@/components/shared";
-import Tabs from "@/components/shared/Tabs/Tabs";
 import { Chip } from "@heroui/react";
 import Image from "next/image";
 
@@ -59,8 +59,8 @@ export default async function ComponentDetailPage({
             />
           ))}
         </div>
-        <div className="pt-5 w-100">
-          <Tabs items={component?.figma_links || []} />
+        <div className="pt-5">
+          <Splitter component={component!} />
         </div>
       </section>
     </div>
