@@ -5,12 +5,13 @@ import { Tabs as HeroTabs, Tab } from "@heroui/react";
 
 interface Props<T> {
   items: T[];
+  placement?: "top" | "bottom" | "start" | "end" | undefined;
 }
-const Tabs = <T extends FigmaLinks>({ items }: Props<T>) => {
+const Tabs = <T extends FigmaLinks>({ items, placement }: Props<T>) => {
   return (
-    <HeroTabs aria-label="Dynamic tabs" items={items}>
+    <HeroTabs aria-label="Dynamic tabs" items={items} placement={placement}>
       {(item) => (
-        <Tab key={item.id} title={item.company_name}>
+        <Tab className="w-full" key={item.id} title={item.company_name}>
           <IFrame link={item.url} />
         </Tab>
       )}
