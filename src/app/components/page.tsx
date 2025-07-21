@@ -24,7 +24,6 @@ async function ComponentsPage({
   const { search } = await searchParams;
 
   const components = await fetchComponentList(search);
-
   return (
     <section className="container mx-auto px-4 py-10 ">
       <div className="flex flex-col gap-5">

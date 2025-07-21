@@ -42,4 +42,5 @@ export interface ComponentType extends Component {
   usage_count: number;
   figma_links: FigmaLinks[];
   design_systems_count: number;
+  is_available?: boolean;
 }
