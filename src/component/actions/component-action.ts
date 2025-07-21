@@ -6,7 +6,7 @@ export const fetchComponentList = async (
   search: string
 ): Promise<ComponentType[]> => {
   try {
-    const response = await https.get<ComponentType[]>(
+    const response = await https.get<{ results: ComponentType[] }>(
       APIS.DESIGN_LIBRARIES.COMPONENT_TYPES,
       {
         params: {
@@ -14,7 +14,7 @@ export const fetchComponentList = async (
         },
       }
     );
-    return response.status === 200 ? response.data : [];
+    return response.status === 200 ? response.data.results : [];
   } catch (error) {
     throw `Error fetching components ${error}`;
   }
