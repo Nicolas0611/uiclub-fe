@@ -1,6 +1,9 @@
 import { fetchComponentTypeById } from "@/component/actions/component-action";
+import Splitter from "@/component/components/Splitter/Splitter";
+import StatCard from "@/component/components/StatCard/StatCard";
 import { Breadcrumb } from "@/components/shared";
 import { Chip } from "@heroui/react";
+import Image from "next/image";
 
 export default async function ComponentDetailPage({
   params,
@@ -9,6 +12,18 @@ export default async function ComponentDetailPage({
 }) {
   const { slug } = await params;
   const component = await fetchComponentTypeById({ slug });
+  const DESIGN_SYSTEM_TOTAL = 5;
+  const componentStats = [
+    {
+      stat: component?.usage_count || 0,
+      description: `Of the Top Systems name this component ${component?.name}.`,
+    },
+    {
+      stat: (component!.design_systems_count * 100) / DESIGN_SYSTEM_TOTAL || 0,
+      description:
+        "of the Top 20 Systems include this component within their system.",
+    },
+  ];
 
   return (
     <div className="container mx-auto px-4">
@@ -21,9 +36,31 @@ export default async function ComponentDetailPage({
               type: {component?.category}
             </Chip>
           </div>
-          <p className="text-neutral-500 text-sm w-full lg:w-[65%] md:text-medium">
+          <p className="text-neutral-500 text-sm pb-3 w-full lg:w-[65%] md:text-medium">
             {component?.description}
           </p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-9">
+          <Image
+            alt={`${component!.name}_img`}
+            className="w-full object-cover h-[140px]"
+            src={`/assets/${component!.name}.png`}
+            width={1000}
+            height={1000}
+            quality={100}
+            style={{ height: "100%" }}
+            loading="lazy"
+          />
+          {componentStats.map((component, index) => (
+            <StatCard
+              key={`card_${index}`}
+              stat={component.stat}
+              description={component.description}
+            />
+          ))}
+        </div>
+        <div className="pt-5">
+          <Splitter component={component!} />
         </div>
       </section>
     </div>

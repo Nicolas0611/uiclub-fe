@@ -1,5 +1,5 @@
 import { fetchComponentList } from "@/component/actions/component-action";
-import InputSearch from "@/component/components/InputSearch";
+import InputSearch from "@/component/components/InputSearch/InputSearch";
 import ComponentsGrid from "@/design-systems/components/ComponentsGrid/ComponentsGrid";
 import { Metadata } from "next";
 
@@ -24,7 +24,6 @@ async function ComponentsPage({
   const { search } = await searchParams;
 
   const components = await fetchComponentList(search);
-
   return (
     <section className="container mx-auto px-4 py-10 ">
       <div className="flex flex-col gap-5">

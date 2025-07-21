@@ -26,9 +26,9 @@ const ComponentsGrid = ({ components }: ComponentsProps) => {
           href={component?.link_to_site || "#"}
           as={Link}
           key={`component_${index}`}
-          isPressable
           shadow="none"
           className="border-1 border-solid border-gray-200"
+          isDisabled={component.link_to_site ? false : true}
         >
           <CardBody className="overflow-visible p-3">
             <Image
@@ -46,7 +46,15 @@ const ComponentsGrid = ({ components }: ComponentsProps) => {
             />
           </CardBody>
           <CardFooter className="text-small justify-between">
-            <p>{component.name}</p>
+            <div className="flex flex-row gap-1 items-center">
+              <p>{component.name}</p>
+              {!component.link_to_site && (
+                <Chip size="sm" color="warning" variant="flat">
+                  Soon
+                </Chip>
+              )}
+            </div>
+
             <Chip size="sm" color="success" variant="dot">
               {component?.type || component?.category}
             </Chip>
