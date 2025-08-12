@@ -55,7 +55,7 @@ export default async function ComponentDetailPage({
           {componentStats.map((component, index) => (
             <StatCard
               key={`card_${index}`}
-              stat={component.stat}
+              stat={`${component.stat}%`}
               description={component.description}
             />
           ))}
@@ -64,8 +64,12 @@ export default async function ComponentDetailPage({
             className="lg:col-span-2" // ⬅️ span 2 columns on large screens
             title="Related Design Systems"
             designSystems={component?.related_design_systems}
-            moreCount={2}
-            showMore
+          />
+          <StatCard
+            stat={
+              `${component?.design_systems_count} Top Design Systems` || "0"
+            }
+            description="Include this component"
           />
         </div>
 

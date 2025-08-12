@@ -11,8 +11,6 @@ interface DesignSystemCardProps {
   className: string;
   designSystems: ComponentType["related_design_systems"] | undefined;
   title: string;
-  showMore?: boolean;
-  moreCount?: number;
 }
 
 const DesignSystemCard: React.FC<DesignSystemCardProps> = ({
