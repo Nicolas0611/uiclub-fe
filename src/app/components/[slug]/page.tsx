@@ -1,5 +1,6 @@
 import { fetchComponentTypeById } from "@/component/actions/component-action";
 import Splitter from "@/component/components/Splitter/Splitter";
+import DesignSystemCard from "@/component/components/StatCard/DesignSystemCard";
 import StatCard from "@/component/components/StatCard/StatCard";
 import { Breadcrumb } from "@/components/shared";
 import { Chip } from "@heroui/react";
@@ -12,7 +13,7 @@ export default async function ComponentDetailPage({
 }) {
   const { slug } = await params;
   const component = await fetchComponentTypeById({ slug });
-  const DESIGN_SYSTEM_TOTAL = 5;
+  const DESIGN_SYSTEM_TOTAL = 6;
   const componentStats = [
     {
       stat: component?.usage_count || 0,
@@ -58,7 +59,16 @@ export default async function ComponentDetailPage({
               description={component.description}
             />
           ))}
+
+          <DesignSystemCard
+            className="lg:col-span-2" // ⬅️ span 2 columns on large screens
+            title="Related Design Systems"
+            designSystems={component?.related_design_systems}
+            moreCount={2}
+            showMore
+          />
         </div>
+
         <div className="pt-5">
           <Splitter component={component!} />
         </div>
