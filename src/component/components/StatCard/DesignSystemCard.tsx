@@ -1,6 +1,6 @@
 "use client";
 import { ComponentType } from "@/interfaces/design-system-interface";
-import { ChevronRightIcon } from "@heroicons/react/24/outline";
+import { LinkIcon } from "@heroicons/react/24/outline";
 
 import clsx from "clsx";
 import Image from "next/image";
@@ -28,19 +28,20 @@ const DesignSystemCard: React.FC<DesignSystemCardProps> = ({
       )}
     >
       {/* Header */}
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold text-primary pb-4">{title}</h3>
+      <div className="flex items-center gap-2 mb-4">
+        <div className="pb-4">
+          <LinkIcon className="size-5" color="text-default-500" />
+        </div>
+        <h3 className="text-lg  text-default-500 pb-4">{title}</h3>
       </div>
 
       {/* Design Systems List */}
-      <div
-        style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}
-      >
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         {designSystems?.map((designSystem, index) => (
           <Link key={index} href={`/design-systems/${designSystem.slug}`}>
-            <div className="flex items-center transition-colors hover:bg-slate-50">
-              <div className="flex w-full justify-between items-center gap-2 border border-gray-200 p-3 rounded-lg">
-                <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center transition-colors hover:bg-slate-50 border border-gray-200 p-3 rounded-lg">
+              <div className="flex w-full flex-wrap justify-between items-center gap-2">
+                <div className="flex items-center gap-2 truncate">
                   <div className="w-8 h-8 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
                     <Image
                       src={designSystem.thumbnail_image}
@@ -54,8 +55,6 @@ const DesignSystemCard: React.FC<DesignSystemCardProps> = ({
                     {designSystem.name}
                   </span>
                 </div>
-
-                <ChevronRightIcon className="size-5" />
               </div>
             </div>
           </Link>
