@@ -77,7 +77,7 @@ export default async function ComponentDetailPage({
             alt="logo"
             style={{ height: "100%", width: "100%" }}
             width={1000}
-            height={1000}
+            height={2000}
             quality={100}
           />
         </div>

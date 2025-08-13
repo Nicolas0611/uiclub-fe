@@ -24,6 +24,7 @@ interface DesignSystemCardProps {
  * - Clear base class separation for maintainability
  * - Early return for empty state to reduce render branching
  */
+
 export default function DesignSystemCard({
   designSystems,
   className,
