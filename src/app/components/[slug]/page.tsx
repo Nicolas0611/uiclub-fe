@@ -5,7 +5,6 @@ import StatCard from "@/component/components/StatCard/StatCard";
 import { Breadcrumb } from "@/components/shared";
 import { Chip } from "@heroui/react";
 import Image from "next/image";
-
 export default async function ComponentDetailPage({
   params,
 }: {
@@ -59,9 +58,8 @@ export default async function ComponentDetailPage({
               description={component.description}
             />
           ))}
-
           <DesignSystemCard
-            className="lg:col-span-2" // ⬅️ span 2 columns on large screens
+            className="lg:col-span-2"
             title="Related Design Systems"
             designSystems={component?.related_design_systems}
           />
@@ -70,6 +68,17 @@ export default async function ComponentDetailPage({
               `${component?.design_systems_count} Top Design Systems` || "0"
             }
             description="Include this component"
+            isInverted
+          />
+        </div>
+        <div className="rounded-xl overflow-hidden border border-gray-200 mt-10 ">
+          <Image
+            src="/blueprints/ButtonBlueprint.png"
+            alt="logo"
+            style={{ height: "100%", width: "100%" }}
+            width={1000}
+            height={1000}
+            quality={100}
           />
         </div>
 
