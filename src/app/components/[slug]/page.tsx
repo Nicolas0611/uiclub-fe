@@ -51,11 +51,12 @@ export default async function ComponentDetailPage({
             style={{ height: "100%" }}
             loading="lazy"
           />
-          {componentStats.map((component, index) => (
+          {componentStats.map(({ stat, description }, index) => (
             <StatCard
               key={`card_${index}`}
-              stat={`${component.stat}%`}
-              description={component.description}
+              stat={`${stat}%`}
+              description={description}
+              brands={component?.related_design_systems}
             />
           ))}
           <DesignSystemCard
