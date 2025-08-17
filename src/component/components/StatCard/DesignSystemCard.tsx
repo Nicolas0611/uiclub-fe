@@ -1,9 +1,10 @@
 "use client";
 
 import { ComponentType } from "@/interfaces/design-system-interface";
+import { replaceBackendWithLocalhost } from "@/utils";
 import { CircleStackIcon, LinkIcon } from "@heroicons/react/24/outline";
+import { Image } from "@heroui/react";
 import clsx from "clsx";
-import Image from "next/image";
 import Link from "next/link";
 
 interface DesignSystemCardProps {
@@ -67,13 +68,13 @@ export default function DesignSystemCard({
             <div className={cardItemClasses}>
               <div className="flex w-full flex-wrap justify-between items-center gap-2">
                 <div className="flex items-center gap-2 truncate">
-                  <div className="w-8 h-8 rounded-lg overflow-hidden flex-shrink-0">
+                  <div className="w-8 h-8 overflow-hidden flex-shrink-0">
                     <Image
-                      src={thumbnail_image}
+                      src={replaceBackendWithLocalhost(thumbnail_image)}
                       alt={name}
                       width={32}
                       height={32}
-                      className="object-cover"
+                      radius="sm"
                     />
                   </div>
                   <span className="text-sm text-gray-900">{name}</span>
