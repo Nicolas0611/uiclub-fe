@@ -10,7 +10,7 @@ const Splitter = ({ component }: { component: ComponentType }) => {
   const [compare, setCompare] = useState(false);
 
   return (
-    <div>
+    <div className="border border-gray-200 rounded-lg shadow-sm p-4">
       <div className="w-full flex justify-end mb-4">
         <Button
           color="primary"

@@ -43,4 +43,8 @@ export interface ComponentType extends Component {
   figma_links: FigmaLinks[];
   design_systems_count: number;
   is_available?: boolean;
+  related_design_systems: Pick<
+    DesignSystem,
+    "name" | "slug" | "thumbnail_image"
+  >[];
 }

@@ -1,10 +1,10 @@
 import { fetchComponentTypeById } from "@/component/actions/component-action";
 import Splitter from "@/component/components/Splitter/Splitter";
+import DesignSystemCard from "@/component/components/StatCard/DesignSystemCard";
 import StatCard from "@/component/components/StatCard/StatCard";
 import { Breadcrumb } from "@/components/shared";
 import { Chip } from "@heroui/react";
 import Image from "next/image";
-
 export default async function ComponentDetailPage({
   params,
 }: {
@@ -12,7 +12,7 @@ export default async function ComponentDetailPage({
 }) {
   const { slug } = await params;
   const component = await fetchComponentTypeById({ slug });
-  const DESIGN_SYSTEM_TOTAL = 5;
+  const DESIGN_SYSTEM_TOTAL = 6;
   const componentStats = [
     {
       stat: component?.usage_count || 0,
@@ -51,14 +51,38 @@ export default async function ComponentDetailPage({
             style={{ height: "100%" }}
             loading="lazy"
           />
-          {componentStats.map((component, index) => (
+          {componentStats.map(({ stat, description }, index) => (
             <StatCard
               key={`card_${index}`}
-              stat={component.stat}
-              description={component.description}
+              stat={`${stat}%`}
+              description={description}
+              brands={component?.related_design_systems}
             />
           ))}
+          <DesignSystemCard
+            className="lg:col-span-2"
+            title="Related Design Systems"
+            designSystems={component?.related_design_systems}
+          />
+          <StatCard
+            stat={
+              `${component?.design_systems_count} Top Design Systems` || "0"
+            }
+            description="Include this component"
+            isInverted
+          />
         </div>
+        <div className="rounded-xl overflow-hidden border border-gray-200 mt-10 ">
+          <Image
+            src="/blueprints/ButtonBlueprint.png"
+            alt="logo"
+            style={{ height: "100%", width: "100%" }}
+            width={1000}
+            height={2000}
+            quality={100}
+          />
+        </div>
+
         <div className="pt-5">
           <Splitter component={component!} />
         </div>
