@@ -1,5 +1,4 @@
 import { ComponentType } from "@/interfaces/design-system-interface";
-import { replaceBackendWithLocalhost } from "@/utils";
 import clsx from "clsx";
 import Image from "next/image";
 
@@ -32,9 +31,9 @@ export default function StatCard({
   const visibleBrands = brands.slice(0, 2);
   const remainingCount = brands.length - visibleBrands.length;
 
-  console.log(JSON.stringify(brands));
   return (
     <div className={clsx(baseClass, isInverted && invertedClass)}>
+      {JSON.stringify(brands)}
       <div className="flex flex-row gap-2 justify-between align-center w-full">
         <p
           className={clsx("text-primary text-5xl", {
@@ -51,7 +50,7 @@ export default function StatCard({
                 className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0 -ml-1"
               >
                 <Image
-                  src={replaceBackendWithLocalhost(brand.thumbnail_image)}
+                  src={brand.thumbnail_image}
                   alt={brand.name}
                   width={32}
                   height={32}
