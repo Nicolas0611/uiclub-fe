@@ -32,7 +32,7 @@ export default function StatCard({
   const visibleBrands = brands.slice(0, 2);
   const remainingCount = brands.length - visibleBrands.length;
 
-  console.log(brands);
+  console.log(JSON.stringify(brands));
   return (
     <div className={clsx(baseClass, isInverted && invertedClass)}>
       <div className="flex flex-row gap-2 justify-between align-center w-full">
