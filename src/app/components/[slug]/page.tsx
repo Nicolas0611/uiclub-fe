@@ -74,7 +74,7 @@ export default async function ComponentDetailPage({
         </div>
         <div className="rounded-xl overflow-hidden border border-gray-200 mt-10 ">
           <Image
-            src="/blueprints/ButtonBlueprint.png"
+            src={`/blueprints/${component?.name}Blueprint.png`}
             alt="logo"
             style={{ height: "100%", width: "100%" }}
             width={1000}
