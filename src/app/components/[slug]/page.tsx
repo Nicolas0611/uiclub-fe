@@ -1,4 +1,5 @@
 import { fetchComponentTypeById } from "@/component/actions/component-action";
+import BrandsMapper from "@/component/components/BrandsMapper/BrandsMapper";
 import Splitter from "@/component/components/Splitter/Splitter";
 import DesignSystemCard from "@/component/components/StatCard/DesignSystemCard";
 import StatCard from "@/component/components/StatCard/StatCard";
@@ -72,7 +73,7 @@ export default async function ComponentDetailPage({
             isInverted
           />
         </div>
-        <div className="rounded-xl overflow-hidden border border-gray-200 mt-10 ">
+        <div className="relative rounded-xl overflow-hidden border border-gray-200 mt-10 ">
           <Image
             src={`/blueprints/${component?.name}Blueprint.png`}
             alt="logo"
@@ -81,6 +82,10 @@ export default async function ComponentDetailPage({
             height={2000}
             quality={100}
           />
+          <div className="flex flex-row items-center gap-2 absolute top-5 left-5 bg-white border border-gray-200 p-3 rounded-full">
+            <p className="text-gray-800">Highlighted by</p>
+            <BrandsMapper brands={component?.related_design_systems} />
+          </div>
         </div>
 
         <div className="pt-5">

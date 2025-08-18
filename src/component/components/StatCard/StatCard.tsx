@@ -1,7 +1,6 @@
 import { ComponentType } from "@/interfaces/design-system-interface";
-import { replaceBackendWithLocalhost } from "@/utils";
-import { Image } from "@heroui/react";
 import clsx from "clsx";
+import BrandsMapper from "../BrandsMapper/BrandsMapper";
 
 interface StatCardProps {
   stat: string;
@@ -29,9 +28,7 @@ export default function StatCard({
   const hoverTextClass = "group-hover:text-white transition-colors";
 
   // Brand display logic
-  const visibleBrands = brands.slice(0, 2);
-  const remainingCount = brands.length - visibleBrands.length;
-  console.log(brands);
+
   return (
     <div className={clsx(baseClass, isInverted && invertedClass)}>
       <div className="flex flex-row gap-2 justify-between align-center w-full">
@@ -42,28 +39,7 @@ export default function StatCard({
         >
           {stat}
         </p>
-        {brands.length > 0 && (
-          <div className="flex">
-            {visibleBrands.map((brand, index) => (
-              <div
-                key={`brand_${index}`}
-                className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0 -ml-1"
-              >
-                <Image
-                  alt="heroui logo"
-                  height={32}
-                  src={replaceBackendWithLocalhost(brand.thumbnail_image)}
-                  width={32}
-                />
-              </div>
-            ))}
-            {remainingCount > 0 && (
-              <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-xs font-medium text-gray-600 -ml-1">
-                +{remainingCount}
-              </div>
-            )}
-          </div>
-        )}
+        {brands.length > 0 && <BrandsMapper brands={brands} />}
       </div>
 
       <p
