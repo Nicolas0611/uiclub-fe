@@ -47,4 +47,5 @@ export interface ComponentType extends Component {
     DesignSystem,
     "name" | "slug" | "thumbnail_image"
   >[];
+  id: number;
 }
