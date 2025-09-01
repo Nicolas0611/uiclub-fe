@@ -83,7 +83,9 @@ export default async function ComponentDetailPage({
             quality={100}
           />
           <div className="flex flex-row items-center gap-2 absolute top-5 left-5 bg-white border border-gray-200 p-3 rounded-full">
-            <p className="text-gray-800">Highlighted by</p>
+            <p className="text-gray-800 text-base sm:text-sm">
+              Highlighted by:
+            </p>
             <BrandsMapper brands={component?.related_design_systems} />
           </div>
         </div>

@@ -1,14 +1,19 @@
-"use client";
-
 import { IMAGES } from "@/constants";
 import { ComponentType } from "@/interfaces/design-system-interface";
 import { Card, CardBody, CardFooter, Chip } from "@heroui/react";
+import { cookies } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
+import HeartButton from "../HeartButton/HeartButton";
 interface ComponentsProps {
   components: ComponentType[];
 }
-const ComponentsGrid = ({ components }: ComponentsProps) => {
+const ComponentsGrid = async ({ components }: ComponentsProps) => {
+  const cookieStore = await cookies();
+  const saved = JSON.parse(cookieStore.get("saved")?.value ?? "{}") as Record<
+    string,
+    number
+  >;
   const verifyRelatedNameForImage = (
     componentName: string,
     relatedNames: Array<string>
@@ -17,7 +22,6 @@ const ComponentsGrid = ({ components }: ComponentsProps) => {
       IMAGES[name.toUpperCase().replace(/\s+/g, "")];
     return getImage(componentName) || relatedNames?.map(getImage).find(Boolean);
   };
-
   return (
     <div className="grid grid-cols-1 gap-6 py-6 md:grid-cols-2 lg:grid-cols-3">
       {components.map((component, index) => (
@@ -30,7 +34,8 @@ const ComponentsGrid = ({ components }: ComponentsProps) => {
           className="border-1 border-solid border-gray-200"
           isDisabled={component.link_to_site ? false : true}
         >
-          <CardBody className="overflow-visible p-3">
+          <CardBody className="relative overflow-visible p-3">
+            <HeartButton component={component} saved={saved} />
             <Image
               alt={`${component.name}_img`}
               className="w-full object-cover h-[140px]"
