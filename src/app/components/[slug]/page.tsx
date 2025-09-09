@@ -55,7 +55,7 @@ export default async function ComponentDetailPage({
           {componentStats.map(({ stat, description }, index) => (
             <StatCard
               key={`card_${index}`}
-              stat={`${stat}%`}
+              stat={`${Math.round(stat)}%`}
               description={description}
               brands={component?.related_design_systems}
             />
