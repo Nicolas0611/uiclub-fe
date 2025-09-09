@@ -45,7 +45,10 @@ export default async function ComponentDetailPage({
           <Image
             alt={`${component!.name}_img`}
             className="w-full object-cover h-[140px]"
-            src={`/assets/${component!.name}.png`}
+            src={
+              `/assets/${component!.name}.png` ||
+              `/assets/${component!.name.toLowerCase().replaceAll(" ", "")}.png`
+            }
             width={1000}
             height={1000}
             quality={100}
