@@ -25,7 +25,6 @@ export default async function ComponentDetailPage({
         "of the Top 20 Systems include this component within their system.",
     },
   ];
-
   return (
     <div className="container mx-auto px-4">
       <section className="container mx-auto px-4 py-10">
@@ -43,7 +42,10 @@ export default async function ComponentDetailPage({
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-9">
           <Image
-            alt={`${component!.name}_img`}
+            alt={
+              `${component!.name}_img` ||
+              component!.name.toLowerCase().replaceAll(" ", "")
+            }
             className="w-full object-cover h-[140px]"
             src={`/assets/${component!.name}.png`}
             width={1000}
