@@ -89,7 +89,7 @@ export default function Home() {
       <footer className="border-t border-gray-200 py-12 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between">
-            <div className="text-gray-600 text-sm">
+            <div className="text-gray-600 text-center text-sm w-full">
               © 2025 UI Club. Built with ❤️ for all designers and developers.
             </div>
           </div>
