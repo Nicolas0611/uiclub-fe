@@ -1,6 +1,5 @@
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -8,8 +7,67 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Popularity {
+  HIGH
+  MEDIUM
+  LOW
+}
+
+model Company {
+  id                  Int             @id @default(autoincrement())
+  dateCreated         DateTime        @default(now())
+  state               Boolean 
+  name                String          @db.VarChar(255)
+
+  //Relations
+  DesignSystem DesignSystem[]
+}
 
 
+
+model DesignSystem {
+  id                  String          @id @default(uuid())
+  dateCreated         DateTime        @default(now())
+  state               Boolean 
+  name                String          @db.VarChar(255)
+  popularity          Popularity    
+  isUpdated           Boolean
+  shortDescription    String          @db.VarChar(255)
+  slug                String          @db.VarChar(50)
+  isNew               Boolean
+
+  //Relations 
+  company Company @relation(fields: [companyId], references: [id])
+  companyId Int
+}
+
+/* 
+
+model design_libraries_designsystem {
+  id                                                    BigInt                                                  @id @default(autoincrement())
+  date_created                                          DateTime                                                @db.Timestamptz(6)
+  date_updated                                          DateTime?                                               @db.Timestamptz(6)
+  date_deleted                                          DateTime?                                               @db.Timestamptz(6)
+  state                                                 Boolean
+  large_description                                     String
+  name                                                  String                                                  @db.VarChar(255)
+  version                                               String                                                  @db.VarChar(255)
+  company_id                                            BigInt
+  popularity                                            String                                                  @db.VarChar(10)
+  is_updated                                            Boolean
+  short_description                                     String
+  thumbnail_image                                       String                                                  @db.VarChar(100)
+  slug                                                  String                                                  @db.VarChar(50)
+  links_id                                              BigInt?
+  is_new                                                Boolean?
+  design_libraries_componenttype_related_design_systems design_libraries_componenttype_related_design_systems[]
+  design_libraries_company                              design_libraries_company                                @relation(fields: [company_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "design_libraries_des_company_id_0c87e701_fk_design_li")
+  design_libraries_link                                 design_libraries_link?                                  @relation(fields: [links_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "design_libraries_des_links_id_8e9b93e6_fk_design_li")
+  design_libraries_designsystem_components              design_libraries_designsystem_components[]
+
+  @@index([company_id], map: "design_libraries_designsystem_company_id_0c87e701")
+  @@index([links_id], map: "design_libraries_designsystem_links_id_8e9b93e6")
+}
 
 
 model design_libraries_company {
@@ -193,3 +251,4 @@ model news_category {
   type         String         @db.VarChar(20)
   news_article news_article[]
 }
+ */
