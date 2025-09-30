@@ -23,6 +23,7 @@ async function DesignSystemsPage({
   };
 
   const designSystems = await fetchDesignSystems(search);
+  console.log(designSystems);
   return (
     <section className="container mx-auto px-4 py-10 ">
       <div className="flex flex-col gap-5">

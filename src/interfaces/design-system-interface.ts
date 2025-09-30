@@ -1,14 +1,19 @@
+export interface Company {
+  id: number;
+  name: string;
+}
+
+export type Popularity = "MEDIUM" | "HIGH" | "LOW";
+
 export interface DesignSystem {
   id: number;
-  short_description: string;
-  large_description: string;
-  company_name: string;
+  shortDescription: string;
+  largeDescription: string;
+  company: Company;
   components: ComponentType[];
   name: string;
-  version: string;
-  quantity_components: number;
   popularity: Popularity;
-  is_updated: boolean;
+  isUpdated: boolean;
   thumbnail_image: string;
   slug: string;
   links?: {
@@ -16,18 +21,15 @@ export interface DesignSystem {
     storybook: string;
     figma: string;
   };
-  is_new: boolean;
+  _count: { components: 26 };
+  isNew: boolean;
 }
-
-export type Popularity = "Medium" | "High" | "Low";
 
 export interface Component {
   name: string;
   description: string;
   type: string;
-  company_name: string;
-  related_names: Array<string>;
-  link_to_site: string;
+  link: string;
 }
 
 export interface FigmaLinks {
@@ -35,6 +37,7 @@ export interface FigmaLinks {
   company_name: string;
   url: string;
 }
+
 export interface ComponentType extends Component {
   name: string;
   description: string;

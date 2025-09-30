@@ -2,14 +2,6 @@
 
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
-export function replaceBackendWithLocalhost(url: string) {
-  // Check if the URL contains 'backend' and replace it with 'localhost'
-  if (url.includes("backend")) {
-    return url.replace("backend", "localhost");
-  }
-  return url;
-}
-
 export function handleSearch(
   term: string,
   router: AppRouterInstance,

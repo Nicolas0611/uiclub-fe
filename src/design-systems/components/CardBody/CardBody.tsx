@@ -5,14 +5,14 @@ import { Chip } from "@heroui/react";
 interface Props {
   quantity: number;
   popularity: Popularity;
-  is_updated: boolean;
+  isUpdated: boolean;
 }
-export const CardBody = ({ quantity, popularity, is_updated }: Props) => {
+export const CardBody = ({ quantity, popularity, isUpdated }: Props) => {
   type StateTypes = "success" | "warning" | "danger";
   const badgeColor = {
-    Medium: "warning",
-    High: "success",
-    Low: "danger",
+    MEDIUM: "warning",
+    HIGH: "success",
+    LOW: "danger",
   }[popularity] as StateTypes;
 
   return (
@@ -22,7 +22,7 @@ export const CardBody = ({ quantity, popularity, is_updated }: Props) => {
         <p className="text-sm text-neutral-400">components</p>
       </div>
       <div className="flex flex-col items-center gap-1">
-        {is_updated ? (
+        {isUpdated ? (
           <CheckCircleIcon className="size-8 text-green-600" />
         ) : (
           <XCircleIcon className="size-8 text-red-600" />

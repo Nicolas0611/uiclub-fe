@@ -1,37 +1,60 @@
 "use server";
 
-import { APIS } from "@/constants";
+import { PrismaAdapter } from "@/adapters/PrismaAdapter";
+import {
+  IDesignSystemFindFirst,
+  IDesignSystemFindMany,
+} from "@/interfaces/adapters/prisma-adapter-interface";
 import { DesignSystem } from "@/interfaces/design-system-interface";
-import { https } from "@/lib/axios";
+import { prisma } from "@/lib/prisma";
 
 export const fetchDesignSystems = async (
   search?: string
 ): Promise<DesignSystem[]> => {
   try {
-    const response = await https.get<DesignSystem[]>(
-      APIS.DESIGN_LIBRARIES.DESIGN_SYSTEMS,
-      {
-        params: {
-          search: search,
-        },
-      }
+    const req = new PrismaAdapter<DesignSystem[], IDesignSystemFindMany>(
+      prisma,
+      "DesignSystem"
     );
-    return response.status === 200 ? response.data : [];
+    const response = await req.findMany({
+      where: {
+        name: search,
+      },
+      include: {
+        company: {
+          select: {
+            name: true,
+          },
+        },
+        _count: {
+          select: {
+            components: true,
+          },
+        },
+      },
+    });
+    return response;
   } catch (error) {
     throw `Error fetching design systems ${error}`;
   }
 };
 
-export const fetchDesignSystemsById = async ({
-  slug,
-}: {
-  slug: string;
-}): Promise<DesignSystem | null> => {
+export const fetchDesignSystemsById = async (
+  slug?: string
+): Promise<DesignSystem | null> => {
   try {
-    const response = await https.get<DesignSystem>(
-      APIS.DESIGN_LIBRARIES.DESIGN_SYSTEMS_BY_ID(slug)
+    const req = new PrismaAdapter<DesignSystem, IDesignSystemFindFirst>(
+      prisma,
+      "DesignSystem"
     );
-    return response.status === 200 ? response.data : null;
+    const designSystem = await req.findFirst({
+      where: { slug },
+      include: {
+        components: true,
+        company: true,
+      },
+    });
+    return designSystem;
   } catch (error) {
     throw `Error fetching design systems id #${slug} - ${error}`;
   }

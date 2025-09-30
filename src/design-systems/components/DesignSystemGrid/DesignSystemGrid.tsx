@@ -4,10 +4,10 @@ import { QueueListIcon, TableCellsIcon } from "@heroicons/react/24/outline";
 import GridCards from "./GridCards";
 import ListCards from "./ListCards";
 
-interface DSGripdProps {
+interface IGrid {
   designSystems: DesignSystem[];
 }
-export const DesignSystemGrid = ({ designSystems }: DSGripdProps) => {
+export const DesignSystemGrid = ({ designSystems }: IGrid) => {
   const Tabs = [
     {
       key: "grid",
@@ -20,7 +20,6 @@ export const DesignSystemGrid = ({ designSystems }: DSGripdProps) => {
       children: <ListCards designSystems={designSystems} />,
     },
   ];
-  //! TODO REPLACE replaceBackendWithLocalhost() fn BACKEND WITH ACTUAL real SOLUTION
   return (
     <section className="flex flex-col gap-4 py-12">
       <div className="flex items-center justify-between w-full">

@@ -10,8 +10,10 @@ export default async function DesignDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const designSystem = await fetchDesignSystemsById({ slug });
-  const isUpdated = designSystem?.is_updated
+
+  const designSystem = await fetchDesignSystemsById(slug);
+
+  const isUpdated = designSystem?.isUpdated
     ? { text: "Updated", color: "success" as const }
     : { text: "Outdated", color: "danger" as const };
 
@@ -19,7 +21,7 @@ export default async function DesignDetailPage({
     <div className="container mx-auto px-4">
       <section className="container mx-auto px-4 py-10">
         <div className="flex flex-col gap-5">
-          <Breadcrumb actualPage={designSystem?.company_name} />
+          <Breadcrumb actualPage={designSystem?.company.name} />
           <h2 className="text-3xl md:text-4xl">{designSystem?.name}</h2>
           <div className="flex gap-2">
             <Chip radius="sm" size="sm" variant="flat" color={isUpdated.color}>
@@ -30,7 +32,7 @@ export default async function DesignDetailPage({
             </Chip>
           </div>
           <p className="text-neutral-500 text-sm w-full lg:w-[65%] md:text-medium">
-            {designSystem?.large_description}
+            {designSystem?.largeDescription}
           </p>
           <ContainerLinks designSystem={designSystem} />
         </div>

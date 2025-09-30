@@ -1,5 +1,4 @@
 import { DesignSystem } from "@/interfaces/design-system-interface";
-import { replaceBackendWithLocalhost } from "@/utils";
 import { Card, CardBody, Chip, Image } from "@heroui/react";
 import Link from "next/link";
 
@@ -29,9 +28,7 @@ const ListCards = ({ designSystems }: Props) => {
                   alt="company_logo"
                   height={40}
                   radius="sm"
-                  src={replaceBackendWithLocalhost(
-                    designSystem.thumbnail_image
-                  )}
+                  src={designSystem.thumbnail_image || ""}
                   width={40}
                 />
               </div>
@@ -45,9 +42,9 @@ const ListCards = ({ designSystems }: Props) => {
                     variant="flat"
                     color={
                       {
-                        Medium: "warning",
-                        High: "success",
-                        Low: "danger",
+                        MEDIUM: "warning",
+                        HIGH: "success",
+                        LOW: "danger",
                       }[designSystem.popularity] as StateTypes
                     }
                   >
@@ -56,7 +53,7 @@ const ListCards = ({ designSystems }: Props) => {
                 </div>
 
                 <p className="text-small text-default-400">
-                  {designSystem.short_description}
+                  {designSystem.shortDescription}
                 </p>
               </div>
             </CardBody>
