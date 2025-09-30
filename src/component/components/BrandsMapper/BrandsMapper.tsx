@@ -1,5 +1,4 @@
 import { ComponentType } from "@/interfaces/design-system-interface";
-import { replaceBackendWithLocalhost } from "@/utils";
 import { Image } from "@heroui/react";
 
 interface BrandsMapperProps {
@@ -18,7 +17,7 @@ const BrandsMapper = ({ brands = [] }: BrandsMapperProps) => {
           <Image
             alt="heroui logo"
             height={32}
-            src={replaceBackendWithLocalhost(brand.thumbnail_image)}
+            src={brand.thumbnail_image}
             width={32}
           />
         </div>

@@ -1,7 +1,6 @@
 "use client";
 
 import { ComponentType } from "@/interfaces/design-system-interface";
-import { replaceBackendWithLocalhost } from "@/utils";
 import { CircleStackIcon, LinkIcon } from "@heroicons/react/24/outline";
 import { Image } from "@heroui/react";
 import clsx from "clsx";
@@ -70,7 +69,7 @@ export default function DesignSystemCard({
                 <div className="flex items-center gap-2 truncate">
                   <div className="w-8 h-8 overflow-hidden flex-shrink-0">
                     <Image
-                      src={replaceBackendWithLocalhost(thumbnail_image)}
+                      src={thumbnail_image}
                       alt={name}
                       width={32}
                       height={32}
