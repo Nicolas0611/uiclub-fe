@@ -13,35 +13,86 @@ enum Popularity {
   LOW
 }
 
+enum Types {
+  Overlays
+  Data
+  Input
+  Status
+  Navigation
+  Loading
+  Messaging
+  Action
+  Images
+  Layout
+  Form
+}
+
 model Company {
   id                  Int             @id @default(autoincrement())
   dateCreated         DateTime        @default(now())
-  state               Boolean 
+  state               Boolean         @default(true)
   name                String          @db.VarChar(255)
 
-  //Relations
-  DesignSystem DesignSystem[]
+  // 1:1 relation
+  designSystem DesignSystem?
 }
-
-
 
 model DesignSystem {
   id                  String          @id @default(uuid())
   dateCreated         DateTime        @default(now())
-  state               Boolean 
+  state               Boolean         @default(true)
   name                String          @db.VarChar(255)
   popularity          Popularity    
   isUpdated           Boolean
   shortDescription    String          @db.VarChar(255)
+  largeDescription    String          
   slug                String          @db.VarChar(50)
   isNew               Boolean
 
   //Relations 
-  company Company @relation(fields: [companyId], references: [id])
-  companyId Int
+  company   Company @relation(fields: [companyId], references: [id])
+  companyId           Int              @unique
+  
+  components Component[]
+}
+
+model Component {
+  id                  String          @id @default(uuid())
+  dateCreated         DateTime        @default(now())
+  state               Boolean         @default(true)
+  name                String          @db.VarChar(255)
+  description         String
+  type                Types
+  link                String          @db.VarChar(255)
+
+  //Relations 
+  designSystem        DesignSystem    @relation(fields: [designSystemId], references: [id])
+  designSystemId      String          
 }
 
 /* 
+/// This model has constraints using non-default deferring rules and requires additional setup for migrations. Visit https://pris.ly/d/constraint-deferring for more info.
+model design_libraries_component {
+  id                                                                                                                              BigInt                                     @id @default(autoincrement())
+  date_created                                                                                                                    DateTime                                   @db.Timestamptz(6)
+  date_updated                                                                                                                    DateTime?                                  @db.Timestamptz(6)
+  date_deleted                                                                                                                    DateTime?                                  @db.Timestamptz(6)
+  state                                                                                                                           Boolean
+  name                                                                                                                            String                                     @db.VarChar(255)
+  description                                                                                                                     String
+  type                                                                                                                            String                                     @db.VarChar(10)
+  company_id                                                                                                                      BigInt
+  link_to_site                                                                                                                    String?                                    @db.VarChar(200)
+  component_type_id                                                                                                               BigInt?
+  design_libraries_company                                                                                                        design_libraries_company                   @relation(fields: [company_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "design_libraries_com_company_id_ab88bbea_fk_design_li")
+  design_libraries_componenttype                                                                                                  design_libraries_componenttype?            @relation(fields: [component_type_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "design_libraries_com_component_type_id_caf3b3fb_fk_design_li")
+  design_libraries_component_related_names_design_libraries_component_related_names_from_component_idTodesign_libraries_component design_libraries_component_related_names[] @relation("design_libraries_component_related_names_from_component_idTodesign_libraries_component")
+  design_libraries_component_related_names_design_libraries_component_related_names_to_component_idTodesign_libraries_component   design_libraries_component_related_names[] @relation("design_libraries_component_related_names_to_component_idTodesign_libraries_component")
+  design_libraries_designsystem_components                                                                                        design_libraries_designsystem_components[]
+
+  @@index([company_id], map: "design_libraries_component_company_id_ab88bbea")
+  @@index([component_type_id], map: "design_libraries_component_component_type_id_caf3b3fb")
+}
 
 model design_libraries_designsystem {
   id                                                    BigInt                                                  @id @default(autoincrement())
