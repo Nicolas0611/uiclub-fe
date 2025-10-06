@@ -14,7 +14,9 @@ export interface DesignSystem {
   name: string;
   popularity: Popularity;
   isUpdated: boolean;
-  thumbnail_image: string;
+  companyImage: {
+    url: string;
+  };
   slug: string;
   links?: {
     web: string;
@@ -46,9 +48,6 @@ export interface ComponentType extends Component {
   figma_links: FigmaLinks[];
   design_systems_count: number;
   is_available?: boolean;
-  related_design_systems: Pick<
-    DesignSystem,
-    "name" | "slug" | "thumbnail_image"
-  >[];
+  related_design_systems: Pick<DesignSystem, "name" | "slug">[];
   id: number;
 }
