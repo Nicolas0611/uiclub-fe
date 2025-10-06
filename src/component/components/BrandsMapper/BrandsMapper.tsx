@@ -1,5 +1,4 @@
 import { ComponentType } from "@/interfaces/design-system-interface";
-import { Image } from "@heroui/react";
 
 interface BrandsMapperProps {
   brands?: ComponentType["related_design_systems"];
@@ -14,12 +13,12 @@ const BrandsMapper = ({ brands = [] }: BrandsMapperProps) => {
           key={`brand_${index}`}
           className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0 -ml-1"
         >
-          <Image
+          {/*        <Image
             alt="heroui logo"
             height={32}
-            src={brand.thumbnail_image}
+            src={brand.companyImage.url}
             width={32}
-          />
+          /> */}
         </div>
       ))}
       {remainingCount > 0 && (

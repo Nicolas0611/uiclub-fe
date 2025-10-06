@@ -2,7 +2,6 @@
 
 import { ComponentType } from "@/interfaces/design-system-interface";
 import { CircleStackIcon, LinkIcon } from "@heroicons/react/24/outline";
-import { Image } from "@heroui/react";
 import clsx from "clsx";
 import Link from "next/link";
 
@@ -62,19 +61,19 @@ export default function DesignSystemCard({
 
       {/* List */}
       <div className={gridClasses}>
-        {designSystems.map(({ slug, thumbnail_image, name }, index) => (
+        {designSystems.map(({ slug, name }, index) => (
           <Link key={index} href={`/design-systems/${slug}`}>
             <div className={cardItemClasses}>
               <div className="flex w-full flex-wrap justify-between items-center gap-2">
                 <div className="flex items-center gap-2 truncate">
                   <div className="w-8 h-8 overflow-hidden flex-shrink-0">
-                    <Image
+                    {/*  <Image
                       src={thumbnail_image}
                       alt={name}
                       width={32}
                       height={32}
                       radius="sm"
-                    />
+                    /> */}
                   </div>
                   <span className="text-sm text-gray-900">{name}</span>
                 </div>
