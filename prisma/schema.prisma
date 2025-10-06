@@ -53,10 +53,26 @@ model DesignSystem {
   isNew               Boolean
 
   //Relations 
-  company   Company @relation(fields: [companyId], references: [id])
-  companyId           Int              @unique
-  
-  components Component[]
+  company             Company         @relation(fields: [companyId], references: [id])
+  companyId           Int             @unique
+
+  companyImage        CompanyImage?   @relation(fields: [companyImageId], references: [id])
+  companyImageId      String?         @unique
+
+  components          Component[]
+
+  links               Link?
+}
+
+model Link {
+  id                   Int            @id @default(autoincrement())
+  state                Boolean        @default(true)
+  dateCreated          DateTime       @default(now())
+  figma                String?        @db.VarChar(200)
+  web                  String?        @db.VarChar(200)
+  storybook            String?        @db.VarChar(200)
+  designSystem         DesignSystem   @relation(fields: [designSystemId], references: [id])
+  designSystemId       String         @unique
 }
 
 model Component {
@@ -73,7 +89,31 @@ model Component {
   designSystemId      String          
 }
 
+model CompanyImage {
+  id                  String          @id @default(uuid())
+  dateCreated         DateTime        @default(now())
+  state               Boolean         @default(true)
+  url                 String          @db.VarChar(255)  
+  name                String          @db.VarChar(100)
+  
+  // 1:1 relation
+  designSystem DesignSystem?
+}
 /* 
+
+model design_libraries_link {
+  id                            BigInt                          @id @default(autoincrement())
+  date_created                  DateTime                        @db.Timestamptz(6)
+  date_updated                  DateTime?                       @db.Timestamptz(6)
+  date_deleted                  DateTime?                       @db.Timestamptz(6)
+  state                         Boolean
+  figma                         String?                         @db.VarChar(200)
+  web                           String?                         @db.VarChar(200)
+  storybook                     String?                         @db.VarChar(200)
+  design_libraries_designsystem design_libraries_designsystem[]
+}
+
+
 /// This model has constraints using non-default deferring rules and requires additional setup for migrations. Visit https://pris.ly/d/constraint-deferring for more info.
 model design_libraries_component {
   id                                                                                                                              BigInt                                     @id @default(autoincrement())
