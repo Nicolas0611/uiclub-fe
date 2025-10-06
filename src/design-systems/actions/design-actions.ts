@@ -6,14 +6,12 @@ import {
   IDesignSystemFindMany,
 } from "@/interfaces/adapters/prisma-adapter-interface";
 import { DesignSystem } from "@/interfaces/design-system-interface";
-import { prisma } from "@/lib/prisma";
 
 export const fetchDesignSystems = async (
   search?: string
 ): Promise<DesignSystem[]> => {
   try {
     const req = new PrismaAdapter<DesignSystem[], IDesignSystemFindMany>(
-      prisma,
       "DesignSystem"
     );
     const response = await req.findMany({
@@ -24,6 +22,11 @@ export const fetchDesignSystems = async (
         company: {
           select: {
             name: true,
+          },
+        },
+        companyImage: {
+          select: {
+            url: true,
           },
         },
         _count: {
@@ -44,7 +47,6 @@ export const fetchDesignSystemsById = async (
 ): Promise<DesignSystem | null> => {
   try {
     const req = new PrismaAdapter<DesignSystem, IDesignSystemFindFirst>(
-      prisma,
       "DesignSystem"
     );
     const designSystem = await req.findFirst({
@@ -52,6 +54,7 @@ export const fetchDesignSystemsById = async (
       include: {
         components: true,
         company: true,
+        links: true,
       },
     });
     return designSystem;
