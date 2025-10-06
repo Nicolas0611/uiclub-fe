@@ -28,7 +28,7 @@ const ListCards = ({ designSystems }: Props) => {
                   alt="company_logo"
                   height={40}
                   radius="sm"
-                  src={designSystem.thumbnail_image || ""}
+                  src={designSystem.companyImage?.url}
                   width={40}
                 />
               </div>

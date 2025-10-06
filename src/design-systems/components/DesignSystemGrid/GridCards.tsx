@@ -24,7 +24,7 @@ const GridCards = ({ designSystems }: Props) => {
           key={designSystem.id}
           as={Link}
           href={`/design-systems/${designSystem.slug}`}
-          img={designSystem?.thumbnail_image || ""}
+          img={designSystem.companyImage?.url}
           title={designSystem.name}
           description={designSystem.shortDescription}
           url={designSystem.company.name}
