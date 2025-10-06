@@ -2,13 +2,13 @@ import {
   HttpsReq,
   IModelNames,
 } from "@/interfaces/adapters/prisma-adapter-interface";
+import { prisma } from "@/lib/prisma";
 import { PrismaClient } from "@prisma/client/extension";
 
 export class PrismaAdapter<RES_T, OPT_T> implements HttpsReq<RES_T, OPT_T> {
-  private prisma: PrismaClient;
+  private prisma: PrismaClient = prisma;
   private modelName: IModelNames;
-  constructor(prisma: PrismaClient, modelName: IModelNames) {
-    this.prisma = prisma;
+  constructor(modelName: IModelNames) {
     this.modelName = modelName;
   }
 
