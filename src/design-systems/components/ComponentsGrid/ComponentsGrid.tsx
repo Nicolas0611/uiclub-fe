@@ -13,14 +13,6 @@ const ComponentsGrid = async ({ components }: ComponentsProps) => {
     string,
     number
   >;
-  /*   const verifyRelatedNameForImage = (
-    componentName: string,
-    relatedNames: Array<string>
-  ): string | undefined => {
-    const getImage = (name: string) =>
-      IMAGES[name.toUpperCase().replace(/\s+/g, "")];
-    return getImage(componentName) || relatedNames?.map(getImage).find(Boolean);
-  }; */
 
   return (
     <div className="grid grid-cols-1 gap-6 py-6 md:grid-cols-2 lg:grid-cols-3">

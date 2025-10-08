@@ -214,7 +214,7 @@ export const initialComponentData = [
     id: 142,
   },
   {
-    name: "Alert Banner",
+    name: "Alert banner",
     description:
       "ActiveCampaign’s static banners are persistent, non-obtrustive messages that sit inline with the page or modal content. They can be used for education, to let a user know that something in the system has changed, or to generally let the user know about a message that’s important to their workflow within ActiveCampaign.\n\n\n",
     type: "Messaging" as const,
@@ -364,9 +364,9 @@ export const initialComponentData = [
     id: 162,
   },
   {
-    name: "Progress Bar",
+    name: "Progress bar",
     description:
-      "A progress bar is a visual representation of progress toward a goal, metric, or quota. It communicates values like usage, success rates, or completion percentages in a quick and scannable way.\n\n",
+      "A Progress bar is a visual representation of progress toward a goal, metric, or quota. It communicates values like usage, success rates, or completion percentages in a quick and scannable way.\n\n",
     type: "Loading" as const,
     companyName: "ActiveCampaign" as const,
     relatedNames: [],
@@ -404,9 +404,9 @@ export const initialComponentData = [
     id: 53,
   },
   {
-    name: "Combo box",
+    name: "Combo Box",
     description:
-      "A combo box combines a text field with a pull-down button in a single control.\n",
+      "A Combo Box combines a text field with a pull-down button in a single control.\n",
     type: "Input" as const,
     companyName: "Apple" as const,
     relatedNames: ["Select"],
@@ -434,7 +434,7 @@ export const initialComponentData = [
     id: 56,
   },
   {
-    name: "Radio button",
+    name: "Radio Button",
     description:
       "A radio input allows users to select only one option from a number of choices. Radio is generally displayed in a radio group.\n",
     type: "Input" as const,
@@ -873,7 +873,7 @@ export const initialComponentData = [
     id: 90,
   },
   {
-    name: "Radio button",
+    name: "Radio Button",
     description:
       "Radio group enable users to choose one option from a predefined set.\n\n",
     type: "Input" as const,
@@ -1013,9 +1013,9 @@ export const initialComponentData = [
     id: 116,
   },
   {
-    name: "Combo box",
+    name: "Combo Box",
     description:
-      "Combo boxes combine a text entry with a picker menu, allowing users to filter longer lists to only the selections matching a query.\n\n\n",
+      "Combo Boxes combine a text entry with a picker menu, allowing users to filter longer lists to only the selections matching a query.\n\n\n",
     type: "Input" as const,
     companyName: "Adobe" as const,
     relatedNames: ["Select"],
@@ -1123,9 +1123,9 @@ export const initialComponentData = [
     id: 129,
   },
   {
-    name: "Radio button",
+    name: "Radio Button",
     description:
-      "A radio group is a grouping of radio buttons that are related to each other.\n\n",
+      "A radio group is a grouping of Radio Buttons that are related to each other.\n\n",
     type: "Input" as const,
     companyName: "Adobe" as const,
     relatedNames: [],
@@ -1302,7 +1302,7 @@ export const initialComponentData = [
     id: 11,
   },
   {
-    name: "Alert Banner",
+    name: "Alert banner",
     description:
       "A section message is used to alert users to a particular section of the screen.\n",
     type: "Messaging" as const,
@@ -1481,7 +1481,7 @@ export const initialComponentData = [
   {
     name: "Progress bar",
     description:
-      "A progress bar communicates the status of a system process.\n",
+      "A Progress bar communicates the status of a system process.\n",
     type: "Loading" as const,
     companyName: "Atlassian" as const,
     relatedNames: [],
@@ -1543,7 +1543,7 @@ export const initialComponentData = [
       "Are temporary notifications that appear at the bottom of the interface. They are meant to provide quick feedback on the outcome of a user action without disrupting a user's experience.",
     type: "Overlays" as const,
     companyName: "Brainly" as const,
-    relatedNames: ["Alert Banner"],
+    relatedNames: ["Alert banner"],
     link: "https://design.brainly.com/8adfd5f36/p/98ac3d-toast",
     id: 10,
   },
@@ -1560,7 +1560,7 @@ export const initialComponentData = [
   {
     name: "Progress bar",
     description:
-      "Progress Bar is a visual element that shows the current step or stage of a multi-step process. Progress bar can be used to indicate the status of the submission process and to provide a sense of how much longer the task will take to complete.",
+      "Progress bar is a visual element that shows the current step or stage of a multi-step process. Progress bar can be used to indicate the status of the submission process and to provide a sense of how much longer the task will take to complete.",
     type: "Loading" as const,
     companyName: "Brainly" as const,
     relatedNames: [],
