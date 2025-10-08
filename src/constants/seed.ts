@@ -594,7 +594,7 @@ export const initialComponentData = [
     id: 62,
   },
   {
-    name: "Segmented  control",
+    name: "Segmented control",
     description:
       "A segmented control is a linear set of two or more segments, each of which functions as a button.\n",
     type: "Navigation" as const,
