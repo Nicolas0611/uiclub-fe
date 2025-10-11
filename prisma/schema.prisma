@@ -37,7 +37,8 @@ model Company {
   name                String          @db.VarChar(255)
 
   // 1:1 relation
-  designSystem DesignSystem?
+  designSystem        DesignSystem?
+  figma               Figma[]
 }
 
 model DesignSystem {
@@ -61,6 +62,8 @@ model DesignSystem {
 
   components          Component[]
 
+  componentTypes      DesignSystemComponentType[]
+
   links               Link?
 }
 
@@ -71,6 +74,8 @@ model Link {
   figma                String?        @db.VarChar(200)
   web                  String?        @db.VarChar(200)
   storybook            String?        @db.VarChar(200)
+
+  //Relations 
   designSystem         DesignSystem   @relation(fields: [designSystemId], references: [id])
   designSystemId       String         @unique
 }
@@ -89,12 +94,55 @@ model Component {
   designSystemId      String          
 }
 
+model ComponentType {
+  id                    String          @id @default(uuid())
+  dateCreated           DateTime        @default(now())
+  state                 Boolean         @default(true)
+  name                  String          @db.VarChar(255)
+  description           String?          
+  type                  Types
+  usageCount            Int             @default(0)
+  implementationsCount  Int             @default(0)
+  designSystemCount     Int             @default(0)
+  link                  String?          @db.VarChar(255)
+  
+
+  //Relations 
+  relatedDesignSystems  DesignSystemComponentType[]
+  figmaLinks            Figma[]
+
+}
+
+model DesignSystemComponentType {
+  designSystem   DesignSystem  @relation(fields: [designSystemId], references: [id])
+  designSystemId String
+
+  componentType  ComponentType @relation(fields: [componentTypeId], references: [id])
+  componentTypeId String
+
+  @@id([designSystemId, componentTypeId])
+}
+
+model Figma {
+    id                    String          @id @default(uuid())
+    dateCreated           DateTime        @default(now())
+    state                 Boolean         @default(true)
+    url                   String          @db.VarChar(200)
+  
+    //Relations 
+    company               Company         @relation(fields: [companyId], references: [id])
+    companyId             Int  
+
+    componentType         ComponentType   @relation(fields: [componentTypeId], references: [id])
+    componentTypeId       String              
+}
+
 model CompanyImage {
-  id                  String          @id @default(uuid())
-  dateCreated         DateTime        @default(now())
-  state               Boolean         @default(true)
-  url                 String          @db.VarChar(255)  
-  name                String          @db.VarChar(100)
+  id                  String              @id @default(uuid())
+  dateCreated         DateTime            @default(now())
+  state               Boolean             @default(true)
+  url                 String              @db.VarChar(255)  
+  name                String              @db.VarChar(100)
   
   // 1:1 relation
   designSystem DesignSystem?

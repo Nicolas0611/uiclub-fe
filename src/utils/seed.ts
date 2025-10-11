@@ -1,8 +1,11 @@
 import {
   initialCompanyData,
   initialComponentData,
+  initialComponentTypes,
   initialDesignSystemData,
+  initialDSComponentType,
   initialDSImages,
+  initialFigmaLink,
   initialLinks,
 } from "../constants/seed";
 import { prisma } from "../lib/prisma";
@@ -16,14 +19,22 @@ async function main() {
     ActiveCampaign: "Camp" as const,
   } as Record<string, string>;
 
+  const initialCleanComponent = initialComponentTypes.map(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    ({ id, ...rest }) => rest
+  );
+
   // Borra primero las relaciones hijas
   await prisma.link.deleteMany();
   await prisma.component.deleteMany();
+  await prisma.figma.deleteMany();
+  await prisma.designSystemComponentType.deleteMany();
 
   // Luego las entidades padre
   await prisma.designSystem.deleteMany();
   await prisma.company.deleteMany();
   await prisma.companyImage.deleteMany();
+  await prisma.componentType.deleteMany();
 
   await prisma.company.createMany({
     data: initialCompanyData,
@@ -31,9 +42,13 @@ async function main() {
   await prisma.companyImage.createMany({
     data: initialDSImages,
   });
+  await prisma.componentType.createMany({
+    data: initialCleanComponent,
+  });
 
   const companyDB = await prisma.company.findMany();
   const DSystemImagesDB = await prisma.companyImage.findMany();
+  const componentTypeDB = await prisma.componentType.findMany();
 
   const companiesMap = companyDB.reduce((map, company) => {
     map[company.name] = company.id;
@@ -45,10 +60,16 @@ async function main() {
     return map;
   }, {} as Record<string, string>);
 
+  const componentTypeMap = componentTypeDB.reduce((map, component) => {
+    map[component.name] = component.id;
+    return map;
+  }, {} as Record<string, string>);
+
   const dbDesignSystemData = initialDesignSystemData.map(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    ({ id, company, ...ds }) => ({
+    ({ id, company, name, ...ds }) => ({
       ...ds,
+      name,
       companyId: companiesMap[company],
       companyImageId: dsImagesMap[company],
     })
@@ -72,18 +93,36 @@ async function main() {
       designSystemId: designSystemMap[companyNames[companyName]],
     })
   );
+  await prisma.component.createMany({
+    data: dbComponentData,
+  });
 
   const dbLinkData = initialLinks.map(({ name, ...rest }) => ({
     ...rest,
     designSystemId: designSystemMap[companyNames[name]],
   }));
-
-  await prisma.component.createMany({
-    data: dbComponentData,
-  });
-
   await prisma.link.createMany({
     data: dbLinkData,
+  });
+
+  const dbFigmaData = initialFigmaLink.map(
+    ({ name, componentTypeName, ...rest }) => ({
+      ...rest,
+      companyId: companiesMap[name],
+      componentTypeId: componentTypeMap[componentTypeName],
+    })
+  );
+  await prisma.figma.createMany({
+    data: dbFigmaData,
+  });
+
+  await prisma.designSystemComponentType.createMany({
+    data: initialDSComponentType.map(
+      ({ designSystemName, componentTypeName }) => ({
+        designSystemId: designSystemMap[designSystemName],
+        componentTypeId: componentTypeMap[componentTypeName],
+      })
+    ),
   });
 
   console.log("Ejecutado Exitosamente");

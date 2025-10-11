@@ -1702,3 +1702,371 @@ export const initialDSImages = [
     url: "https://res.cloudinary.com/archikola/image/upload/v1759716114/design-system-thumbs/Brainly_xhus3a.png",
   },
 ];
+
+export const initialComponentTypes = [
+  {
+    id: 46,
+    name: "Accordion",
+    description:
+      "A collapsible content component that allows users to expand and collapse sections to manage information density and focus.",
+    usageCount: 90,
+    implementationsCount: 9,
+    designSystemCount: 3,
+    type: "Layout" as const,
+    link: "accordion",
+  },
+  {
+    id: 12,
+    name: "Alert banner",
+    description:
+      "A prominent messaging component that displays important notifications, warnings, or status information to users.",
+    usageCount: 90,
+    implementationsCount: 9,
+    designSystemCount: 3,
+    type: "Messaging" as const,
+    link: "alertbanner",
+  },
+  {
+    id: 11,
+    name: "Button",
+    description:
+      "An interactive control that triggers actions or events, providing clear visual feedback about available user interactions.",
+    usageCount: 90,
+    implementationsCount: 9,
+    designSystemCount: 3,
+    type: "Action" as const,
+    link: "button",
+  },
+  {
+    id: 40,
+    name: "Spinner",
+    description:
+      "An animated loading indicator that informs users that content is being processed or loaded in the background.",
+    usageCount: 90,
+    implementationsCount: 9,
+    designSystemCount: 3,
+    type: "Loading" as const,
+    link: "spinner",
+  },
+  {
+    id: 53,
+    name: "Action Bar",
+    type: "Action" as const,
+    link: null,
+  },
+  {
+    id: 48,
+    name: "Autocomplete",
+    type: "Input" as const,
+    link: null,
+  },
+  {
+    id: 13,
+    name: "Avatar",
+    type: "Images" as const,
+    link: null,
+  },
+  {
+    id: 37,
+    name: "Badge",
+    type: "Status" as const,
+    link: null,
+  },
+  {
+    id: 14,
+    name: "Breadcrumbs",
+    type: "Navigation" as const,
+    link: null,
+  },
+  {
+    id: 35,
+    name: "Button Group",
+    type: "Action" as const,
+    link: null,
+  },
+  {
+    id: 49,
+    name: "Card",
+    type: "Layout" as const,
+    link: null,
+  },
+  {
+    id: 15,
+    name: "Checkbox",
+    type: "Input" as const,
+    link: null,
+  },
+  {
+    id: 50,
+    name: "Chip",
+    type: "Status" as const,
+    link: null,
+  },
+  {
+    id: 16,
+    name: "Code",
+    type: "Messaging" as const,
+    link: null,
+  },
+  {
+    id: 28,
+    name: "Date Picker",
+    type: "Input" as const,
+    link: null,
+  },
+  {
+    id: 57,
+    name: "Dialog",
+    type: "Overlays" as const,
+    link: null,
+  },
+  {
+    id: 10,
+    name: "Divider",
+    type: "Layout" as const,
+    link: null,
+  },
+  {
+    id: 18,
+    name: "Drawer",
+    type: "Overlays" as const,
+    link: null,
+  },
+  {
+    id: 17,
+    name: "Dropdown",
+    type: "Input" as const,
+    link: null,
+  },
+  {
+    id: 19,
+    name: "Empty",
+    type: "Status" as const,
+    link: null,
+  },
+  {
+    id: 31,
+    name: "Form",
+    type: "Form" as const,
+    link: null,
+  },
+  {
+    id: 22,
+    name: "Header",
+    type: "Layout" as const,
+    link: null,
+  },
+  {
+    id: 55,
+    name: "Help Text",
+    type: "Messaging" as const,
+    link: null,
+  },
+  {
+    id: 29,
+    name: "Icon",
+    type: "Images" as const,
+    link: null,
+  },
+  {
+    id: 21,
+    name: "Inline Message",
+    type: "Messaging" as const,
+    link: null,
+  },
+  {
+    id: 56,
+    name: "Label",
+    type: "Messaging" as const,
+    link: null,
+  },
+  {
+    id: 52,
+    name: "Link",
+    type: "Navigation" as const,
+    link: null,
+  },
+  {
+    id: 20,
+    name: "List",
+    type: "Navigation" as const,
+    link: null,
+  },
+  {
+    id: 42,
+    name: "Menu",
+    type: "Layout" as const,
+    link: null,
+  },
+  {
+    id: 23,
+    name: "Pagination",
+    type: "Navigation" as const,
+    link: null,
+  },
+  {
+    id: 43,
+    name: "Popover",
+    type: "Overlays" as const,
+    link: null,
+  },
+  {
+    id: 27,
+    name: "Progress Bar",
+    type: "Loading" as const,
+    link: null,
+  },
+  {
+    id: 36,
+    name: "Radio Button",
+    type: "Input" as const,
+    link: null,
+  },
+  {
+    id: 26,
+    name: "Range",
+    type: "Input" as const,
+    link: null,
+  },
+  {
+    id: 44,
+    name: "Search",
+    type: "Input" as const,
+    link: null,
+  },
+  {
+    id: 25,
+    name: "Select",
+    type: "Input" as const,
+    link: null,
+  },
+  {
+    id: 2,
+    name: "Sidebar",
+    type: "Navigation" as const,
+    link: null,
+  },
+  {
+    id: 41,
+    name: "Table",
+    type: "Data" as const,
+    link: null,
+  },
+  {
+    id: 39,
+    name: "Table Tree",
+    type: "Data" as const,
+    link: null,
+  },
+  {
+    id: 5,
+    name: "Tabs",
+    type: "Navigation" as const,
+    link: null,
+  },
+  {
+    id: 7,
+    name: "Text Area",
+    type: "Input" as const,
+    link: null,
+  },
+  {
+    id: 8,
+    name: "Text Field",
+    type: "Input" as const,
+    link: null,
+  },
+  {
+    id: 4,
+    name: "Toast",
+    type: "Overlays" as const,
+    link: null,
+  },
+  {
+    id: 38,
+    name: "Toggle",
+    type: "Action" as const,
+    link: null,
+  },
+  {
+    id: 9,
+    name: "Tooltip",
+    type: "Overlays" as const,
+    link: null,
+  },
+  {
+    id: 54,
+    name: "Tray",
+    type: "Overlays" as const,
+    link: null,
+  },
+];
+
+export const initialFigmaLink = [
+  {
+    name: "Atlassian",
+    componentTypeName: "Spinner",
+    url: "https://embed.figma.com/design/2lrOAXq5fGrqOdBfhS3wwA/ADS-Components--Legacy---Community-?node-id=7999-10220&embed-host=share",
+  },
+  {
+    name: "Amazon",
+    componentTypeName: "Spinner",
+    url: "https://embed.figma.com/design/hOrRc8nk92ep6hlHqrB5zL/CDS-Component-Library-2.0.1--Community-?node-id=12669-9940&embed-host=share",
+  },
+  {
+    name: "Amazon",
+    componentTypeName: "Button",
+    url: "https://embed.figma.com/design/hOrRc8nk92ep6hlHqrB5zL/CDS-Component-Library-2.0.1--Community-?node-id=12669-6&embed-host=share",
+  },
+  {
+    name: "Atlassian",
+    componentTypeName: "Button",
+    url: "https://embed.figma.com/design/2lrOAXq5fGrqOdBfhS3wwA/ADS-Components--Legacy---Community-?node-id=51833-86269&embed-host=share",
+  },
+  {
+    name: "Apple",
+    componentTypeName: "Button",
+    url: "https://embed.figma.com/design/2lrOAXq5fGrqOdBfhS3wwA/ADS-Components--Legacy---Community-?node-id=51833-86269&embed-host=share",
+  },
+  {
+    name: "Amazon",
+    componentTypeName: "Accordion",
+    url: "https://embed.figma.com/design/2lrOAXq5fGrqOdBfhS3wwA/ADS-Components--Legacy---Community-?node-id=51833-86269&embed-host=share",
+  },
+  {
+    name: "Atlassian",
+    componentTypeName: "Alert banner",
+    url: "https://embed.figma.com/design/2lrOAXq5fGrqOdBfhS3wwA/ADS-Components--Legacy---Community-?node-id=79-45&embed-host=share",
+  },
+];
+
+export const initialDSComponentType = [
+  {
+    componentTypeName: "Button",
+    designSystemName: "Design System",
+  },
+  {
+    componentTypeName: "Button",
+    designSystemName: "HIG",
+  },
+  {
+    componentTypeName: "Button",
+    designSystemName: "Cloudscape",
+  },
+  {
+    componentTypeName: "Spinner",
+    designSystemName: "Cloudscape",
+  },
+  {
+    componentTypeName: "Spinner",
+    designSystemName: "Design System",
+  },
+  {
+    componentTypeName: "Accordion",
+    designSystemName: "Cloudscape",
+  },
+  {
+    componentTypeName: "Alert banner",
+    designSystemName: "Design System",
+  },
+];
