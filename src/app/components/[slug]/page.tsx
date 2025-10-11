@@ -33,7 +33,7 @@ export default async function ComponentDetailPage({
           <h2 className="text-3xl md:text-4xl">{component?.name}</h2>
           <div className="flex gap-2">
             <Chip size="sm" color="success" variant="dot">
-              type: {component?.category}
+              type: {component?.type}
             </Chip>
           </div>
           <p className="text-neutral-500 text-sm pb-3 w-full lg:w-[65%] md:text-medium">

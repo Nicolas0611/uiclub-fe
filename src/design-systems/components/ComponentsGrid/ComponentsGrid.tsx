@@ -6,8 +6,12 @@ import Link from "next/link";
 import HeartButton from "../HeartButton/HeartButton";
 interface ComponentsProps {
   components: ComponentType[];
+  isWebsiteHref?: boolean;
 }
-const ComponentsGrid = async ({ components }: ComponentsProps) => {
+const ComponentsGrid = async ({
+  components,
+  isWebsiteHref = true,
+}: ComponentsProps) => {
   const cookieStore = await cookies();
   const saved = JSON.parse(cookieStore.get("saved")?.value ?? "{}") as Record<
     string,
@@ -19,8 +23,11 @@ const ComponentsGrid = async ({ components }: ComponentsProps) => {
       {components.map((component, index) => (
         <Card
           isHoverable={true}
-          href={`/components/${component?.link}` || "#"}
+          href={
+            isWebsiteHref ? component.link : `/components/${component?.link}`
+          }
           as={Link}
+          target={isWebsiteHref ? "_blank" : undefined}
           key={`component_${index}`}
           shadow="none"
           className="border-1 border-solid border-gray-200"

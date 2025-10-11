@@ -40,7 +40,7 @@ async function ComponentsPage({
       <div className="pt-8">
         <InputSearch />
       </div>
-      <ComponentsGrid components={components} />
+      <ComponentsGrid components={components} isWebsiteHref={false} />
     </section>
   );
 }
