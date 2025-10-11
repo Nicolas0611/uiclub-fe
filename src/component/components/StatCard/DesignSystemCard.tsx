@@ -2,12 +2,13 @@
 
 import { ComponentType } from "@/interfaces/design-system-interface";
 import { CircleStackIcon, LinkIcon } from "@heroicons/react/24/outline";
+import { Image } from "@heroui/react";
 import clsx from "clsx";
 import Link from "next/link";
 
 interface DesignSystemCardProps {
   className?: string;
-  designSystems?: ComponentType["related_design_systems"];
+  designSystems?: ComponentType["relatedDesignSystems"];
   title: string;
 }
 
@@ -61,21 +62,23 @@ export default function DesignSystemCard({
 
       {/* List */}
       <div className={gridClasses}>
-        {designSystems.map(({ slug, name }, index) => (
-          <Link key={index} href={`/design-systems/${slug}`}>
+        {designSystems.map(({ designSystem }, index) => (
+          <Link key={index} href={`/design-systems/${designSystem.name}`}>
             <div className={cardItemClasses}>
               <div className="flex w-full flex-wrap justify-between items-center gap-2">
                 <div className="flex items-center gap-2 truncate">
                   <div className="w-8 h-8 overflow-hidden flex-shrink-0">
-                    {/*  <Image
-                      src={thumbnail_image}
-                      alt={name}
+                    <Image
+                      src={designSystem.companyImage.url}
+                      alt={designSystem.name}
                       width={32}
                       height={32}
                       radius="sm"
-                    /> */}
+                    />
                   </div>
-                  <span className="text-sm text-gray-900">{name}</span>
+                  <span className="text-sm text-gray-900">
+                    {designSystem.name}
+                  </span>
                 </div>
               </div>
             </div>

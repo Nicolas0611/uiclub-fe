@@ -19,7 +19,7 @@ const ComponentsGrid = async ({ components }: ComponentsProps) => {
       {components.map((component, index) => (
         <Card
           isHoverable={true}
-          href={component?.link || "#"}
+          href={`/components/${component?.link}` || "#"}
           as={Link}
           key={`component_${index}`}
           shadow="none"
@@ -34,7 +34,6 @@ const ComponentsGrid = async ({ components }: ComponentsProps) => {
               src={`/assets/${component.name}.png`}
               width={1000}
               height={1000}
-              quality={100}
               style={{ height: "100%" }}
               loading="lazy"
             />

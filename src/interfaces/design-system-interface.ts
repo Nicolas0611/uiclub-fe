@@ -36,7 +36,7 @@ export interface Component {
 
 export interface FigmaLinks {
   id: string;
-  company_name: string;
+  company: Company;
   url: string;
 }
 
@@ -44,10 +44,9 @@ export interface ComponentType extends Component {
   name: string;
   description: string;
   category: string;
-  usage_count: number;
-  figma_links: FigmaLinks[];
-  design_systems_count: number;
-  is_available?: boolean;
-  related_design_systems: Pick<DesignSystem, "name" | "slug">[];
+  usageCount: number;
+  figmaLinks: FigmaLinks[];
+  designSystemCount: number;
+  relatedDesignSystems: { designSystem: DesignSystem }[];
   id: number;
 }

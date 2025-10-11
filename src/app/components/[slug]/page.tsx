@@ -16,11 +16,11 @@ export default async function ComponentDetailPage({
   const DESIGN_SYSTEM_TOTAL = 6;
   const componentStats = [
     {
-      stat: component?.usage_count || 0,
+      stat: component?.usageCount || 0,
       description: `Of the Top Systems name this component ${component?.name}.`,
     },
     {
-      stat: (component!.design_systems_count * 100) / DESIGN_SYSTEM_TOTAL || 0,
+      stat: (component!.designSystemCount * 100) / DESIGN_SYSTEM_TOTAL || 0,
       description:
         "of the Top 20 Systems include this component within their system.",
     },
@@ -59,18 +59,16 @@ export default async function ComponentDetailPage({
               key={`card_${index}`}
               stat={`${stat}%`}
               description={description}
-              brands={component?.related_design_systems}
+              brands={component?.relatedDesignSystems}
             />
           ))}
           <DesignSystemCard
             className="lg:col-span-2"
             title="Related Design Systems"
-            designSystems={component?.related_design_systems}
+            designSystems={component?.relatedDesignSystems}
           />
           <StatCard
-            stat={
-              `${component?.design_systems_count} Top Design Systems` || "0"
-            }
+            stat={`${component?.designSystemCount} Top Design Systems` || "0"}
             description="Include this component"
             isInverted
           />
@@ -88,7 +86,7 @@ export default async function ComponentDetailPage({
             <p className="text-gray-800 text-base sm:text-sm">
               Highlighted by:
             </p>
-            <BrandsMapper brands={component?.related_design_systems} />
+            <BrandsMapper brands={component?.relatedDesignSystems} />
           </div>
         </div>
 

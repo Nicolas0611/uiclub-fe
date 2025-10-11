@@ -24,12 +24,12 @@ const Splitter = ({ component }: { component: ComponentType }) => {
 
       <div className="flex flex-col md:flex-row gap-4">
         <div className="flex-1">
-          <Tabs items={component?.figma_links || []} placement="start" />
+          <Tabs items={component?.figmaLinks || []} placement="start" />
         </div>
 
         {compare && (
           <div className="flex-1">
-            <Tabs items={component?.figma_links || []} placement="end" />
+            <Tabs items={component?.figmaLinks || []} placement="end" />
           </div>
         )}
       </div>
