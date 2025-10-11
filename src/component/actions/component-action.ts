@@ -11,7 +11,10 @@ export const fetchComponentList = async (
     );
     const response = await req.findMany({
       where: {
-        name: search,
+        name: {
+          contains: search,
+          mode: "insensitive",
+        },
       },
       include: {
         relatedDesignSystems: {
@@ -20,6 +23,7 @@ export const fetchComponentList = async (
               select: {
                 name: true,
                 companyImage: { select: { url: true } },
+                slug: true,
               },
             },
           },
@@ -54,7 +58,7 @@ export const fetchComponentTypeById = async ({
     const response = await req.findFirst({
       where: {
         name: {
-          equals: slug,
+          contains: slug,
           mode: "insensitive",
         },
       },

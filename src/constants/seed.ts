@@ -1724,7 +1724,7 @@ export const initialComponentTypes = [
     implementationsCount: 9,
     designSystemCount: 3,
     type: "Messaging" as const,
-    link: "alertbanner",
+    link: "alert",
   },
   {
     id: 11,
