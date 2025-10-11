@@ -25,10 +25,10 @@ async function main() {
   );
 
   // Borra primero las relaciones hijas
-  await prisma.link.deleteMany();
   await prisma.component.deleteMany();
   await prisma.figma.deleteMany();
   await prisma.designSystemComponentType.deleteMany();
+  await prisma.link.deleteMany();
 
   // Luego las entidades padre
   await prisma.designSystem.deleteMany();
