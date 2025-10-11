@@ -25,6 +25,7 @@ export default async function ComponentDetailPage({
         "of the Top 20 Systems include this component within their system.",
     },
   ];
+
   return (
     <div className="container mx-auto px-4">
       <section className="container mx-auto px-4 py-10">
