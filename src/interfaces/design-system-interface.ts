@@ -1,51 +1,52 @@
+export interface Company {
+  id: number;
+  name: string;
+}
+
+export type Popularity = "MEDIUM" | "HIGH" | "LOW";
+
 export interface DesignSystem {
   id: number;
-  short_description: string;
-  large_description: string;
-  company_name: string;
+  shortDescription: string;
+  largeDescription: string;
+  company: Company;
   components: ComponentType[];
   name: string;
-  version: string;
-  quantity_components: number;
   popularity: Popularity;
-  is_updated: boolean;
-  thumbnail_image: string;
+  isUpdated: boolean;
+  companyImage: {
+    url: string;
+  };
   slug: string;
   links?: {
     web: string;
     storybook: string;
     figma: string;
   };
-  is_new: boolean;
+  _count: { components: 26 };
+  isNew: boolean;
 }
-
-export type Popularity = "Medium" | "High" | "Low";
 
 export interface Component {
   name: string;
   description: string;
   type: string;
-  company_name: string;
-  related_names: Array<string>;
-  link_to_site: string;
+  link: string;
 }
 
 export interface FigmaLinks {
   id: string;
-  company_name: string;
+  company: Company;
   url: string;
 }
+
 export interface ComponentType extends Component {
   name: string;
   description: string;
   category: string;
-  usage_count: number;
-  figma_links: FigmaLinks[];
-  design_systems_count: number;
-  is_available?: boolean;
-  related_design_systems: Pick<
-    DesignSystem,
-    "name" | "slug" | "thumbnail_image"
-  >[];
+  usageCount: number;
+  figmaLinks: FigmaLinks[];
+  designSystemCount: number;
+  relatedDesignSystems: { designSystem: DesignSystem }[];
   id: number;
 }

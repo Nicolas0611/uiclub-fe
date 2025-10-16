@@ -16,11 +16,11 @@ export default async function ComponentDetailPage({
   const DESIGN_SYSTEM_TOTAL = 6;
   const componentStats = [
     {
-      stat: component?.usage_count || 0,
+      stat: component?.usageCount || 0,
       description: `Of the Top Systems name this component ${component?.name}.`,
     },
     {
-      stat: (component!.design_systems_count * 100) / DESIGN_SYSTEM_TOTAL || 0,
+      stat: (component!.designSystemCount * 100) / DESIGN_SYSTEM_TOTAL || 0,
       description:
         "of the Top 20 Systems include this component within their system.",
     },
@@ -34,7 +34,7 @@ export default async function ComponentDetailPage({
           <h2 className="text-3xl md:text-4xl">{component?.name}</h2>
           <div className="flex gap-2">
             <Chip size="sm" color="success" variant="dot">
-              type: {component?.category}
+              type: {component?.type}
             </Chip>
           </div>
           <p className="text-neutral-500 text-sm pb-3 w-full lg:w-[65%] md:text-medium">
@@ -43,7 +43,10 @@ export default async function ComponentDetailPage({
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-9">
           <Image
-            alt={`${component!.name}_img`}
+            alt={
+              `${component!.name}_img` ||
+              component!.name.toLowerCase().replaceAll(" ", "")
+            }
             className="w-full object-cover h-[140px]"
             src={`/assets/${component!.name}.png`}
             width={1000}
@@ -57,18 +60,16 @@ export default async function ComponentDetailPage({
               key={`card_${index}`}
               stat={`${Math.round(stat)}%`}
               description={description}
-              brands={component?.related_design_systems}
+              brands={component?.relatedDesignSystems}
             />
           ))}
           <DesignSystemCard
             className="lg:col-span-2"
             title="Related Design Systems"
-            designSystems={component?.related_design_systems}
+            designSystems={component?.relatedDesignSystems}
           />
           <StatCard
-            stat={
-              `${component?.design_systems_count} Top Design Systems` || "0"
-            }
+            stat={`${component?.designSystemCount} Top Design Systems` || "0"}
             description="Include this component"
             isInverted
           />
@@ -86,7 +87,7 @@ export default async function ComponentDetailPage({
             <p className="text-gray-800 text-base sm:text-sm">
               Highlighted by:
             </p>
-            <BrandsMapper brands={component?.related_design_systems} />
+            <BrandsMapper brands={component?.relatedDesignSystems} />
           </div>
         </div>
 

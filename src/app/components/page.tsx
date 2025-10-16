@@ -22,7 +22,6 @@ async function ComponentsPage({
   };
 
   const { search } = await searchParams;
-
   const components = await fetchComponentList(search);
   return (
     <section className="container mx-auto px-4 py-10 ">
@@ -41,7 +40,7 @@ async function ComponentsPage({
       <div className="pt-8">
         <InputSearch />
       </div>
-      <ComponentsGrid components={components} />
+      <ComponentsGrid components={components} isWebsiteHref={false} />
     </section>
   );
 }

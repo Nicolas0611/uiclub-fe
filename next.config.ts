@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   /* config options here */
   output: "standalone",
   images: {
-    domains: ["localhost", "backend"], // Agrega aquí los dominios permitidos
+    domains: ["res.cloudinary.com"], // Agrega aquí los dominios permitidos
   },
 };
 

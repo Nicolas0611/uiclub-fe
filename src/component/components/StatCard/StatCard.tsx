@@ -6,7 +6,7 @@ interface StatCardProps {
   stat: string;
   description: string;
   isInverted?: boolean;
-  brands?: ComponentType["related_design_systems"];
+  brands?: ComponentType["relatedDesignSystems"];
 }
 
 /**

@@ -1,7 +1,6 @@
 import { Card } from "@/components/shared/Card/Card";
 import EmptyState from "@/components/shared/EmptyState/EmptyState";
 import { DesignSystem } from "@/interfaces/design-system-interface";
-import { replaceBackendWithLocalhost } from "@/utils";
 import Link from "next/link";
 import { CardBody } from "../CardBody/CardBody";
 
@@ -25,16 +24,16 @@ const GridCards = ({ designSystems }: Props) => {
           key={designSystem.id}
           as={Link}
           href={`/design-systems/${designSystem.slug}`}
-          img={replaceBackendWithLocalhost(designSystem.thumbnail_image)}
+          img={designSystem.companyImage?.url}
           title={designSystem.name}
-          description={designSystem.short_description}
-          url={designSystem.company_name}
-          showTag={designSystem.is_new}
+          description={designSystem.shortDescription}
+          url={designSystem.company.name}
+          showTag={designSystem.isNew}
           slot={
             <CardBody
-              quantity={designSystem.quantity_components}
+              quantity={designSystem._count.components || 0}
               popularity={designSystem.popularity}
-              is_updated={designSystem.is_updated}
+              isUpdated={designSystem.isUpdated}
             />
           }
           isPressable
