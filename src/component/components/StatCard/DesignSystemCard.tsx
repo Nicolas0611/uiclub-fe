@@ -60,10 +60,17 @@ export default function DesignSystemCard({
         <h3 className="text-lg text-default-500">{title}</h3>
       </div>
 
-      {/* List */}
+      {/* List TODO: Fix the Link href when is attlasian*/}
       <div className={gridClasses}>
         {designSystems.map(({ designSystem }, index) => (
-          <Link key={index} href={`/design-systems/${designSystem.name}`}>
+          <Link
+            key={index}
+            href={`/design-systems/${
+              designSystem.name === "Design System"
+                ? "attlasian"
+                : designSystem.name.toLowerCase()
+            }`}
+          >
             <div className={cardItemClasses}>
               <div className="flex w-full flex-wrap justify-between items-center gap-2">
                 <div className="flex items-center gap-2 truncate">

@@ -6,6 +6,7 @@ import StatCard from "@/component/components/StatCard/StatCard";
 import { Breadcrumb } from "@/components/shared";
 import { Chip } from "@heroui/react";
 import Image from "next/image";
+
 export default async function ComponentDetailPage({
   params,
 }: {
@@ -25,7 +26,7 @@ export default async function ComponentDetailPage({
         "of the Top 20 Systems include this component within their system.",
     },
   ];
-
+  console.log(component);
   return (
     <div className="container mx-auto px-4">
       <section className="container mx-auto px-4 py-10">
