@@ -68,7 +68,7 @@ export const fetchComponentTypeById = async ({
             designSystem: {
               select: {
                 name: true,
-                companyImage: { select: { url: true } },
+                companyImage: { select: { url: true, name: true } },
               },
             },
           },

@@ -5,6 +5,10 @@ export interface Company {
 
 export type Popularity = "MEDIUM" | "HIGH" | "LOW";
 
+export interface CompanyImage {
+  url: string;
+  name: string;
+}
 export interface DesignSystem {
   id: number;
   shortDescription: string;
@@ -14,16 +18,14 @@ export interface DesignSystem {
   name: string;
   popularity: Popularity;
   isUpdated: boolean;
-  companyImage: {
-    url: string;
-  };
+  companyImage: CompanyImage;
   slug: string;
   links?: {
     web: string;
     storybook: string;
     figma: string;
   };
-  _count: { components: 26 };
+  _count: { components: number };
   isNew: boolean;
 }
 

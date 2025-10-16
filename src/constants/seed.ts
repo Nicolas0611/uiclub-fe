@@ -57,7 +57,7 @@ export const initialDesignSystemData = [
     isUpdated: true,
     /*     thumbnail_image: "http://localhost:8000/media/thumbnails/Amazon.png",
      */ slug: "cloudscape",
-    isNew: true,
+    isNew: false,
   },
   {
     id: 2,
@@ -88,7 +88,7 @@ export const initialDesignSystemData = [
     /*     thumbnail_image:
       "http://localhost:8000/media/thumbnails/ActiveCapaign_1_Il29Szy.png", */
     slug: "camp",
-    isNew: false,
+    isNew: true,
   },
 ];
 
@@ -1750,7 +1750,7 @@ export const initialComponentTypes = [
   },
   {
     id: 53,
-    name: "Action Bar",
+    name: "Action bar",
     type: "Action" as const,
     link: null,
   },
@@ -1858,7 +1858,7 @@ export const initialComponentTypes = [
   },
   {
     id: 55,
-    name: "Help Text",
+    name: "Help text",
     type: "Messaging" as const,
     link: null,
   },
@@ -1870,7 +1870,7 @@ export const initialComponentTypes = [
   },
   {
     id: 21,
-    name: "Inline Message",
+    name: "Inline message",
     type: "Messaging" as const,
     link: null,
   },
@@ -1912,7 +1912,7 @@ export const initialComponentTypes = [
   },
   {
     id: 27,
-    name: "Progress Bar",
+    name: "Progress bar",
     type: "Loading" as const,
     link: null,
   },
@@ -1954,7 +1954,7 @@ export const initialComponentTypes = [
   },
   {
     id: 39,
-    name: "Table Tree",
+    name: "Table tree",
     type: "Data" as const,
     link: null,
   },
@@ -1966,13 +1966,13 @@ export const initialComponentTypes = [
   },
   {
     id: 7,
-    name: "Text Area",
+    name: "Text area",
     type: "Input" as const,
     link: null,
   },
   {
     id: 8,
-    name: "Text Field",
+    name: "Text field",
     type: "Input" as const,
     link: null,
   },
@@ -2026,17 +2026,22 @@ export const initialFigmaLink = [
   {
     name: "Apple",
     componentTypeName: "Button",
-    url: "https://embed.figma.com/design/2lrOAXq5fGrqOdBfhS3wwA/ADS-Components--Legacy---Community-?node-id=51833-86269&embed-host=share",
+    url: "https://embed.figma.com/design/FDXB803mGwVpaGOE6gET4L/iOS-and-iPadOS-26--Community-?node-id=507-24673&embed-host=share",
   },
   {
     name: "Amazon",
     componentTypeName: "Accordion",
-    url: "https://embed.figma.com/design/2lrOAXq5fGrqOdBfhS3wwA/ADS-Components--Legacy---Community-?node-id=51833-86269&embed-host=share",
+    url: "https://embed.figma.com/design/hOrRc8nk92ep6hlHqrB5zL/CDS-Component-Library-2.0.1--Community-?node-id=12669-13&embed-host=share",
   },
   {
     name: "Atlassian",
     componentTypeName: "Alert banner",
     url: "https://embed.figma.com/design/2lrOAXq5fGrqOdBfhS3wwA/ADS-Components--Legacy---Community-?node-id=79-45&embed-host=share",
+  },
+  {
+    name: "Amazon",
+    componentTypeName: "Alert banner",
+    url: "https://embed.figma.com/design/hOrRc8nk92ep6hlHqrB5zL/CDS-Component-Library-2.0.1--Community-?node-id=12669-9953&embed-host=share",
   },
 ];
 
@@ -2054,19 +2059,47 @@ export const initialDSComponentType = [
     designSystemName: "Cloudscape",
   },
   {
-    componentTypeName: "Spinner",
-    designSystemName: "Cloudscape",
+    componentTypeName: "Button",
+    designSystemName: "Spectrum",
   },
   {
-    componentTypeName: "Spinner",
-    designSystemName: "Design System",
+    componentTypeName: "Button",
+    designSystemName: "Camp",
+  },
+  {
+    componentTypeName: "Button",
+    designSystemName: "Pencil",
   },
   {
     componentTypeName: "Accordion",
     designSystemName: "Cloudscape",
   },
   {
+    componentTypeName: "Accordion",
+    designSystemName: "Camp",
+  },
+  {
+    componentTypeName: "Spinner",
+    designSystemName: "HIG",
+  },
+  {
+    componentTypeName: "Spinner",
+    designSystemName: "Camp",
+  },
+  {
+    componentTypeName: "Spinner",
+    designSystemName: "Spectrum",
+  },
+  {
     componentTypeName: "Alert banner",
     designSystemName: "Design System",
+  },
+  {
+    componentTypeName: "Alert banner",
+    designSystemName: "Cloudscape",
+  },
+  {
+    componentTypeName: "Alert banner",
+    designSystemName: "Camp",
   },
 ];
