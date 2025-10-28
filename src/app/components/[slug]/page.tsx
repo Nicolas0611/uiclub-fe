@@ -1,8 +1,9 @@
-import { fetchComponentTypeById } from "@/component/actions/component-action";
-import BrandsMapper from "@/component/components/BrandsMapper/BrandsMapper";
-import Splitter from "@/component/components/Splitter/Splitter";
-import DesignSystemCard from "@/component/components/StatCard/DesignSystemCard";
-import StatCard from "@/component/components/StatCard/StatCard";
+import { fetchComponentTypeById } from "@/actions/component/component-action";
+import BrandsMapper from "@/components/custom/component-page/BrandsMapper/BrandsMapper";
+import Splitter from "@/components/custom/component-page/Splitter/Splitter";
+import DesignSystemCard from "@/components/custom/component-page/StatCard/DesignSystemCard";
+import StatCard from "@/components/custom/component-page/StatCard/StatCard";
+
 import { Breadcrumb } from "@/components/shared";
 import { Chip } from "@heroui/react";
 import Image from "next/image";
