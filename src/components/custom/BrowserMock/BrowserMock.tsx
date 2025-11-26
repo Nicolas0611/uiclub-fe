@@ -8,7 +8,6 @@ type ComponentType = {
 };
 interface Props {
   components: ComponentType[];
-
   children: (comp: ComponentType) => React.ReactNode;
 }
 const BrowserMock = ({ components, children }: Props) => {

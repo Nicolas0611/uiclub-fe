@@ -4,7 +4,12 @@ const nextConfig: NextConfig = {
   /* config options here */
   output: "standalone",
   images: {
-    domains: ["res.cloudinary.com"], // Agrega aquí los dominios permitidos
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+      },
+    ],
   },
 };
 
