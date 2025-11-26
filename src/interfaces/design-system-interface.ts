@@ -29,10 +29,23 @@ export interface DesignSystem {
   isNew: boolean;
 }
 
+type Type =
+  | "Overlays"
+  | "Data"
+  | "Input"
+  | "Status"
+  | "Navigation"
+  | "Loading"
+  | "Messaging"
+  | "Action"
+  | "Images"
+  | "Layout"
+  | "Form";
+
 export interface Component {
   name: string;
   description: string;
-  type: string;
+  type: Type;
   link: string;
 }
 

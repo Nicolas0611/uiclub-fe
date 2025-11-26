@@ -3,7 +3,7 @@
 import {
   addComponentToSaved,
   deleteProductFromSaved,
-} from "@/design-systems/actions/cookie-actions";
+} from "@/actions/design-system/cookie-actions";
 import { ComponentType } from "@/interfaces/design-system-interface";
 import { HeartIcon as OutlineHeart } from "@heroicons/react/24/outline";
 import { HeartIcon as SolidHeart } from "@heroicons/react/24/solid";

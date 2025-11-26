@@ -1,7 +1,8 @@
+import { fetchDesignSystemsById } from "@/actions/design-system/design-actions";
+import ComponentsGrid from "@/components/custom/design-systems/ComponentsGrid/ComponentsGrid";
+import ContainerLinks from "@/components/custom/design-systems/ContainerLinks/ContainerLinks";
+
 import { Breadcrumb, EmptyState } from "@/components/shared";
-import { fetchDesignSystemsById } from "@/design-systems/actions/design-actions";
-import ComponentsGrid from "@/design-systems/components/ComponentsGrid/ComponentsGrid";
-import ContainerLinks from "@/design-systems/components/ContainerLinks/ContainerLinks";
 import { Chip } from "@heroui/react";
 
 export default async function DesignDetailPage({

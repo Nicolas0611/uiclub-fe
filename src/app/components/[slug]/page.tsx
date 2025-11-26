@@ -1,8 +1,13 @@
-import { fetchComponentTypeById } from "@/component/actions/component-action";
-import BrandsMapper from "@/component/components/BrandsMapper/BrandsMapper";
-import Splitter from "@/component/components/Splitter/Splitter";
-import DesignSystemCard from "@/component/components/StatCard/DesignSystemCard";
-import StatCard from "@/component/components/StatCard/StatCard";
+import {
+  fetchComponentTypeById,
+  fetchRelatedCategories,
+} from "@/actions/component/component-action";
+import BrandsMapper from "@/components/custom/component-page/BrandsMapper/BrandsMapper";
+import Splitter from "@/components/custom/component-page/Splitter/Splitter";
+import DesignSystemCard from "@/components/custom/component-page/StatCard/DesignSystemCard";
+import StatCard from "@/components/custom/component-page/StatCard/StatCard";
+import ComponentsGrid from "@/components/custom/design-systems/ComponentsGrid/ComponentsGrid";
+
 import { Breadcrumb } from "@/components/shared";
 import { Chip } from "@heroui/react";
 import Image from "next/image";
@@ -14,7 +19,13 @@ export default async function ComponentDetailPage({
 }) {
   const { slug } = await params;
   const component = await fetchComponentTypeById({ slug });
+
+  const componentTypes = await fetchRelatedCategories({
+    type: component!.type,
+  });
+
   const DESIGN_SYSTEM_TOTAL = 6;
+
   const componentStats = [
     {
       stat: component?.usageCount || 0,
@@ -26,6 +37,7 @@ export default async function ComponentDetailPage({
         "of the Top 20 Systems include this component within their system.",
     },
   ];
+
   return (
     <div className="container mx-auto px-4">
       <section className="container mx-auto px-4 py-10">
@@ -93,6 +105,14 @@ export default async function ComponentDetailPage({
 
         <div className="pt-5">
           <Splitter component={component!} />
+        </div>
+
+        <div className="mt-5 border border-gray-200 rounded-lg shadow-sm p-4">
+          <div>
+            <small className="text-gray-600">Family</small>
+            <h3 className="text-lg"> {component?.type}</h3>
+          </div>
+          <ComponentsGrid components={componentTypes!} isWebsiteHref={false} />
         </div>
       </section>
     </div>

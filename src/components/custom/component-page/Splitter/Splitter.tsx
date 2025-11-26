@@ -11,7 +11,11 @@ const Splitter = ({ component }: { component: ComponentType }) => {
 
   return (
     <div className="border border-gray-200 rounded-lg shadow-sm p-4">
-      <div className="w-full flex justify-end mb-4">
+      <div className="w-full flex justify-between mb-4">
+        <div>
+          <small className="text-gray-600">Figma</small>
+          <h3 className="text-lg"> {component.name}</h3>
+        </div>
         <Button
           color="primary"
           variant="light"

@@ -1,5 +1,5 @@
 "use client";
-import IFrame from "@/component/components/IFrame/IFrame";
+import IFrame from "@/components/custom/component-page/IFrame/IFrame";
 import { FigmaLinks } from "@/interfaces/design-system-interface";
 import { Tabs as HeroTabs, Tab } from "@heroui/react";
 

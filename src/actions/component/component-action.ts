@@ -1,3 +1,5 @@
+"use server";
+
 import { PrismaAdapter } from "@/adapters/PrismaAdapter";
 import { IComponentTypeFindMany } from "@/interfaces/adapters/prisma-adapter-interface";
 import { ComponentType } from "@/interfaces/design-system-interface";
@@ -87,5 +89,27 @@ export const fetchComponentTypeById = async ({
     return response;
   } catch (error) {
     throw `Error fetching component with slug ${slug} - ${error}`;
+  }
+};
+
+export const fetchRelatedCategories = async ({
+  type,
+}: {
+  type: ComponentType["type"];
+}): Promise<ComponentType[] | null> => {
+  try {
+    const componentTypeReq = new PrismaAdapter<
+      ComponentType[],
+      IComponentTypeFindMany
+    >("ComponentType");
+
+    const response = await componentTypeReq.findMany({
+      where: {
+        type,
+      },
+    });
+    return response;
+  } catch (error) {
+    throw `Error fetching component with type ${type} - ${error}`;
   }
 };

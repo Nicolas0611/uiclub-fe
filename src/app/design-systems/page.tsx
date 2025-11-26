@@ -1,5 +1,5 @@
-import { fetchDesignSystems } from "@/design-systems/actions/design-actions";
-import { DesignSystemGrid } from "@/design-systems/components/DesignSystemGrid/DesignSystemGrid";
+import { fetchDesignSystems } from "@/actions/design-system/design-actions";
+import { DesignSystemGrid } from "@/components/custom/design-systems/DesignSystemGrid/DesignSystemGrid";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

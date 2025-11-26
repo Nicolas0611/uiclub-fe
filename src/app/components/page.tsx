@@ -1,6 +1,6 @@
-import { fetchComponentList } from "@/component/actions/component-action";
-import InputSearch from "@/component/components/InputSearch/InputSearch";
-import ComponentsGrid from "@/design-systems/components/ComponentsGrid/ComponentsGrid";
+import { fetchComponentList } from "@/actions/component/component-action";
+import InputSearch from "@/components/custom/component-page/InputSearch";
+import ComponentsGrid from "@/components/custom/design-systems/ComponentsGrid/ComponentsGrid";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
