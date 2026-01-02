@@ -8,16 +8,23 @@ export default defineConfig({
     environment: "jsdom",
     watch: false,
     globals: true,
-    // Add these configurations:
-    include: ["**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
+    // Strict file matching - ONLY look for test files
+    include: ["src/**/*.{test,spec}.{ts,tsx}"],
     exclude: [
       "**/node_modules/**",
       "**/dist/**",
       "**/.next/**",
       "**/build/**",
       "**/.vercel/**",
+      "**/coverage/**",
+      "**/.git/**",
     ],
-    testTimeout: 30000, // 30 seconds timeout for individual tests
-    hookTimeout: 30000, // 30 seconds timeout for hooks
+    // Use threads pool with limited workers
+    pool: "threads",
+    // Timeouts
+    testTimeout: 10000,
+    hookTimeout: 10000,
+    // Bail on first failure to speed up
+    bail: 1,
   },
 });
