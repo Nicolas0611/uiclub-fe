@@ -28,14 +28,10 @@ jobs:
       - name: Run Linter
         run: npm run lint
 
-      - name: Debug - List potential test files
+      - name: Debug - List project test files
         run: |
-          echo "=== Searching for test files ==="
-          find . -name "*.test.*" -o -name "*.spec.*" | head -20
-          echo "=== Checking .next directory size ==="
-          du -sh .next 2>/dev/null || echo "No .next directory"
-          echo "=== Checking node_modules size ==="
-          du -sh node_modules
+          echo "=== Searching for project test files ==="
+          find src -type f \( -name "*.test.*" -o -name "*.spec.*" \)
 
       - name: Run Tests
         run: npm run test -- --reporter=verbose
