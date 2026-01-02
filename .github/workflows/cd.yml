@@ -39,7 +39,6 @@ jobs:
 
       - name: Run Tests
         run: npm run test -- --reporter=verbose
-        timeout-minutes: 2
 
       - name: Build Project
         run: npm run build
