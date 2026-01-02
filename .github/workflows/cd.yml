@@ -28,8 +28,18 @@ jobs:
       - name: Run Linter
         run: npm run lint
 
+      - name: Debug - List potential test files
+        run: |
+          echo "=== Searching for test files ==="
+          find . -name "*.test.*" -o -name "*.spec.*" | head -20
+          echo "=== Checking .next directory size ==="
+          du -sh .next 2>/dev/null || echo "No .next directory"
+          echo "=== Checking node_modules size ==="
+          du -sh node_modules
+
       - name: Run Tests
-        run: npm run test
+        run: npm run test -- --reporter=verbose
+        timeout-minutes: 2
 
       - name: Build Project
         run: npm run build
