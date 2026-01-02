@@ -1,30 +1,27 @@
 import react from "@vitejs/plugin-react";
-import tsconfigPaths from "vite-tsconfig-paths";
+import path from "path";
 import { defineConfig } from "vitest/config";
 
 export default defineConfig({
-  plugins: [tsconfigPaths(), react()],
+  plugins: [react()],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
   test: {
     environment: "jsdom",
     watch: false,
     globals: true,
-    // Strict file matching - ONLY look for test files
     include: ["src/**/*.{test,spec}.{ts,tsx}"],
-    exclude: [
-      "**/node_modules/**",
-      "**/dist/**",
-      "**/.next/**",
-      "**/build/**",
-      "**/.vercel/**",
-      "**/coverage/**",
-      "**/.git/**",
-    ],
-    // Use threads pool with limited workers
+    exclude: ["node_modules"],
     pool: "threads",
-    // Timeouts
+    poolOptions: {
+      threads: {
+        singleThread: true,
+      },
+    },
     testTimeout: 10000,
     hookTimeout: 10000,
-    // Bail on first failure to speed up
-    bail: 1,
   },
 });
