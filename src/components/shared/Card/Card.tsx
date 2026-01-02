@@ -1,13 +1,11 @@
 import {
   As,
   CardBody,
-  CardFooter,
   CardHeader,
   Chip,
   Divider,
   Card as HeroCard,
   Image,
-  Link,
 } from "@heroui/react";
 
 export interface CardProps {
@@ -31,7 +29,6 @@ export const Card = ({
   description,
   slot,
   img,
-  showFooter = false,
   as,
   href,
   showTag,
@@ -77,17 +74,6 @@ export const Card = ({
         <p className="text-sm text-neutral-500 line-clamp-3">{description} </p>
         {slot && <div className="pt-4">{slot}</div>}
       </CardBody>
-      {showFooter && (
-        <CardFooter>
-          <Link
-            isExternal
-            showAnchorIcon
-            href="https://github.com/heroui-inc/heroui"
-          >
-            Visit source code on GitHub.
-          </Link>
-        </CardFooter>
-      )}
     </HeroCard>
   );
 };

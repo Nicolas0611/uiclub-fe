@@ -28,6 +28,11 @@ jobs:
       - name: Run Linter
         run: npm run lint
 
+      - name: Debug - List project test files
+        run: |
+          echo "=== Searching for project test files ==="
+          find src -type f \( -name "*.test.*" -o -name "*.spec.*" \)
+
       - name: Build Project
         run: npm run build
 
