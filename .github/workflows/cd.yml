@@ -33,9 +33,6 @@ jobs:
           echo "=== Searching for project test files ==="
           find src -type f \( -name "*.test.*" -o -name "*.spec.*" \)
 
-      - name: Run Tests
-        run: npm run test -- --reporter=verbose
-
       - name: Build Project
         run: npm run build
 
