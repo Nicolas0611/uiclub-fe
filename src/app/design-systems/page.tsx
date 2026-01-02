@@ -16,7 +16,7 @@ async function DesignSystemsPage({
   const { search } = await searchParams;
 
   const content = {
-    preTitle: "2025 · Design Systems and UI Libraries",
+    preTitle: "2026 · Design Systems and UI Libraries",
     title: "List of the top Benchmark Systems",
     parragraph:
       "This list highlights the most popular Design Systems and UI libraries, serving as key benchmarks for thousands of companies, startups, designers, and developers worldwide. It is the result of extensive research, including a survey of hundreds of professionals from leading organizations like Google, Atlassian, Airbnb, and IBM.",
