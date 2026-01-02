@@ -8,5 +8,16 @@ export default defineConfig({
     environment: "jsdom",
     watch: false,
     globals: true,
+    // Add these configurations:
+    include: ["**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
+    exclude: [
+      "**/node_modules/**",
+      "**/dist/**",
+      "**/.next/**",
+      "**/build/**",
+      "**/.vercel/**",
+    ],
+    testTimeout: 30000, // 30 seconds timeout for individual tests
+    hookTimeout: 30000, // 30 seconds timeout for hooks
   },
 });
