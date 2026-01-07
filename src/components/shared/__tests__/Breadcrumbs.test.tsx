@@ -8,3 +8,5 @@ test("renders the Breadcrumb component with an actual page", () => {
   const activePage = screen.getByText("Design");
   expect(activePage).toBeDefined();
 });
+
+/*Unit test for the breadcrumbs */
