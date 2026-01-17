@@ -11,4 +11,5 @@ export type IModelNames = Prisma.ModelName; // This will be a union of all your 
 
 export interface HttpsReq<RES_T, OPT_T> {
   findMany(options?: OPT_T): Promise<RES_T>;
+  findFirst(options?: OPT_T): Promise<RES_T>;
 }
