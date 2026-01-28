@@ -21,7 +21,7 @@ async function main() {
 
   const initialCleanComponent = initialComponentTypes.map(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    ({ id, ...rest }) => rest
+    ({ id, ...rest }) => rest,
   );
 
   // Borra primero las relaciones hijas
@@ -50,20 +50,29 @@ async function main() {
   const DSystemImagesDB = await prisma.companyImage.findMany();
   const componentTypeDB = await prisma.componentType.findMany();
 
-  const companiesMap = companyDB.reduce((map, company) => {
-    map[company.name] = company.id;
-    return map;
-  }, {} as Record<string, number>);
+  const companiesMap = companyDB.reduce(
+    (map, company) => {
+      map[company.name] = company.id;
+      return map;
+    },
+    {} as Record<string, number>,
+  );
 
-  const dsImagesMap = DSystemImagesDB.reduce((map, image) => {
-    map[image.name] = image.id;
-    return map;
-  }, {} as Record<string, string>);
+  const dsImagesMap = DSystemImagesDB.reduce(
+    (map, image) => {
+      map[image.name] = image.id;
+      return map;
+    },
+    {} as Record<string, string>,
+  );
 
-  const componentTypeMap = componentTypeDB.reduce((map, component) => {
-    map[component.name] = component.id;
-    return map;
-  }, {} as Record<string, string>);
+  const componentTypeMap = componentTypeDB.reduce(
+    (map, component) => {
+      map[component.name] = component.id;
+      return map;
+    },
+    {} as Record<string, string>,
+  );
 
   const dbDesignSystemData = initialDesignSystemData.map(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -72,7 +81,7 @@ async function main() {
       name,
       companyId: companiesMap[company],
       companyImageId: dsImagesMap[company],
-    })
+    }),
   );
 
   await prisma.designSystem.createMany({
@@ -81,17 +90,20 @@ async function main() {
 
   const designSystemDB = await prisma.designSystem.findMany();
 
-  const designSystemMap = designSystemDB.reduce((map, designSystem) => {
-    map[designSystem.name] = designSystem.id;
-    return map;
-  }, {} as Record<string, string>);
+  const designSystemMap = designSystemDB.reduce(
+    (map, designSystem) => {
+      map[designSystem.name] = designSystem.id;
+      return map;
+    },
+    {} as Record<string, string>,
+  );
 
   const dbComponentData = initialComponentData.map(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     ({ id, relatedNames, companyName, ...rest }) => ({
       ...rest,
       designSystemId: designSystemMap[companyNames[companyName]],
-    })
+    }),
   );
   await prisma.component.createMany({
     data: dbComponentData,
@@ -110,7 +122,7 @@ async function main() {
       ...rest,
       companyId: companiesMap[name],
       componentTypeId: componentTypeMap[componentTypeName],
-    })
+    }),
   );
   await prisma.figma.createMany({
     data: dbFigmaData,
@@ -121,7 +133,7 @@ async function main() {
       ({ designSystemName, componentTypeName }) => ({
         designSystemId: designSystemMap[designSystemName],
         componentTypeId: componentTypeMap[componentTypeName],
-      })
+      }),
     ),
   });
 
