@@ -2,6 +2,8 @@
 
 import { login } from "@/actions/auth/login";
 import { Button, Input } from "@heroui/react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 interface FormValues {
@@ -10,6 +12,8 @@ interface FormValues {
 }
 
 const LoginForm = () => {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -22,9 +26,18 @@ const LoginForm = () => {
     },
   });
 
+  const [_, setErrorMessage] = useState("");
+
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
-    const result = await login(data.email, data.password);
-    console.log(result);
+    const { email, password } = data;
+    const res = await login(email, password);
+
+    if (!res.ok) {
+      setErrorMessage(res.message);
+      return;
+    }
+
+    router.push("/dashboard");
   };
 
   return (
