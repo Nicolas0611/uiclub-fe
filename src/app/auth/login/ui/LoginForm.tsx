@@ -13,7 +13,8 @@ const LoginForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    /*     formState: { errors },
+     */
   } = useForm<FormValues>({
     defaultValues: {
       email: "",
