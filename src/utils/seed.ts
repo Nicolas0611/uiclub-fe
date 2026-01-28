@@ -7,6 +7,7 @@ import {
   initialDSImages,
   initialFigmaLink,
   initialLinks,
+  initialUsers,
 } from "../constants/seed";
 import { prisma } from "../lib/prisma";
 async function main() {
@@ -25,6 +26,7 @@ async function main() {
   );
 
   // Borra primero las relaciones hijas
+  await prisma.user.deleteMany();
   await prisma.component.deleteMany();
   await prisma.figma.deleteMany();
   await prisma.designSystemComponentType.deleteMany();
@@ -35,6 +37,10 @@ async function main() {
   await prisma.company.deleteMany();
   await prisma.companyImage.deleteMany();
   await prisma.componentType.deleteMany();
+
+  await prisma.user.createMany({
+    data: initialUsers,
+  });
 
   await prisma.company.createMany({
     data: initialCompanyData,
