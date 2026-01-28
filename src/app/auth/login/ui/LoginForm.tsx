@@ -14,6 +14,7 @@ interface FormValues {
 const LoginForm = () => {
   const router = useRouter();
 
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -29,8 +30,10 @@ const LoginForm = () => {
   const [_, setErrorMessage] = useState("");
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    setIsLoading(true);
     const { email, password } = data;
     const res = await login(email, password);
+    setIsLoading(false);
 
     if (!res.ok) {
       setErrorMessage(res.message);
@@ -61,7 +64,13 @@ const LoginForm = () => {
           {...register("password")}
         />
       </div>
-      <Button color="primary" variant="solid" className="w-full" type="submit">
+      <Button
+        color="primary"
+        variant="solid"
+        className="w-full"
+        type="submit"
+        isLoading={isLoading}
+      >
         Login
       </Button>
     </form>

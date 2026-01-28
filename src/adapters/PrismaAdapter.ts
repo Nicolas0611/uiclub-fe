@@ -22,4 +22,7 @@ export class PrismaAdapter<RES_T, OPT_T> implements HttpsReq<RES_T, OPT_T> {
   findFirst(options?: OPT_T): Promise<RES_T> {
     return this.model.findFirst(options);
   }
+  findUnique(options?: OPT_T): Promise<RES_T> {
+    return this.model.findUnique(options);
+  }
 }
