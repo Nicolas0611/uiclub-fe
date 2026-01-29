@@ -1,8 +1,7 @@
-import { Header } from "@/components/shared";
-import { HeroUIProviders } from "@/providers/HeroUIProvider";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
+import { HeroUIProviders, NextAuthProvider } from "@/providers";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
@@ -46,8 +45,7 @@ export default function RootLayout({
     <html lang="en" className="light">
       <body className={`${poppins.className} antialiased`}>
         <HeroUIProviders>
-          <Header />
-          {children}
+          <NextAuthProvider>{children}</NextAuthProvider>
         </HeroUIProviders>
         <Analytics />
         <SpeedInsights />

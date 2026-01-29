@@ -1,6 +1,7 @@
 import BrowserMock from "@/components/custom/BrowserMock/BrowserMock";
 import HomeCard from "@/components/custom/HomeCard/HomeCard";
 import HomePill from "@/components/custom/HomePill/HomePill";
+import { Header } from "@/components/shared";
 import Button, { ButtonProps } from "@/components/shared/Button/Button";
 
 interface ContentProps {
@@ -40,6 +41,7 @@ export default function Home() {
 
   return (
     <>
+      <Header />
       <section className="bg-white">
         <div className="relative isolate px-6 pt-14 lg:px-8">
           <div

@@ -30,6 +30,24 @@ enum Types {
   Form
 }
 
+enum Role {
+  admin
+  user
+}
+
+model User {
+  id String @id @default(uuid())
+  name String
+  email String @unique
+  emailVerified DateTime?
+  password String
+  role Role @default(user)
+  image String?
+  //Relations
+}
+
+
+
 model Company {
   id                  Int             @id @default(autoincrement())
   dateCreated         DateTime        @default(now())
@@ -147,250 +165,3 @@ model CompanyImage {
   // 1:1 relation
   designSystem DesignSystem?
 }
-/* 
-
-model design_libraries_link {
-  id                            BigInt                          @id @default(autoincrement())
-  date_created                  DateTime                        @db.Timestamptz(6)
-  date_updated                  DateTime?                       @db.Timestamptz(6)
-  date_deleted                  DateTime?                       @db.Timestamptz(6)
-  state                         Boolean
-  figma                         String?                         @db.VarChar(200)
-  web                           String?                         @db.VarChar(200)
-  storybook                     String?                         @db.VarChar(200)
-  design_libraries_designsystem design_libraries_designsystem[]
-}
-
-
-/// This model has constraints using non-default deferring rules and requires additional setup for migrations. Visit https://pris.ly/d/constraint-deferring for more info.
-model design_libraries_component {
-  id                                                                                                                              BigInt                                     @id @default(autoincrement())
-  date_created                                                                                                                    DateTime                                   @db.Timestamptz(6)
-  date_updated                                                                                                                    DateTime?                                  @db.Timestamptz(6)
-  date_deleted                                                                                                                    DateTime?                                  @db.Timestamptz(6)
-  state                                                                                                                           Boolean
-  name                                                                                                                            String                                     @db.VarChar(255)
-  description                                                                                                                     String
-  type                                                                                                                            String                                     @db.VarChar(10)
-  company_id                                                                                                                      BigInt
-  link_to_site                                                                                                                    String?                                    @db.VarChar(200)
-  component_type_id                                                                                                               BigInt?
-  design_libraries_company                                                                                                        design_libraries_company                   @relation(fields: [company_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "design_libraries_com_company_id_ab88bbea_fk_design_li")
-  design_libraries_componenttype                                                                                                  design_libraries_componenttype?            @relation(fields: [component_type_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "design_libraries_com_component_type_id_caf3b3fb_fk_design_li")
-  design_libraries_component_related_names_design_libraries_component_related_names_from_component_idTodesign_libraries_component design_libraries_component_related_names[] @relation("design_libraries_component_related_names_from_component_idTodesign_libraries_component")
-  design_libraries_component_related_names_design_libraries_component_related_names_to_component_idTodesign_libraries_component   design_libraries_component_related_names[] @relation("design_libraries_component_related_names_to_component_idTodesign_libraries_component")
-  design_libraries_designsystem_components                                                                                        design_libraries_designsystem_components[]
-
-  @@index([company_id], map: "design_libraries_component_company_id_ab88bbea")
-  @@index([component_type_id], map: "design_libraries_component_component_type_id_caf3b3fb")
-}
-
-model design_libraries_designsystem {
-  id                                                    BigInt                                                  @id @default(autoincrement())
-  date_created                                          DateTime                                                @db.Timestamptz(6)
-  date_updated                                          DateTime?                                               @db.Timestamptz(6)
-  date_deleted                                          DateTime?                                               @db.Timestamptz(6)
-  state                                                 Boolean
-  large_description                                     String
-  name                                                  String                                                  @db.VarChar(255)
-  version                                               String                                                  @db.VarChar(255)
-  company_id                                            BigInt
-  popularity                                            String                                                  @db.VarChar(10)
-  is_updated                                            Boolean
-  short_description                                     String
-  thumbnail_image                                       String                                                  @db.VarChar(100)
-  slug                                                  String                                                  @db.VarChar(50)
-  links_id                                              BigInt?
-  is_new                                                Boolean?
-  design_libraries_componenttype_related_design_systems design_libraries_componenttype_related_design_systems[]
-  design_libraries_company                              design_libraries_company                                @relation(fields: [company_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "design_libraries_des_company_id_0c87e701_fk_design_li")
-  design_libraries_link                                 design_libraries_link?                                  @relation(fields: [links_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "design_libraries_des_links_id_8e9b93e6_fk_design_li")
-  design_libraries_designsystem_components              design_libraries_designsystem_components[]
-
-  @@index([company_id], map: "design_libraries_designsystem_company_id_0c87e701")
-  @@index([links_id], map: "design_libraries_designsystem_links_id_8e9b93e6")
-}
-
-
-model design_libraries_company {
-  id                            BigInt                          @id @default(autoincrement())
-  date_created                  DateTime                        @db.Timestamptz(6)
-  date_updated                  DateTime?                       @db.Timestamptz(6)
-  date_deleted                  DateTime?                       @db.Timestamptz(6)
-  state                         Boolean
-  name                          String                          @db.VarChar(255)
-  design_libraries_component    design_libraries_component[]
-  design_libraries_designsystem design_libraries_designsystem[]
-  design_libraries_figmalink    design_libraries_figmalink[]
-}
-
-/// This model has constraints using non-default deferring rules and requires additional setup for migrations. Visit https://pris.ly/d/constraint-deferring for more info.
-model design_libraries_component {
-  id                                                                                                                              BigInt                                     @id @default(autoincrement())
-  date_created                                                                                                                    DateTime                                   @db.Timestamptz(6)
-  date_updated                                                                                                                    DateTime?                                  @db.Timestamptz(6)
-  date_deleted                                                                                                                    DateTime?                                  @db.Timestamptz(6)
-  state                                                                                                                           Boolean
-  name                                                                                                                            String                                     @db.VarChar(255)
-  description                                                                                                                     String
-  type                                                                                                                            String                                     @db.VarChar(10)
-  company_id                                                                                                                      BigInt
-  link_to_site                                                                                                                    String?                                    @db.VarChar(200)
-  component_type_id                                                                                                               BigInt?
-  design_libraries_company                                                                                                        design_libraries_company                   @relation(fields: [company_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "design_libraries_com_company_id_ab88bbea_fk_design_li")
-  design_libraries_componenttype                                                                                                  design_libraries_componenttype?            @relation(fields: [component_type_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "design_libraries_com_component_type_id_caf3b3fb_fk_design_li")
-  design_libraries_component_related_names_design_libraries_component_related_names_from_component_idTodesign_libraries_component design_libraries_component_related_names[] @relation("design_libraries_component_related_names_from_component_idTodesign_libraries_component")
-  design_libraries_component_related_names_design_libraries_component_related_names_to_component_idTodesign_libraries_component   design_libraries_component_related_names[] @relation("design_libraries_component_related_names_to_component_idTodesign_libraries_component")
-  design_libraries_designsystem_components                                                                                        design_libraries_designsystem_components[]
-
-  @@index([company_id], map: "design_libraries_component_company_id_ab88bbea")
-  @@index([component_type_id], map: "design_libraries_component_component_type_id_caf3b3fb")
-}
-
-/// This model has constraints using non-default deferring rules and requires additional setup for migrations. Visit https://pris.ly/d/constraint-deferring for more info.
-model design_libraries_component_related_names {
-  id                                                                                                                BigInt                     @id @default(autoincrement())
-  from_component_id                                                                                                 BigInt
-  to_component_id                                                                                                   BigInt
-  design_libraries_component_design_libraries_component_related_names_from_component_idTodesign_libraries_component design_libraries_component @relation("design_libraries_component_related_names_from_component_idTodesign_libraries_component", fields: [from_component_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "design_libraries_com_from_component_id_51efe5d5_fk_design_li")
-  design_libraries_component_design_libraries_component_related_names_to_component_idTodesign_libraries_component   design_libraries_component @relation("design_libraries_component_related_names_to_component_idTodesign_libraries_component", fields: [to_component_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "design_libraries_com_to_component_id_021dbd4c_fk_design_li")
-
-  @@unique([from_component_id, to_component_id], map: "design_libraries_compone_from_component_id_to_com_92fb48d7_uniq")
-  @@index([from_component_id], map: "design_libraries_component_from_component_id_51efe5d5")
-  @@index([to_component_id], map: "design_libraries_component_to_component_id_021dbd4c")
-}
-
-/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
-model design_libraries_componenttype {
-  id                                                    BigInt                                                  @id @default(autoincrement())
-  date_created                                          DateTime                                                @db.Timestamptz(6)
-  date_updated                                          DateTime?                                               @db.Timestamptz(6)
-  date_deleted                                          DateTime?                                               @db.Timestamptz(6)
-  state                                                 Boolean
-  name                                                  String                                                  @unique @db.VarChar(255)
-  description                                           String
-  category                                              String                                                  @db.VarChar(15)
-  usage_count                                           Int
-  link_to_site                                          String?                                                 @db.VarChar(200)
-  slug                                                  String?                                                 @unique @db.VarChar(50)
-  design_libraries_component                            design_libraries_component[]
-  design_libraries_componenttype_related_design_systems design_libraries_componenttype_related_design_systems[]
-  design_libraries_figmalink                            design_libraries_figmalink[]
-
-  @@index([name], map: "design_libraries_componenttype_name_bb450125_like")
-  @@index([slug], map: "design_libraries_componenttype_slug_7490163a_like")
-}
-
-/// This model has constraints using non-default deferring rules and requires additional setup for migrations. Visit https://pris.ly/d/constraint-deferring for more info.
-model design_libraries_componenttype_related_design_systems {
-  id                             BigInt                         @id @default(autoincrement())
-  componenttype_id               BigInt
-  designsystem_id                BigInt
-  design_libraries_componenttype design_libraries_componenttype @relation(fields: [componenttype_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "design_libraries_com_componenttype_id_639307ed_fk_design_li")
-  design_libraries_designsystem  design_libraries_designsystem  @relation(fields: [designsystem_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "design_libraries_com_designsystem_id_99d7c59a_fk_design_li")
-
-  @@unique([componenttype_id, designsystem_id], map: "design_libraries_compone_componenttype_id_designs_572f945b_uniq")
-  @@index([componenttype_id], map: "design_libraries_component_componenttype_id_639307ed")
-  @@index([designsystem_id], map: "design_libraries_component_designsystem_id_99d7c59a")
-}
-
-/// This model has constraints using non-default deferring rules and requires additional setup for migrations. Visit https://pris.ly/d/constraint-deferring for more info.
-model design_libraries_designsystem {
-  id                                                    BigInt                                                  @id @default(autoincrement())
-  date_created                                          DateTime                                                @db.Timestamptz(6)
-  date_updated                                          DateTime?                                               @db.Timestamptz(6)
-  date_deleted                                          DateTime?                                               @db.Timestamptz(6)
-  state                                                 Boolean
-  large_description                                     String
-  name                                                  String                                                  @db.VarChar(255)
-  version                                               String                                                  @db.VarChar(255)
-  company_id                                            BigInt
-  popularity                                            String                                                  @db.VarChar(10)
-  is_updated                                            Boolean
-  short_description                                     String
-  thumbnail_image                                       String                                                  @db.VarChar(100)
-  slug                                                  String                                                  @db.VarChar(50)
-  links_id                                              BigInt?
-  is_new                                                Boolean?
-  design_libraries_componenttype_related_design_systems design_libraries_componenttype_related_design_systems[]
-  design_libraries_company                              design_libraries_company                                @relation(fields: [company_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "design_libraries_des_company_id_0c87e701_fk_design_li")
-  design_libraries_link                                 design_libraries_link?                                  @relation(fields: [links_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "design_libraries_des_links_id_8e9b93e6_fk_design_li")
-  design_libraries_designsystem_components              design_libraries_designsystem_components[]
-
-  @@index([company_id], map: "design_libraries_designsystem_company_id_0c87e701")
-  @@index([links_id], map: "design_libraries_designsystem_links_id_8e9b93e6")
-}
-
-/// This model has constraints using non-default deferring rules and requires additional setup for migrations. Visit https://pris.ly/d/constraint-deferring for more info.
-model design_libraries_designsystem_components {
-  id                            BigInt                        @id @default(autoincrement())
-  designsystem_id               BigInt
-  component_id                  BigInt
-  design_libraries_component    design_libraries_component    @relation(fields: [component_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "design_libraries_des_component_id_7a15ae0e_fk_design_li")
-  design_libraries_designsystem design_libraries_designsystem @relation(fields: [designsystem_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "design_libraries_des_designsystem_id_7926d7ea_fk_design_li")
-
-  @@unique([designsystem_id, component_id], map: "design_libraries_designs_designsystem_id_componen_7a87d558_uniq")
-  @@index([designsystem_id], map: "design_libraries_designsys_designsystem_id_7926d7ea")
-  @@index([component_id], map: "design_libraries_designsystem_components_component_id_7a15ae0e")
-}
-
-/// This model has constraints using non-default deferring rules and requires additional setup for migrations. Visit https://pris.ly/d/constraint-deferring for more info.
-model design_libraries_figmalink {
-  id                             BigInt                         @id @default(autoincrement())
-  url                            String                         @db.VarChar(200)
-  company_id                     BigInt
-  component_type_id              BigInt
-  design_libraries_company       design_libraries_company       @relation(fields: [company_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "design_libraries_fig_company_id_4db24519_fk_design_li")
-  design_libraries_componenttype design_libraries_componenttype @relation(fields: [component_type_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "design_libraries_fig_component_type_id_4df8cb5d_fk_design_li")
-
-  @@index([company_id], map: "design_libraries_figmalink_company_id_4db24519")
-  @@index([component_type_id], map: "design_libraries_figmalink_component_type_id_4df8cb5d")
-}
-
-model design_libraries_link {
-  id                            BigInt                          @id @default(autoincrement())
-  date_created                  DateTime                        @db.Timestamptz(6)
-  date_updated                  DateTime?                       @db.Timestamptz(6)
-  date_deleted                  DateTime?                       @db.Timestamptz(6)
-  state                         Boolean
-  figma                         String?                         @db.VarChar(200)
-  web                           String?                         @db.VarChar(200)
-  storybook                     String?                         @db.VarChar(200)
-  design_libraries_designsystem design_libraries_designsystem[]
-}
-
-
-
-/// This model has constraints using non-default deferring rules and requires additional setup for migrations. Visit https://pris.ly/d/constraint-deferring for more info.
-model news_article {
-  id            BigInt        @id(map: "news_news_pkey") @default(autoincrement())
-  date_created  DateTime      @db.Timestamptz(6)
-  date_updated  DateTime?     @db.Timestamptz(6)
-  date_deleted  DateTime?     @db.Timestamptz(6)
-  state         Boolean
-  name          String        @db.VarChar(255)
-  title         String        @db.VarChar(255)
-  subtitle      String        @db.VarChar(255)
-  description   String
-  autor         String        @db.VarChar(255)
-  content       String
-  time_to_read  Int
-  slug          String        @unique(map: "news_news_slug_key") @db.VarChar(255)
-  category_id   BigInt
-  news_category news_category @relation(fields: [category_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "news_news_category_id_f060a768_fk_news_category_id")
-
-  @@index([category_id], map: "news_news_category_id_f060a768")
-  @@index([slug], map: "news_news_slug_2b9132f1_like")
-}
-
-model news_category {
-  id           BigInt         @id @default(autoincrement())
-  date_created DateTime       @db.Timestamptz(6)
-  date_updated DateTime?      @db.Timestamptz(6)
-  date_deleted DateTime?      @db.Timestamptz(6)
-  state        Boolean
-  name         String         @db.VarChar(255)
-  type         String         @db.VarChar(20)
-  news_article news_article[]
-}
- */

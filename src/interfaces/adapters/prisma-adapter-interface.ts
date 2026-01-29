@@ -6,7 +6,7 @@ export type IDesignSystemFindMany = Prisma.DesignSystemFindManyArgs;
 export type IComponentTypeFindMany = Prisma.ComponentTypeFindFirstArgs;
 export type IDesignSystemFindFirst = Prisma.DesignSystemFindFirstArgs;
 export type IComponentFindMany = Prisma.ComponentFindManyArgs;
-
+export type IUserFindUnique = Prisma.UserFindUniqueArgs;
 export type IModelNames = Prisma.ModelName; // This will be a union of all your model names (e.g., 'User' | 'Product' | 'Order')
 
 export interface HttpsReq<RES_T, OPT_T> {

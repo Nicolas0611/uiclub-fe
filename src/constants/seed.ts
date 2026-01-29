@@ -1,3 +1,5 @@
+import bcryptjs from "bcryptjs";
+
 export const initialDesignSystemData = [
   {
     id: 6,
@@ -2101,5 +2103,14 @@ export const initialDSComponentType = [
   {
     componentTypeName: "Alert banner",
     designSystemName: "Camp",
+  },
+];
+
+export const initialUsers = [
+  {
+    name: "Nicolas Sierra",
+    email: "nico.sierra13@gmail.com",
+    password: bcryptjs.hashSync("123456", 10),
+    role: "admin" as const,
   },
 ];
