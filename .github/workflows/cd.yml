@@ -28,6 +28,12 @@ jobs:
       - name: Run Linter
         run: npm run lint
 
+      - name: Run Migrations
+        run: npm run migrate
+
+      - name: Run Seed
+        run: npm run seed
+
       - name: Debug - List project test files
         run: |
           echo "=== Searching for project test files ==="
