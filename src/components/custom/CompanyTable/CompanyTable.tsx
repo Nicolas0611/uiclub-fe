@@ -147,7 +147,7 @@ const CompanyTable = ({ companies = [] }: { companies: Company[] }) => {
   }, []);
 
   return (
-    <Table aria-label="Example table with custom cells">
+    <Table shadow="none" className="border border-gray-200 rounded-lg">
       <TableHeader columns={columns}>
         {(column) => (
           <TableColumn

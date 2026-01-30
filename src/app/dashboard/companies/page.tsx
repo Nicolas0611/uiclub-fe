@@ -8,9 +8,9 @@ const CompaniesPage = async () => {
   if (!ok) return <div>{message}</div>;
 
   return (
-    <div className="flex flex-col gap-4 m-7">
+    <div className="flex flex-col h-full gap-3 m-5">
       <div className="w-full flex items-center justify-between">
-        <h1 className="text-2xl text-gray-700">Companies</h1>
+        <h1 className="text-lg text-gray-500">Companies</h1>
         <Button size="sm" color="primary" variant="solid">
           <PlusIcon className="size-5" />
           Add Company
