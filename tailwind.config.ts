@@ -5,7 +5,9 @@ export default {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/component/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/shared/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/custom/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/ui/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/design-systems/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/auth/**/*.{js,ts,jsx,tsx,mdx}",
