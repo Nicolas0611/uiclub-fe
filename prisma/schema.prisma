@@ -54,9 +54,14 @@ model Company {
   state               Boolean         @default(true)
   name                String          @db.VarChar(255)
 
+
   // 1:1 relation
   designSystem        DesignSystem?
   figma               Figma[]
+
+  companyImage        CompanyImage?   @relation(fields: [companyImageId], references: [id])
+  companyImageId      String?         @unique
+  
 }
 
 model DesignSystem {
@@ -164,4 +169,6 @@ model CompanyImage {
   
   // 1:1 relation
   designSystem DesignSystem?
+  company Company?
+  
 }

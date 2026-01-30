@@ -1678,7 +1678,7 @@ export const initialLinks = [
   },
 ];
 
-export const initialDSImages = [
+export const initialCompanyImages = [
   {
     name: "Amazon",
     url: "https://res.cloudinary.com/archikola/image/upload/v1759716115/design-system-thumbs/Amazon_nugsoy.png",
@@ -2110,7 +2110,7 @@ export const initialUsers = [
   {
     name: "Nicolas Sierra",
     email: "nico.sierra13@gmail.com",
-    password: bcryptjs.hashSync("123456", 10),
+    password: bcryptjs.hashSync("Nscmcq9911**", 10),
     role: "admin" as const,
   },
 ];

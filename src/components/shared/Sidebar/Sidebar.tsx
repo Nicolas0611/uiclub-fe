@@ -9,6 +9,7 @@ import {
   ScrollShadow,
 } from "@heroui/react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import User, { UserProps } from "../User/User";
 import { menuItems } from "./Siderbar.data";
@@ -20,6 +21,8 @@ interface SidebarProps {
 
 export const Sidebar = ({ user }: SidebarProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+  const selectedKeyPath = pathname.split("/").pop();
 
   return (
     <>
@@ -59,12 +62,19 @@ export const Sidebar = ({ user }: SidebarProps) => {
         <Divider />
 
         <ScrollShadow className="flex-1 p-2">
-          <Listbox aria-label="Dynamic Actions" items={menuItems}>
+          <Listbox
+            aria-label="Dynamic Actions"
+            items={menuItems}
+            selectedKeys={[selectedKeyPath || "companies"]}
+            selectionMode="single"
+            color="primary"
+            variant="solid"
+          >
             {(item) => (
               <ListboxItem
                 key={item.key}
                 startContent={item.icon}
-                className="mb-2 cursor-pointer"
+                className={`mb-2 cursor-pointer ${selectedKeyPath === item.key ? "bg-slate-100" : ""}`}
                 href={`/dashboard/${item.key}`}
               >
                 {item.label}

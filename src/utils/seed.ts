@@ -1,10 +1,10 @@
 import {
   initialCompanyData,
+  initialCompanyImages,
   initialComponentData,
   initialComponentTypes,
   initialDesignSystemData,
   initialDSComponentType,
-  initialDSImages,
   initialFigmaLink,
   initialLinks,
   initialUsers,
@@ -31,6 +31,7 @@ async function main() {
   await prisma.figma.deleteMany();
   await prisma.designSystemComponentType.deleteMany();
   await prisma.link.deleteMany();
+  await prisma.companyImage.deleteMany();
 
   // Luego las entidades padre
   await prisma.designSystem.deleteMany();
@@ -42,14 +43,23 @@ async function main() {
     data: initialUsers,
   });
 
-  await prisma.company.createMany({
-    data: initialCompanyData,
-  });
   await prisma.companyImage.createMany({
-    data: initialDSImages,
+    data: initialCompanyImages,
   });
+
   await prisma.componentType.createMany({
     data: initialCleanComponent,
+  });
+
+  const companyImagesDB = await prisma.companyImage.findMany();
+
+  await prisma.company.createMany({
+    data: initialCompanyData.map((company) => ({
+      ...company,
+      companyImageId: companyImagesDB.find(
+        (image) => image.name === company.name,
+      )?.id,
+    })),
   });
 
   const companyDB = await prisma.company.findMany();
