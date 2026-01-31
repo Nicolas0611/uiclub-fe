@@ -1,12 +1,15 @@
+"use client";
+
 import { ArrowRightEndOnRectangleIcon } from "@heroicons/react/24/outline";
 import { Avatar, Button } from "@heroui/react";
 
 export interface UserProps {
   name: string;
   email: string;
+  onLogout?: () => Promise<void>;
 }
 
-const User = ({ name, email }: UserProps) => {
+const User = ({ name, email, onLogout }: UserProps) => {
   return (
     <div className="p-4">
       <div className="flex items-center gap-3">
@@ -15,7 +18,7 @@ const User = ({ name, email }: UserProps) => {
           <p className="text-sm font-medium text-gray-900 truncate">{name}</p>
           <p className="text-xs text-gray-500 truncate">{email}</p>
         </div>
-        <Button isIconOnly size="sm" variant="light">
+        <Button isIconOnly size="sm" variant="light" onPress={onLogout}>
           <ArrowRightEndOnRectangleIcon className="size-5" />
         </Button>
       </div>

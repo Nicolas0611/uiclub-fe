@@ -1,5 +1,6 @@
 "use client";
 
+import { logout } from "@/actions/auth/logout";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import {
   Button,
@@ -10,9 +11,10 @@ import {
   ScrollShadow,
   Tooltip,
 } from "@heroui/react";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useMemo, useState } from "react";
 import User, { UserProps } from "../User/User";
 import { menuItems } from "./Siderbar.data";
 
@@ -22,10 +24,27 @@ interface SidebarProps {
 }
 
 export const Sidebar = ({ user }: SidebarProps) => {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const selectedKeyPath = pathname.split("/").pop();
+  const { data: session } = useSession();
 
+  const role = session?.user?.role;
+
+  const menuItemsRoles = useMemo(() => {
+    if (role === "admin") {
+      return menuItems.filter(
+        (item) => item.role === "all" || item.role === "admin",
+      );
+    }
+    return menuItems.filter((item) => item.role === "all");
+  }, [role]);
+
+  const handleLogout = async () => {
+    await logout();
+    router.push("/");
+  };
   return (
     <>
       {/* Desktop Sidebar */}
@@ -97,14 +116,14 @@ export const Sidebar = ({ user }: SidebarProps) => {
 
             <Divider />
 
-            <User name={user.name} email={user.email} />
+            <User name={user.name} email={user.email} onLogout={handleLogout} />
           </>
         )}
 
         {/* Collapsed state - Desktop only */}
         {!isOpen && (
           <div className="flex flex-1 flex-col items-center py-4 gap-3">
-            {menuItems.map((item) => (
+            {menuItemsRoles.map((item) => (
               <Tooltip key={item.key} content={item.label} placement="right">
                 <Button
                   isIconOnly
@@ -125,7 +144,7 @@ export const Sidebar = ({ user }: SidebarProps) => {
       {/* Mobile Bottom Navigation */}
       <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 safe-area-pb">
         <div className="flex items-center justify-around px-2 py-2">
-          {menuItems.slice(0, 5).map((item) => (
+          {menuItemsRoles.slice(0, 5).map((item) => (
             <Button
               key={item.key}
               as={Link}
@@ -147,7 +166,7 @@ export const Sidebar = ({ user }: SidebarProps) => {
           ))}
 
           {/* More/Menu button if you have more than 5 items */}
-          {menuItems.length > 5 && (
+          {menuItemsRoles.length > 5 && (
             <Button
               variant="light"
               className="flex-1 flex flex-col items-center gap-1 h-auto py-2 px-1 text-gray-600"

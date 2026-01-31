@@ -10,18 +10,20 @@ export const authConfig: NextAuthConfig = {
   pages: {
     signIn: "/auth/login",
   },
-  /* callbacks: {
-      jwt({ token, user }) {
+  callbacks: {
+    jwt({ token, user }) {
+      /* If the user is found, the token data is the user object that comes from the jwt callback*/
       if (user) {
         token.data = user;
       }
       return token;
-    }, 
-   session({ session, token, user }) {
-      session.user = token.data as unkown;
+    },
+    session({ session, token }) {
+      /* Token data is the user object */
+      session.user = token.data as never;
       return session;
     },
-  },*/
+  },
   providers: [
     Credentials({
       /* Authorize function always needs to return something, the CredentialsProvider is the provider 
