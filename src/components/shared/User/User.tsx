@@ -1,3 +1,5 @@
+"use client";
+
 import { ArrowRightEndOnRectangleIcon } from "@heroicons/react/24/outline";
 import { Avatar, Button } from "@heroui/react";
 
