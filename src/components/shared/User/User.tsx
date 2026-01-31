@@ -6,7 +6,7 @@ import { Avatar, Button } from "@heroui/react";
 export interface UserProps {
   name: string;
   email: string;
-  onLogout: () => Promise<void>;
+  onLogout?: () => Promise<void>;
 }
 
 const User = ({ name, email, onLogout }: UserProps) => {
