@@ -42,7 +42,6 @@ export const Sidebar = ({ user, role }: SidebarProps) => {
     await logout();
     router.push("/");
   };
-
   return (
     <>
       {/* Desktop Sidebar */}
