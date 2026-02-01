@@ -5,9 +5,9 @@ import {
   Badge,
   Button,
   Chip,
+  Navbar as HeroNavbar,
   Image,
   Link,
-  Navbar,
   NavbarBrand,
   NavbarContent,
   NavbarItem,
@@ -17,11 +17,11 @@ import {
 } from "@heroui/react";
 import { usePathname } from "next/navigation";
 
-const Header = () => {
+const Navbar = () => {
   const currentPath = usePathname();
 
   return (
-    <Navbar maxWidth="xl" isBlurred={true}>
+    <HeroNavbar>
       <NavbarBrand className="flex items-end gap-2">
         <Link href="/">
           <Image src="/logo.svg" alt="logo" width={130} />
@@ -97,8 +97,8 @@ const Header = () => {
           </NavbarMenuItem>
         ))}
       </NavbarMenu>
-    </Navbar>
+    </HeroNavbar>
   );
 };
 
-export default Header;
+export default Navbar;

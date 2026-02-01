@@ -11,7 +11,6 @@ import {
   ScrollShadow,
   Tooltip,
 } from "@heroui/react";
-import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
@@ -21,16 +20,14 @@ import { menuItems } from "./Siderbar.data";
 // Basic Sidebar Component
 interface SidebarProps {
   user: UserProps;
+  role: string /* "admin" | "user" */;
 }
 
-export const Sidebar = ({ user }: SidebarProps) => {
+export const Sidebar = ({ user, role }: SidebarProps) => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const selectedKeyPath = pathname.split("/").pop();
-  const { data: session } = useSession();
-
-  const role = session?.user?.role;
 
   const menuItemsRoles = useMemo(() => {
     if (role === "admin") {
@@ -95,7 +92,7 @@ export const Sidebar = ({ user }: SidebarProps) => {
             <ScrollShadow className="flex-1 p-2">
               <Listbox
                 aria-label="Dynamic Actions"
-                items={menuItems}
+                items={menuItemsRoles}
                 selectedKeys={[selectedKeyPath || "companies"]}
                 selectionMode="single"
                 color="primary"
