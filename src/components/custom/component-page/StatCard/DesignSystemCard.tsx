@@ -32,7 +32,7 @@ export default function DesignSystemCard({
 }: DesignSystemCardProps) {
   const containerClasses = clsx(
     "h-full border border-gray-200 rounded-2xl shadow-sm p-4",
-    className
+    className,
   );
   const headerClasses = "flex items-center gap-2 pb-4";
   const gridClasses = "grid grid-cols-1 md:grid-cols-2 gap-3";

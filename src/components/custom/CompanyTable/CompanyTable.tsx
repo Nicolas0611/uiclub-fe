@@ -4,7 +4,7 @@ import type { ChipProps } from "@heroui/react";
 import type { SVGProps } from "react";
 
 import { Company } from "@/interfaces/company-interface";
-import { EyeIcon, PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
 import {
   Chip,
   Link,
@@ -126,17 +126,12 @@ const CompanyTable = ({ companies = [] }: { companies: Company[] }) => {
       case "actions":
         return (
           <div className="flex items-center gap-2 justify-center">
-            <Tooltip content="Details">
-              <Link href={`/dashboard/companies/${company.id}`}>
-                <EyeIcon className="size-5 text-default-400" />
-              </Link>
-            </Tooltip>
-            <Tooltip content="Edit user">
+            <Tooltip content="Edit">
               <Link href={`/dashboard/companies/${company.id}/edit`}>
                 <PencilIcon className="size-5 text-default-400" />
               </Link>
             </Tooltip>
-            <Tooltip color="danger" content="Delete user">
+            <Tooltip color="danger" content="Delete">
               <span className="text-lg text-danger cursor-pointer active:opacity-50">
                 <TrashIcon className="size-5 text-danger" />
               </span>
