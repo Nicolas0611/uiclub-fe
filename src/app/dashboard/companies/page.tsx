@@ -1,7 +1,7 @@
 import { getCompanies } from "@/actions/company/get-companies";
 import CompanyTable from "@/components/custom/CompanyTable/CompanyTable";
 import { PlusIcon } from "@heroicons/react/24/outline";
-import { Button } from "@heroui/react";
+import { Button, Link } from "@heroui/react";
 
 const CompaniesPage = async () => {
   const { companies, ok, message } = await getCompanies();
@@ -10,7 +10,13 @@ const CompaniesPage = async () => {
   return (
     <div className="flex flex-col h-full gap-3">
       <div className="w-full flex items-center justify-end">
-        <Button size="sm" color="primary" variant="solid">
+        <Button
+          size="sm"
+          color="primary"
+          variant="solid"
+          as={Link}
+          href="/dashboard/companies/add"
+        >
           <PlusIcon className="size-5" />
           Add Company
         </Button>

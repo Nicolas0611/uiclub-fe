@@ -5,6 +5,7 @@ import { Button, Input } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 interface FormValues {
   email: string;
@@ -15,19 +16,12 @@ const LoginForm = () => {
   const router = useRouter();
 
   const [isLoading, setIsLoading] = useState(false);
-  const {
-    register,
-    handleSubmit,
-    /*     formState: { errors },
-     */
-  } = useForm<FormValues>({
+  const { register, handleSubmit } = useForm<FormValues>({
     defaultValues: {
       email: "",
       password: "",
     },
   });
-
-  const [_, setErrorMessage] = useState("");
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     setIsLoading(true);
@@ -36,7 +30,7 @@ const LoginForm = () => {
     setIsLoading(false);
 
     if (!res.ok) {
-      setErrorMessage(res.message);
+      toast.error(res.message);
       return;
     }
 

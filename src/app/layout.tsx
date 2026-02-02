@@ -4,6 +4,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { HeroUIProviders, NextAuthProvider } from "@/providers";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
+import { ToastContainer } from "react-toastify";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -45,6 +46,7 @@ export default function RootLayout({
     <html lang="en" className="light">
       <body className={`${poppins.className} antialiased`}>
         <HeroUIProviders>
+          <ToastContainer />
           <NextAuthProvider>{children}</NextAuthProvider>
         </HeroUIProviders>
         <Analytics />
