@@ -89,8 +89,6 @@ const statusColorMap: Record<string, ChipProps["color"]> = {
   vacation: "warning",
 };
 
-type User = (typeof users)[0];
-
 const CompanyTable = ({ companies = [] }: { companies: Company[] }) => {
   const renderCell = useCallback((company: Company, columnKey: React.Key) => {
     switch (columnKey) {
