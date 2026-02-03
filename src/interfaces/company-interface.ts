@@ -9,7 +9,7 @@ export interface Company {
   dateCreated: Date;
   state: boolean;
   name: string;
-  designSystem: DesignSystem;
-  figma: FigmaLinks[];
-  companyImage: CompanyImage;
+  designSystem?: DesignSystem;
+  figma?: FigmaLinks[];
+  companyImage?: CompanyImage[];
 }
