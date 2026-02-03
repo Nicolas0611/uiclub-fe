@@ -9,14 +9,10 @@ export const getCompanies = async () => {
     const req = new PrismaAdapter<Company[], ICompanyFindMany>("Company");
     const response = await req.findMany({
       include: {
+        companyImage: true,
         designSystem: {
           select: {
             name: true,
-          },
-        },
-        companyImage: {
-          select: {
-            url: true,
           },
         },
       },
