@@ -15,7 +15,7 @@ const CompaniesPage = async () => {
           color="primary"
           variant="solid"
           as={Link}
-          href="/dashboard/companies/add"
+          href="/dashboard/companies/new"
         >
           <PlusIcon className="size-5" />
           Add Company
