@@ -59,9 +59,7 @@ model Company {
   designSystem        DesignSystem?
   figma               Figma[]
 
-  companyImage        CompanyImage?   @relation(fields: [companyImageId], references: [id])
-  companyImageId      String?         @unique
-  
+  companyImage       CompanyImage[]
 }
 
 model DesignSystem {
@@ -169,6 +167,7 @@ model CompanyImage {
   
   // 1:1 relation
   designSystem DesignSystem?
-  company Company?
-  
+
+  company Company? @relation(fields: [companyId], references: [id])
+  companyId Int?
 }

@@ -43,23 +43,12 @@ async function main() {
     data: initialUsers,
   });
 
-  await prisma.companyImage.createMany({
-    data: initialCompanyImages,
+  await prisma.company.createMany({
+    data: initialCompanyData,
   });
 
   await prisma.componentType.createMany({
     data: initialCleanComponent,
-  });
-
-  const companyImagesDB = await prisma.companyImage.findMany();
-
-  await prisma.company.createMany({
-    data: initialCompanyData.map((company) => ({
-      ...company,
-      companyImageId: companyImagesDB.find(
-        (image) => image.name === company.name,
-      )?.id,
-    })),
   });
 
   const companyDB = await prisma.company.findMany();
@@ -73,6 +62,13 @@ async function main() {
     },
     {} as Record<string, number>,
   );
+
+  await prisma.companyImage.createMany({
+    data: initialCompanyImages.map((image) => ({
+      ...image,
+      companyId: companiesMap[image.name],
+    })),
+  });
 
   const dsImagesMap = DSystemImagesDB.reduce(
     (map, image) => {

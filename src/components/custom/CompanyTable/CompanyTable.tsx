@@ -95,7 +95,7 @@ const CompanyTable = ({ companies = [] }: { companies: Company[] }) => {
       case "name":
         return (
           <User
-            avatarProps={{ radius: "lg", src: company.companyImage.url }}
+            avatarProps={{ radius: "lg", src: company?.companyImage?.[0]?.url }}
             description={company.name}
             name={company.name}
           >
@@ -105,9 +105,20 @@ const CompanyTable = ({ companies = [] }: { companies: Company[] }) => {
       case "designSystem":
         return (
           <div className="flex flex-col">
-            <p className="text-bold text-sm capitalize">
-              {company.designSystem.name}
-            </p>
+            {company?.designSystem?.name ? (
+              <p className="text-bold text-sm capitalize">
+                {company?.designSystem?.name}
+              </p>
+            ) : (
+              <Chip
+                className="capitalize"
+                color="warning"
+                size="sm"
+                variant="flat"
+              >
+                No associated DS
+              </Chip>
+            )}
           </div>
         );
       case "status":

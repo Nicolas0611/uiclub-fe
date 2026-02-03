@@ -6,6 +6,9 @@ export interface Company {
 export type Popularity = "MEDIUM" | "HIGH" | "LOW";
 
 export interface CompanyImage {
+  id: string;
+  dateCreated: Date;
+  state: boolean;
   url: string;
   name: string;
 }
