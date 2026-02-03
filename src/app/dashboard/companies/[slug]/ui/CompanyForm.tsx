@@ -2,8 +2,9 @@
 
 import { createUpdateCompany } from "@/actions/company/create-update-company";
 import Dropzone from "@/components/shared/Inputs/Drozpone/Dropzone";
+import { Company } from "@/interfaces/company-interface";
 import { BuildingStorefrontIcon } from "@heroicons/react/24/outline";
-import { Button, Checkbox, Input } from "@heroui/react";
+import { Button, Checkbox, Image, Input } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -15,14 +16,18 @@ export interface CompanyFormValues {
   state: boolean;
   companyImage: FileList;
 }
-const CompanyForm = () => {
+interface CompanyFormProps {
+  company: Company;
+}
+const CompanyForm = ({ company }: CompanyFormProps) => {
   const { register, handleSubmit } = useForm<CompanyFormValues>({
     defaultValues: {
-      name: "",
-      state: true,
+      name: company.name,
+      state: company.state,
       companyImage: undefined,
     },
   });
+  console.log({ company });
   const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = async (data: CompanyFormValues) => {
@@ -64,6 +69,27 @@ const CompanyForm = () => {
             Estado
           </Checkbox>
           <Dropzone register={register} name="companyImage" />
+          {company.companyImage && (
+            <div className="flex items-center flex-col gap-2">
+              <Image
+                src={company.companyImage[0].url}
+                alt={company.companyImage[0].name}
+                width={100}
+                height={100}
+              />
+              <Button
+                size="sm"
+                type="button"
+                variant="flat"
+                color="danger"
+                onPress={() => {
+                  console.log("eliminar");
+                }}
+              >
+                Eliminar
+              </Button>
+            </div>
+          )}
         </div>
         <div className="flex justify-end gap-4 border-t border-gray-200 pt-4">
           <Button type="submit" variant="light" onPress={() => router.back()}>
