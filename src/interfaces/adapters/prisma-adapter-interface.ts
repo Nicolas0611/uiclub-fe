@@ -14,6 +14,7 @@ export type IUserFindUnique = Prisma.UserFindUniqueArgs;
 /* COMPANY */
 export type ICompanyFindMany = Prisma.CompanyFindManyArgs;
 export type ICompanyFindFirst = Prisma.CompanyFindFirstArgs;
+export type ICompanyImageDelete = Prisma.CompanyImageDeleteArgs;
 
 /* MODEL NAMES */
 export type IModelNames = Prisma.ModelName;
@@ -22,4 +23,5 @@ export interface HttpsReq<RES_T, OPT_T> {
   findMany(options?: OPT_T): Promise<RES_T>;
   findFirst(options?: OPT_T): Promise<RES_T>;
   findUnique(options?: OPT_T): Promise<RES_T>;
+  delete(options?: OPT_T): Promise<RES_T>;
 }
