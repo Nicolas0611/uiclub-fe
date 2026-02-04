@@ -10,18 +10,19 @@ import { uploadImage } from "../cloudinary/upload-image";
 cloudinary.config(process.env.CLOUDINARY_URL || "");
 
 const companySchema = z.object({
-  id: z.string().uuid().optional(),
+  id: z.number().optional(),
   name: z.string().min(3).max(255),
   state: z.boolean(),
 });
 
 export const createUpdateCompany = async (
   company: CompanyFormValues,
-  formData: FormData,
+  formData: FormData | null,
 ) => {
-  const companyImage = formData.get("companyImage");
+  const companyImage = formData?.get("companyImage");
   const companyParsed = companySchema.safeParse(company);
 
+  console.log({ companyImage });
   if (!companyImage) {
     return {
       message: "La imagen de la empresa es requerida",
@@ -37,6 +38,7 @@ export const createUpdateCompany = async (
   }
 
   const companyData = companyParsed.data;
+  console.log({ companyData });
   const { id, name, state } = companyData;
 
   try {
@@ -65,7 +67,7 @@ export const createUpdateCompany = async (
       }
       // Proceso de carga y guardado de imagenes
       // Recorrer imagenes y guardarlas
-      if (companyImage) {
+      if (companyImage && companyImage instanceof File) {
         const companyImageUrl = await uploadImage(
           companyImage as File,
           "/design-system-thumbs",

@@ -32,8 +32,14 @@ const CompanyForm = ({ company }: CompanyFormProps) => {
 
   const onSubmit = async (data: CompanyFormValues) => {
     setIsLoading(true);
+
     const formData = new FormData();
-    formData.append("companyImage", data.companyImage[0]);
+
+    if (data.companyImage) {
+      formData.append("companyImage", data.companyImage[0]);
+    }
+
+    data.id = company.id ?? undefined;
 
     const result = await createUpdateCompany(data, formData);
     if (result?.ok) {
