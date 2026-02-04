@@ -22,7 +22,6 @@ export const createUpdateCompany = async (
   const companyImage = formData?.get("companyImage");
   const companyParsed = companySchema.safeParse(company);
 
-  console.log({ companyImage });
   if (!companyImage) {
     return {
       message: "La imagen de la empresa es requerida",
@@ -38,7 +37,6 @@ export const createUpdateCompany = async (
   }
 
   const companyData = companyParsed.data;
-  console.log({ companyData });
   const { id, name, state } = companyData;
 
   try {

@@ -16,8 +16,6 @@ export const deleteCompanyImage = async (imageId: string, imageUrl: string) => {
 
   const imageName = imageUrl.split("/").pop()?.split(".")[0] || "";
 
-  console.log({ imageName });
-
   try {
     const result = await cloudinary.uploader.destroy(
       `design-system-thumbs/${imageName}`,

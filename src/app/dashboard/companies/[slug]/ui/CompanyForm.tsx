@@ -28,7 +28,6 @@ const CompanyForm = ({ company }: CompanyFormProps) => {
     },
   });
   const [isLoading, setIsLoading] = useState(false);
-  console.log({ company });
   const onSubmit = async (data: CompanyFormValues) => {
     setIsLoading(true);
 
