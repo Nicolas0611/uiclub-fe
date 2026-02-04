@@ -52,7 +52,6 @@ async function main() {
   });
 
   const companyDB = await prisma.company.findMany();
-  const DSystemImagesDB = await prisma.companyImage.findMany();
   const componentTypeDB = await prisma.componentType.findMany();
 
   const companiesMap = companyDB.reduce(
@@ -70,6 +69,7 @@ async function main() {
     })),
   });
 
+  const DSystemImagesDB = await prisma.companyImage.findMany();
   const dsImagesMap = DSystemImagesDB.reduce(
     (map, image) => {
       map[image.name] = image.id;
@@ -77,6 +77,7 @@ async function main() {
     },
     {} as Record<string, string>,
   );
+  console.log({ dsImagesMap });
 
   const componentTypeMap = componentTypeDB.reduce(
     (map, component) => {
