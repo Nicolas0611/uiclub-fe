@@ -91,13 +91,10 @@ export const createUpdateCompany = async (
     return {
       ok: true,
       product: prismaTx,
-      message: "Producto creado/actualizado exitosamente",
+      message: "Compañía creada/actualizado exitosamente",
     };
   } catch (error) {
     console.error(error);
-    return {
-      ok: false,
-      message: "Error al crear/actualizar la empresa",
-    };
+    return { ok: false, message: "Error al crear/actualizar la compañía" };
   }
 };
