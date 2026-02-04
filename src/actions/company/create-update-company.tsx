@@ -10,16 +10,16 @@ import { uploadImage } from "../cloudinary/upload-image";
 cloudinary.config(process.env.CLOUDINARY_URL || "");
 
 const companySchema = z.object({
-  id: z.string().uuid().optional(),
+  id: z.number().optional(),
   name: z.string().min(3).max(255),
   state: z.boolean(),
 });
 
 export const createUpdateCompany = async (
   company: CompanyFormValues,
-  formData: FormData,
+  formData: FormData | null,
 ) => {
-  const companyImage = formData.get("companyImage");
+  const companyImage = formData?.get("companyImage");
   const companyParsed = companySchema.safeParse(company);
 
   if (!companyImage) {
@@ -65,7 +65,7 @@ export const createUpdateCompany = async (
       }
       // Proceso de carga y guardado de imagenes
       // Recorrer imagenes y guardarlas
-      if (companyImage) {
+      if (companyImage && companyImage instanceof File) {
         const companyImageUrl = await uploadImage(
           companyImage as File,
           "/design-system-thumbs",
@@ -89,13 +89,10 @@ export const createUpdateCompany = async (
     return {
       ok: true,
       product: prismaTx,
-      message: "Producto creado/actualizado exitosamente",
+      message: "Compañía creada/actualizado exitosamente",
     };
   } catch (error) {
     console.error(error);
-    return {
-      ok: false,
-      message: "Error al crear/actualizar la empresa",
-    };
+    return { ok: false, message: "Error al crear/actualizar la compañía" };
   }
 };

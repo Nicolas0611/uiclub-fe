@@ -19,6 +19,7 @@ export const getCompanies = async () => {
     });
     if (!response)
       return { companies: [], ok: false, message: "No companies found" };
+
     return { companies: response, ok: true, message: "Companies found" };
   } catch (error) {
     console.error(error);
