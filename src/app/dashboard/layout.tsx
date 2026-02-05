@@ -26,7 +26,9 @@ const DashboardLayout = async ({
       />
       <section className="flex flex-col w-100 w-full">
         <Header />
-        <div className="flex flex-col w-full gap-4 p-4">{children}</div>
+        <div className="flex flex-col w-full gap-4 p-4 overflow-y-auto">
+          {children}
+        </div>
       </section>
     </div>
   );
