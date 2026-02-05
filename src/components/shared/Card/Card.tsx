@@ -1,37 +1,23 @@
-import {
-  As,
-  CardBody,
-  CardHeader,
-  Chip,
-  Divider,
-  Card as HeroCard,
-  Image,
-} from "@heroui/react";
+import { As, CardBody, Divider, Card as HeroCard } from "@heroui/react";
 
 export interface CardProps {
   isHoverable?: boolean;
-  title: string;
-  url: string;
   description: string;
   slot?: React.ReactNode;
   showFooter?: boolean;
-  img: string;
+  header?: React.ReactNode;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   as: As<any>;
   isPressable: boolean;
   href: string;
-  showTag?: boolean;
 }
 export const Card = ({
   isHoverable = true,
-  title,
-  url,
+  header,
   description,
   slot,
-  img,
   as,
   href,
-  showTag,
 }: CardProps) => {
   return (
     <HeroCard
@@ -43,32 +29,7 @@ export const Card = ({
       as={as}
       href={href}
     >
-      <CardHeader className="justify-between">
-        <div className="flex gap-3">
-          <Image
-            alt="heroui logo"
-            height={40}
-            radius="sm"
-            src={img}
-            width={40}
-          />
-          <div className="flex flex-col">
-            <p className="text-md text-start">{title}</p>
-            <p className="text-small text-left text-default-500">{url}</p>
-          </div>
-        </div>
-        {showTag && (
-          <Chip
-            classNames={{
-              base: "bg-gradient-to-br from-indigo-500 to-pink-500 border-small border-white/50 shadow-pink-500/30",
-              content: "drop-shadow shadow-black text-white",
-            }}
-            variant="shadow"
-          >
-            New
-          </Chip>
-        )}
-      </CardHeader>
+      {header && header}
       <Divider />
       <CardBody>
         <p className="text-sm text-neutral-500 line-clamp-3">{description} </p>

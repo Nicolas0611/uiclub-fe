@@ -1,13 +1,12 @@
+import { CardBody } from "@/components/custom/design-systems/CardBody/CardBody";
 import { Card } from "@/components/shared/Card/Card";
 import EmptyState from "@/components/shared/EmptyState/EmptyState";
 import { DesignSystem } from "@/interfaces/design-system-interface";
 import { CardHeader, Chip, Image } from "@heroui/react";
 import Link from "next/link";
-import { CardBody } from "../CardBody/CardBody";
 
 interface Props {
   designSystems: DesignSystem[];
-  isDashboard?: boolean;
 }
 
 const GridCards = ({ designSystems }: Props) => {
@@ -55,7 +54,7 @@ const GridCards = ({ designSystems }: Props) => {
               )}
             </CardHeader>
           }
-          href={`/design-systems/${designSystem.slug}`}
+          href={`/dashboard/design-systems/${designSystem.id}`}
           description={designSystem.shortDescription}
           slot={
             <CardBody
