@@ -17,7 +17,7 @@ const BrandsMapper = ({ brands = [] }: BrandsMapperProps) => {
           <Image
             alt="heroui logo"
             height={32}
-            src={brand?.designSystem?.companyImage.url}
+            src={brand?.designSystem?.companyImage?.url || ""}
             width={32}
           />
         </div>
