@@ -1,8 +1,11 @@
+import { getCompanies } from "@/actions/company/get-companies";
+import { getCompanyImages } from "@/actions/company/get-company-image";
 import { fetchDesignSystemsById } from "@/actions/design-system/design-actions";
 import FormWrapper from "@/components/shared/FormWrapper/FormWrapper";
+import { DesignSystem } from "@/interfaces/design-system-interface";
 import { PencilIcon } from "@heroicons/react/24/outline";
 import { redirect } from "next/navigation";
-import DesignSystemForm from "./ui/DesignSystemForm";
+import DesignSystemForm from "../ui/DesignSystemForm";
 
 const DesignDetailPage = async ({
   params,
@@ -10,9 +13,18 @@ const DesignDetailPage = async ({
   params: Promise<{ id: string }>;
 }) => {
   const { id } = await params;
-  const designSystem = await fetchDesignSystemsById(id);
+  const companyImages = await getCompanyImages();
+  const companies = await getCompanies();
+  let designSystem = {} as DesignSystem;
 
-  if (!designSystem) {
+  if (id !== "new") {
+    const designSystemResponse = await fetchDesignSystemsById(id);
+    if (designSystemResponse) {
+      designSystem = designSystemResponse;
+    }
+  }
+
+  if (!designSystem && id !== "new") {
     redirect("/dashboard/design-systems");
   }
 
@@ -22,7 +34,11 @@ const DesignDetailPage = async ({
         icon={<PencilIcon className="size-5 text-gray-500" />}
         title="Design System"
       >
-        <DesignSystemForm />
+        <DesignSystemForm
+          designSystem={designSystem}
+          companyImages={companyImages.images}
+          companies={companies.companies}
+        />
       </FormWrapper>
     </div>
   );
