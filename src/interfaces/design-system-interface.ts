@@ -12,23 +12,28 @@ export interface CompanyImage {
   url: string;
   name: string;
 }
+
+//TODO: Fix the design system interface
 export interface DesignSystem {
-  id: number;
+  id: string;
+  companyId: number;
+  companyImageId: string;
   shortDescription: string;
   largeDescription: string;
-  company: Company;
-  components: ComponentType[];
+  company?: Company;
+  components?: ComponentType[];
   name: string;
   popularity: Popularity;
   isUpdated: boolean;
-  companyImage: CompanyImage;
+  companyImage?: CompanyImage;
   slug: string;
   links?: {
     web: string;
     storybook: string;
     figma: string;
   };
-  _count: { components: number };
+  state: boolean;
+  _count?: { components: number };
   isNew: boolean;
 }
 

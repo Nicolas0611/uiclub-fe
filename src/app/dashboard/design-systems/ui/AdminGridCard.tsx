@@ -37,7 +37,7 @@ const GridCards = ({ designSystems }: Props) => {
                 <div className="flex flex-col">
                   <p className="text-md text-start">{designSystem.name}</p>
                   <p className="text-small text-left text-default-500">
-                    {designSystem.company.name}
+                    {designSystem.company?.name}
                   </p>
                 </div>
               </div>
@@ -58,7 +58,7 @@ const GridCards = ({ designSystems }: Props) => {
           description={designSystem.shortDescription}
           slot={
             <CardBody
-              quantity={designSystem._count.components || 0}
+              quantity={designSystem._count?.components || 0}
               popularity={designSystem.popularity}
               isUpdated={designSystem.isUpdated}
             />

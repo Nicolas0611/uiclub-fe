@@ -1,4 +1,4 @@
-import { fetchDesignSystemsById } from "@/actions/design-system/design-actions";
+import { fetchDesignSystemsBySlug } from "@/actions/design-system/design-actions";
 import ComponentsGrid from "@/components/custom/design-systems/ComponentsGrid/ComponentsGrid";
 import ContainerLinks from "@/components/custom/design-systems/ContainerLinks/ContainerLinks";
 
@@ -12,7 +12,7 @@ export default async function DesignDetailPage({
 }) {
   const { slug } = await params;
 
-  const designSystem = await fetchDesignSystemsById(slug);
+  const designSystem = await fetchDesignSystemsBySlug(slug);
 
   const isUpdated = designSystem?.isUpdated
     ? { text: "Updated", color: "success" as const }
@@ -22,7 +22,7 @@ export default async function DesignDetailPage({
     <div className="container mx-auto px-4">
       <section className="container mx-auto px-4 py-10">
         <div className="flex flex-col gap-5">
-          <Breadcrumb actualPage={designSystem?.company.name} />
+          <Breadcrumb actualPage={designSystem?.company?.name} />
           <h2 className="text-3xl md:text-4xl">{designSystem?.name}</h2>
           <div className="flex gap-2">
             <Chip radius="sm" size="sm" variant="flat" color={isUpdated.color}>
@@ -37,7 +37,7 @@ export default async function DesignDetailPage({
           </p>
           <ContainerLinks designSystem={designSystem} />
         </div>
-        {designSystem!.components.length > 0 ? (
+        {designSystem?.components && designSystem?.components.length > 0 ? (
           <ComponentsGrid components={designSystem!.components} />
         ) : (
           <div className="py-10">

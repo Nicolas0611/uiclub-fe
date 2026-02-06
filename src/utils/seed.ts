@@ -77,7 +77,6 @@ async function main() {
     },
     {} as Record<string, string>,
   );
-  console.log({ dsImagesMap });
 
   const componentTypeMap = componentTypeDB.reduce(
     (map, component) => {

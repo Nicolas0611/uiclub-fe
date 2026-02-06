@@ -15,7 +15,7 @@ export type IUserFindUnique = Prisma.UserFindUniqueArgs;
 export type ICompanyFindMany = Prisma.CompanyFindManyArgs;
 export type ICompanyFindFirst = Prisma.CompanyFindFirstArgs;
 export type ICompanyImageDelete = Prisma.CompanyImageDeleteArgs;
-
+export type ICompanyImageFindMany = Prisma.CompanyImageFindManyArgs;
 /* MODEL NAMES */
 export type IModelNames = Prisma.ModelName;
 

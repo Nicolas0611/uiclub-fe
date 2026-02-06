@@ -76,7 +76,7 @@ export default function DesignSystemCard({
                 <div className="flex items-center gap-2 truncate">
                   <div className="w-8 h-8 overflow-hidden flex-shrink-0">
                     <Image
-                      src={designSystem.companyImage.url}
+                      src={designSystem.companyImage?.url || ""}
                       alt={designSystem.name}
                       width={32}
                       height={32}

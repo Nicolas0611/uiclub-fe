@@ -8,11 +8,11 @@ import {
 import { DesignSystem } from "@/interfaces/design-system-interface";
 
 export const fetchDesignSystems = async (
-  search?: string
+  search?: string,
 ): Promise<DesignSystem[]> => {
   try {
     const req = new PrismaAdapter<DesignSystem[], IDesignSystemFindMany>(
-      "DesignSystem"
+      "DesignSystem",
     );
     const response = await req.findMany({
       where: {
@@ -42,12 +42,12 @@ export const fetchDesignSystems = async (
   }
 };
 
-export const fetchDesignSystemsById = async (
-  slug?: string
+export const fetchDesignSystemsBySlug = async (
+  slug?: string,
 ): Promise<DesignSystem | null> => {
   try {
     const req = new PrismaAdapter<DesignSystem, IDesignSystemFindFirst>(
-      "DesignSystem"
+      "DesignSystem",
     );
     const designSystem = await req.findFirst({
       where: { slug },
@@ -60,5 +60,21 @@ export const fetchDesignSystemsById = async (
     return designSystem;
   } catch (error) {
     throw `Error fetching design systems id #${slug} - ${error}`;
+  }
+};
+
+export const fetchDesignSystemsById = async (
+  id?: string,
+): Promise<DesignSystem | null> => {
+  try {
+    const req = new PrismaAdapter<DesignSystem, IDesignSystemFindFirst>(
+      "DesignSystem",
+    );
+    const designSystem = await req.findFirst({
+      where: { id },
+    });
+    return designSystem;
+  } catch (error) {
+    throw `Error fetching design systems id #${id} - ${error}`;
   }
 };
