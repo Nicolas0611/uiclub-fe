@@ -122,7 +122,7 @@ const DesignSystemForm = ({
           <Switch {...register("state")}>State</Switch>
         </div>
         <div className="flex justify-end gap-4 border-t border-gray-200 pt-4">
-          <Button type="submit" variant="light" onPress={() => router.back()}>
+          <Button variant="light" onPress={() => router.back()}>
             Cancelar
           </Button>
           <Button type="submit" color="primary" isLoading={isLoading}>
