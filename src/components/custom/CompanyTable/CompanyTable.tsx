@@ -31,7 +31,11 @@ const statusColorMap: Record<string, ChipProps["color"]> = {
   vacation: "warning",
 };
 
-const CompanyTable = ({ companies = [] }: { companies: Company[] }) => {
+interface ICompanyTable {
+  companies: Company[];
+  isAdmin: boolean;
+}
+const CompanyTable = ({ companies = [], isAdmin }: ICompanyTable) => {
   const renderCell = useCallback((company: Company, columnKey: React.Key) => {
     switch (columnKey) {
       case "name":
@@ -82,11 +86,13 @@ const CompanyTable = ({ companies = [] }: { companies: Company[] }) => {
                 <PencilIcon className="size-5 text-default-400" />
               </Link>
             </Tooltip>
-            <Tooltip color="danger" content="Delete">
-              <span className="text-lg text-danger cursor-pointer active:opacity-50">
-                <TrashIcon className="size-5 text-danger" />
-              </span>
-            </Tooltip>
+            {isAdmin && (
+              <Tooltip color="danger" content="Delete">
+                <span className="text-lg text-danger cursor-pointer active:opacity-50">
+                  <TrashIcon className="size-5 text-danger" />
+                </span>
+              </Tooltip>
+            )}
           </div>
         );
     }
