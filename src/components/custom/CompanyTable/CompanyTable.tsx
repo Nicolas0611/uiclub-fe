@@ -99,7 +99,11 @@ const CompanyTable = ({ companies = [], isAdmin }: ICompanyTable) => {
   }, []);
 
   return (
-    <Table shadow="none" className="border border-gray-200 rounded-lg">
+    <Table
+      aria-label="Companies Table"
+      shadow="none"
+      className="border border-gray-200 rounded-lg"
+    >
       <TableHeader columns={columns}>
         {(column) => (
           <TableColumn
