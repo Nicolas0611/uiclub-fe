@@ -13,6 +13,15 @@ export interface CompanyImage {
   name: string;
 }
 
+export interface Link {
+  id: string;
+  dateCreated: Date;
+  state: boolean;
+  web: string;
+  storybook: string;
+  figma: string;
+}
+
 //TODO: Fix the design system interface
 export interface DesignSystem {
   id: string;
