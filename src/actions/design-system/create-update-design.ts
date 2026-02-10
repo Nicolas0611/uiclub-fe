@@ -25,7 +25,6 @@ export const createUpdateDesignSystem = async (
 ) => {
   const designSystemParsed = designSystemSchema.safeParse(designSystem);
 
-  console.log({ designSystem });
   if (!designSystemParsed.success) {
     return {
       message: designSystemParsed.error.message,

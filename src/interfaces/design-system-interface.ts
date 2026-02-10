@@ -14,12 +14,13 @@ export interface CompanyImage {
 }
 
 export interface Link {
-  id: string;
+  id: number;
   dateCreated: Date;
   state: boolean;
-  web: string;
-  storybook: string;
-  figma: string;
+  web: string | null;
+  storybook: string | null;
+  figma: string | null;
+  designSystemId: string;
 }
 
 //TODO: Fix the design system interface
