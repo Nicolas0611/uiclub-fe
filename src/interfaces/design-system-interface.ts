@@ -1,6 +1,7 @@
 export interface Company {
   id: number;
   name: string;
+  companyImage?: CompanyImage[];
 }
 
 export type Popularity = "MEDIUM" | "HIGH" | "LOW";
@@ -27,7 +28,6 @@ export interface Link {
 export interface DesignSystem {
   id: string;
   companyId: number;
-  companyImageId: string;
   shortDescription: string;
   largeDescription: string;
   company?: Company;
@@ -35,7 +35,6 @@ export interface DesignSystem {
   name: string;
   popularity: Popularity;
   isUpdated: boolean;
-  companyImage?: CompanyImage;
   slug: string;
   links?: {
     web: string;

@@ -5,38 +5,17 @@ import { IComponentTypeFindMany } from "@/interfaces/adapters/prisma-adapter-int
 import { ComponentType } from "@/interfaces/design-system-interface";
 
 export const fetchComponentList = async (
-  search: string
+  search: string,
 ): Promise<ComponentType[]> => {
   try {
     const req = new PrismaAdapter<ComponentType[], IComponentTypeFindMany>(
-      "ComponentType"
+      "ComponentType",
     );
     const response = await req.findMany({
       where: {
         name: {
           contains: search,
           mode: "insensitive",
-        },
-      },
-      include: {
-        relatedDesignSystems: {
-          include: {
-            designSystem: {
-              select: {
-                name: true,
-                companyImage: { select: { url: true } },
-                slug: true,
-              },
-            },
-          },
-        },
-        figmaLinks: {
-          select: {
-            url: true,
-            company: {
-              select: { name: true },
-            },
-          },
         },
       },
     });
@@ -54,7 +33,7 @@ export const fetchComponentTypeById = async ({
 }): Promise<ComponentType | null> => {
   try {
     const req = new PrismaAdapter<ComponentType, IComponentTypeFindMany>(
-      "ComponentType"
+      "ComponentType",
     );
 
     const response = await req.findFirst({
@@ -70,7 +49,13 @@ export const fetchComponentTypeById = async ({
             designSystem: {
               select: {
                 name: true,
-                companyImage: { select: { url: true, name: true } },
+                company: {
+                  select: {
+                    companyImage: {
+                      select: { url: true },
+                    },
+                  },
+                },
               },
             },
           },

@@ -22,11 +22,11 @@ export const fetchDesignSystems = async (
         company: {
           select: {
             name: true,
-          },
-        },
-        companyImage: {
-          select: {
-            url: true,
+            companyImage: {
+              select: {
+                url: true,
+              },
+            },
           },
         },
         _count: {
@@ -38,7 +38,7 @@ export const fetchDesignSystems = async (
     });
     return response;
   } catch (error) {
-    throw `Error fetching design systems ${error}`;
+    throw `Error fetching design systems here ${error}`;
   }
 };
 

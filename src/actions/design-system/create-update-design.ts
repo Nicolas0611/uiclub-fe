@@ -15,7 +15,6 @@ const designSystemSchema = z.object({
   slug: z.string().min(3).max(255),
   isNew: z.boolean(),
   companyId: z.string(),
-  companyImageId: z.string(),
   shortDescription: z.string().min(3),
   largeDescription: z.string().min(3),
 });
@@ -33,7 +32,7 @@ export const createUpdateDesignSystem = async (
   }
 
   const designSystemData = designSystemParsed.data;
-  const { id, companyId, companyImageId, ...rest } = designSystemData;
+  const { id, companyId, ...rest } = designSystemData;
 
   try {
     const prismaTx = await prisma.$transaction(async (tx) => {
@@ -46,7 +45,6 @@ export const createUpdateDesignSystem = async (
           data: {
             ...rest,
             companyId: Number(companyId),
-            companyImageId: companyImageId,
           },
         });
         console.log({ updatedDesignSystem: designSystem });
@@ -56,7 +54,6 @@ export const createUpdateDesignSystem = async (
           data: {
             ...rest,
             companyId: Number(companyId),
-            companyImageId: companyImageId,
           },
         });
         console.log({ createdDesignSystem: designSystem });
