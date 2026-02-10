@@ -1,5 +1,4 @@
 import { getCompanies } from "@/actions/company/get-companies";
-import { getCompanyImages } from "@/actions/company/get-company-image";
 import { fetchDesignSystemsById } from "@/actions/design-system/design-actions";
 import FormWrapper from "@/components/shared/FormWrapper/FormWrapper";
 import { DesignSystem } from "@/interfaces/design-system-interface";
@@ -13,7 +12,6 @@ const DesignDetailPage = async ({
   params: Promise<{ id: string }>;
 }) => {
   const { id } = await params;
-  const companyImages = await getCompanyImages();
   const companies = await getCompanies();
   let designSystem = {} as DesignSystem;
 
@@ -36,7 +34,6 @@ const DesignDetailPage = async ({
       >
         <DesignSystemForm
           designSystem={designSystem}
-          companyImages={companyImages.images}
           companies={companies.companies}
         />
       </FormWrapper>
