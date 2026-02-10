@@ -35,7 +35,13 @@ const statusColorMap: Record<string, ChipProps["color"]> = {
   paused: "danger",
 };
 
-const ExternalLinkCell = ({ href, label }: { href: string; label: string }) => {
+const ExternalLinkCell = ({
+  href,
+  label,
+}: {
+  href: string | null;
+  label: string;
+}) => {
   if (!href?.trim()) {
     return (
       <Chip className="capitalize" color="default" size="sm" variant="flat">
