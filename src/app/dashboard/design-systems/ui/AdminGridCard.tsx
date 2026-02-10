@@ -31,7 +31,7 @@ const GridCards = ({ designSystems }: Props) => {
                   alt="heroui logo"
                   height={40}
                   radius="sm"
-                  src={designSystem.companyImage?.url}
+                  src={designSystem.company?.companyImage?.[0]?.url}
                   width={40}
                 />
                 <div className="flex flex-col">

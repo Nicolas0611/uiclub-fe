@@ -2,14 +2,9 @@
 
 import { createUpdateDesignSystem } from "@/actions/design-system/create-update-design";
 import { Company } from "@/interfaces/company-interface";
-import {
-  CompanyImage,
-  DesignSystem,
-  Popularity,
-} from "@/interfaces/design-system-interface";
+import { DesignSystem, Popularity } from "@/interfaces/design-system-interface";
 import {
   Button,
-  Image,
   Input,
   Select,
   SelectItem,
@@ -31,12 +26,10 @@ export interface DesignSystemFormValues {
   slug: string;
   isNew: boolean;
   companyId: number;
-  companyImageId: string;
 }
 
 interface DesignSystemFormProps {
   designSystem: DesignSystem;
-  companyImages: CompanyImage[];
   companies: Company[];
 }
 const POPULARITY_OPTIONS = [
@@ -47,7 +40,6 @@ const POPULARITY_OPTIONS = [
 
 const DesignSystemForm = ({
   designSystem,
-  companyImages,
   companies,
 }: DesignSystemFormProps) => {
   const { register, handleSubmit } = useForm<DesignSystemFormValues>({
@@ -80,26 +72,6 @@ const DesignSystemForm = ({
             {companies.map((company) => (
               <SelectItem key={company.id} value={company.id}>
                 {company.name}
-              </SelectItem>
-            ))}
-          </Select>
-
-          <Select label="Company Image" {...register("companyImageId")}>
-            {companyImages.map((companyImage) => (
-              <SelectItem
-                startContent={
-                  <Image
-                    src={companyImage.url}
-                    alt={companyImage.name}
-                    width={20}
-                    height={20}
-                    fallbackSrc="https://placehold.co/100x100"
-                  />
-                }
-                key={companyImage.id}
-                value={companyImage.id}
-              >
-                {companyImage.name}
               </SelectItem>
             ))}
           </Select>
