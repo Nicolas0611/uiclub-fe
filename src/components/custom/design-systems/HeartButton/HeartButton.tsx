@@ -18,7 +18,7 @@ const HeartButton = ({ component, saved }: Props) => {
   // Keep local reactive state for instant UI updates
   // We only use the `saved` prop for the initial value
   const [isSaved, setIsSaved] = useState<boolean>(
-    saved[String(component.id)] !== undefined
+    saved[String(component.id)] !== undefined,
   );
 
   const handleOnSave = (e: React.MouseEvent<HTMLButtonElement>) => {
