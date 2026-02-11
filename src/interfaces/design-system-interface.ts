@@ -60,10 +60,13 @@ type Type =
   | "Form";
 
 export interface Component {
+  id: string;
   name: string;
   description: string;
   type: Type;
+  state: boolean;
   link: string;
+  designSystem: DesignSystem;
 }
 
 export interface FigmaLinks {
@@ -80,5 +83,5 @@ export interface ComponentType extends Component {
   figmaLinks: FigmaLinks[];
   designSystemCount: number;
   relatedDesignSystems: { designSystem: DesignSystem }[];
-  id: number;
+  id: string;
 }
