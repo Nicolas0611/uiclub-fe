@@ -17,7 +17,7 @@ import {
   User,
 } from "@heroui/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 
 interface IComponentTable {
   components: Component[];
@@ -42,10 +42,18 @@ export const ComponentTable = ({ components, totalPages }: IComponentTable) => {
   const pathName = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
+  const params = new URLSearchParams(searchParams.toString());
+  const currentPage = Number(params.get("page")) || 1;
+
+  useEffect(() => {
+    if (currentPage > totalPages && totalPages > 0) {
+      const newParams = new URLSearchParams(searchParams.toString());
+      newParams.set("page", totalPages.toString());
+      router.push(`${pathName}?${newParams.toString()}`);
+    }
+  }, [currentPage, totalPages, pathName, router, searchParams]);
 
   const createPageUrl = (pageNumber: number | string) => {
-    const params = new URLSearchParams(searchParams.toString());
-
     if (+pageNumber <= 0) {
       return `${pathName}`;
     }
@@ -146,6 +154,7 @@ export const ComponentTable = ({ components, totalPages }: IComponentTable) => {
             isCompact
             showControls
             showShadow
+            page={currentPage}
             color="primary"
             total={totalPages}
             onChange={(page) => router.push(createPageUrl(page))}
