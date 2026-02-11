@@ -8,13 +8,13 @@ export const getCookieSaved = (): { [id: string]: number } => {
   return {};
 };
 
-export const addComponentToSaved = (id: number) => {
+export const addComponentToSaved = (id: string) => {
   const cookieSaved = getCookieSaved();
   cookieSaved[id] = 1;
   setCookie("saved", JSON.stringify(cookieSaved));
 };
 
-export const deleteProductFromSaved = (id: number) => {
+export const deleteProductFromSaved = (id: string) => {
   const cookieCart = getCookieSaved();
   delete cookieCart[id];
   setCookie("saved", JSON.stringify(cookieCart));
