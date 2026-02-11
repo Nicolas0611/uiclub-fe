@@ -28,4 +28,7 @@ export class PrismaAdapter<RES_T, OPT_T> implements HttpsReq<RES_T, OPT_T> {
   delete(options?: OPT_T): Promise<RES_T> {
     return this.model.delete(options);
   }
+  count(options?: OPT_T): Promise<number> {
+    return this.model.count(options);
+  }
 }
