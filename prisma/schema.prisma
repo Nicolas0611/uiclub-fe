@@ -114,7 +114,10 @@ model Component {
 
   //Relations 
   designSystem        DesignSystem    @relation(fields: [designSystemId], references: [id])
-  designSystemId      String          
+  designSystemId      String  
+
+  componentImage      ComponentImage[]
+
 }
 
 model ComponentType {
@@ -170,4 +173,17 @@ model CompanyImage {
 
   company Company? @relation(fields: [companyId], references: [id])
   companyId Int?
+}
+
+/* ComponentImage has a relation with Component because ComponentImage is used to display the component image */
+/* ComponentImage is used to display the component image in the component */
+model ComponentImage {
+  id                  String              @id @default(uuid())
+  dateCreated         DateTime            @default(now())
+  state               Boolean             @default(true)
+  url                 String              @db.VarChar(255)  
+  name                String              @db.VarChar(100)
+  //Relations
+  component Component @relation(fields: [componentId], references: [id])
+  componentId String
 }

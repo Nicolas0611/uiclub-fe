@@ -2,6 +2,7 @@ import {
   initialCompanyData,
   initialCompanyImages,
   initialComponentData,
+  initialComponentImages,
   initialComponentTypes,
   initialDesignSystemData,
   initialDSComponentType,
@@ -10,6 +11,10 @@ import {
   initialUsers,
 } from "../constants/seed";
 import { prisma } from "../lib/prisma";
+
+const normalize = (value: string) =>
+  value.trim().toLowerCase().replace(/\s+/g, "_");
+
 async function main() {
   const companyNames = {
     Brainly: "Pencil" as const,
@@ -26,13 +31,13 @@ async function main() {
   );
 
   // Borra primero las relaciones hijas
+  await prisma.componentImage.deleteMany();
   await prisma.user.deleteMany();
   await prisma.component.deleteMany();
   await prisma.figma.deleteMany();
   await prisma.designSystemComponentType.deleteMany();
   await prisma.link.deleteMany();
   await prisma.companyImage.deleteMany();
-
   // Luego las entidades padre
   await prisma.designSystem.deleteMany();
   await prisma.company.deleteMany();
@@ -102,7 +107,7 @@ async function main() {
 
   const dbComponentData = initialComponentData.map(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    ({ id, relatedNames, companyName, ...rest }) => ({
+    ({ id, companyName, ...rest }) => ({
       ...rest,
       designSystemId: designSystemMap[companyNames[companyName]],
     }),
@@ -111,10 +116,38 @@ async function main() {
     data: dbComponentData,
   });
 
+  const componentDB = await prisma.component.findMany();
+
+  // Group component IDs by normalized name
+  const componentMap = componentDB.reduce(
+    (map, component) => {
+      const key = normalize(component.name);
+      if (!map[key]) map[key] = [];
+      map[key].push(component.id);
+      return map;
+    },
+    {} as Record<string, string[]>,
+  );
+
+  // Create one image record per component (across all design systems)
+  const imageData = initialComponentImages.flatMap((image) => {
+    const ids = componentMap[normalize(image.name)] ?? [];
+    return ids.map((componentId) => ({
+      url: image.url,
+      name: image.name,
+      componentId,
+    }));
+  });
+
+  await prisma.componentImage.createMany({
+    data: imageData,
+  });
+
   const dbLinkData = initialLinks.map(({ name, ...rest }) => ({
     ...rest,
     designSystemId: designSystemMap[companyNames[name]],
   }));
+
   await prisma.link.createMany({
     data: dbLinkData,
   });
