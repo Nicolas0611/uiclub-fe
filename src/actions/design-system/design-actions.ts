@@ -52,7 +52,15 @@ export const fetchDesignSystemsBySlug = async (
     const designSystem = await req.findFirst({
       where: { slug },
       include: {
-        components: true,
+        components: {
+          include: {
+            componentImage: {
+              select: {
+                url: true,
+              },
+            },
+          },
+        },
         company: true,
         links: true,
       },
