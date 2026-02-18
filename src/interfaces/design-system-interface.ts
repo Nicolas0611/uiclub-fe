@@ -75,7 +75,14 @@ export interface FigmaLinks {
   url: string;
 }
 
+export interface ComponentImage {
+  id: string;
+  url: string;
+  name: string;
+}
+
 export interface ComponentType extends Component {
+  componentImage: ComponentImage[];
   name: string;
   description: string;
   category: string;
