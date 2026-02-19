@@ -67,6 +67,7 @@ export interface Component {
   state: boolean;
   link: string;
   designSystem: DesignSystem;
+  componentImage: ComponentImage[];
 }
 
 export interface FigmaLinks {

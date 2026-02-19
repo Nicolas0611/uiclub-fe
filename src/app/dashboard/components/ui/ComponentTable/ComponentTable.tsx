@@ -75,7 +75,7 @@ export const ComponentTable = ({ components, totalPages }: IComponentTable) => {
               name={component.name}
               avatarProps={{
                 radius: "lg",
-                src: `/assets/${component.name}.png`,
+                src: component.componentImage[0]?.url,
               }}
             >
               {component.name}

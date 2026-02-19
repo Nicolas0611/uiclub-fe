@@ -1,7 +1,6 @@
 import { ComponentType } from "@/interfaces/design-system-interface";
-import { Card, CardBody, CardFooter, Chip } from "@heroui/react";
+import { Card, CardBody, CardFooter, Chip, Image } from "@heroui/react";
 import { cookies } from "next/headers";
-import Image from "next/image";
 import Link from "next/link";
 import HeartButton from "../HeartButton/HeartButton";
 interface ComponentsProps {
