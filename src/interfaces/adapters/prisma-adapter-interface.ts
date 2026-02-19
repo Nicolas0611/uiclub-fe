@@ -6,8 +6,11 @@ export type IDesignSystemFindFirst = Prisma.DesignSystemFindFirstArgs;
 
 /* COMPONENT TYPE */
 export type IComponentTypeFindMany = Prisma.ComponentTypeFindFirstArgs;
+
+/* COMPONENT */
 export type IComponentFindMany = Prisma.ComponentFindManyArgs;
 export type IComponentCount = Prisma.ComponentCountArgs;
+export type IComponentFindFirst = Prisma.ComponentFindFirstArgs;
 /* USER */
 export type IUserFindUnique = Prisma.UserFindUniqueArgs;
 

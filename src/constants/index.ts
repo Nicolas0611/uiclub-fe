@@ -71,3 +71,50 @@ export const LINKS = [
     isDisabled: false,
   },
 ];
+
+export const COMPONENT_TYPES = [
+  {
+    label: "Overlays",
+    value: "Overlays",
+  },
+  {
+    label: "Data",
+    value: "Data",
+  },
+  {
+    label: "Input",
+    value: "Input",
+  },
+  {
+    label: "Status",
+    value: "Status",
+  },
+  {
+    label: "Navigation",
+    value: "Navigation",
+  },
+  {
+    label: "Loading",
+    value: "Loading",
+  },
+  {
+    label: "Messaging",
+    value: "Messaging",
+  },
+  {
+    label: "Action",
+    value: "Action",
+  },
+  {
+    label: "Images",
+    value: "Images",
+  },
+  {
+    label: "Layout",
+    value: "Layout",
+  },
+  {
+    label: "Form",
+    value: "Form",
+  },
+];

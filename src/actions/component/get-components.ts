@@ -18,6 +18,11 @@ export const getComponents = async ({
       take,
       skip: (page - 1) * take,
       include: {
+        componentImage: {
+          select: {
+            url: true,
+          },
+        },
         designSystem: {
           select: {
             name: true,
