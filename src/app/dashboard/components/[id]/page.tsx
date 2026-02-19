@@ -1,8 +1,10 @@
 import { getComponentById } from "@/actions/component/get-component-by-id";
+import { fetchDesignSystems } from "@/actions/design-system/design-actions";
 import FormWrapper from "@/components/shared/FormWrapper/FormWrapper";
 import { Component } from "@/interfaces/design-system-interface";
 import { PencilIcon } from "@heroicons/react/24/outline";
 import { redirect } from "next/navigation";
+import ComponentForm from "../ui/ComponentForm/ComponentForm";
 
 const ComponentDetailPage = async ({
   params,
@@ -11,6 +13,7 @@ const ComponentDetailPage = async ({
 }) => {
   const { id } = await params;
   let component: Component = {} as Component;
+  const designSystems = await fetchDesignSystems();
 
   if (id !== "new") {
     const componentResponse = await getComponentById(id);
@@ -21,14 +24,13 @@ const ComponentDetailPage = async ({
   if (!component && id !== "new") {
     redirect("/dashboard/components");
   }
-  console.log(component);
 
   return (
     <FormWrapper
       icon={<PencilIcon className="size-5 text-gray-500" />}
-      title="Component"
+      title="Crear componente"
     >
-      <div>ComponentDetailPage</div>
+      <ComponentForm component={component} designSystems={designSystems} />
     </FormWrapper>
   );
 };
