@@ -1,8 +1,8 @@
 "use client";
 
+import { handleSearch } from "@/utils";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { Divider, Input, Tab, Tabs } from "@heroui/react";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ReactNode, useEffect, useState } from "react";
 
@@ -10,21 +10,6 @@ interface TabProps {
   title?: string;
   defaultKey: string;
   tabs: { key: string | null; title: ReactNode; children: ReactNode }[];
-}
-
-function handleSearch(
-  term: string,
-  router: AppRouterInstance,
-  pathname: string,
-  searchParams: URLSearchParams
-) {
-  const params = new URLSearchParams(searchParams);
-  if (term) {
-    params.set("search", term);
-  } else {
-    params.delete("search");
-  }
-  router.replace(`${pathname}?${params.toString()}`);
 }
 
 const SwitchTab = ({ tabs, defaultKey, title }: TabProps) => {
