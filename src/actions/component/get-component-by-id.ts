@@ -13,6 +13,7 @@ export const getComponentById = async (id: string) => {
         componentImage: {
           select: {
             url: true,
+            id: true,
           },
         },
         designSystem: {
