@@ -1,5 +1,7 @@
 "use client";
 
+import { createUpdateComponent } from "@/actions/component/create-update-component";
+import { deleteComponentImage } from "@/actions/component/delete-component-image";
 import Dropzone from "@/components/shared/Inputs/Drozpone/Dropzone";
 import { COMPONENT_TYPES } from "@/constants";
 import { Component, DesignSystem } from "@/interfaces/design-system-interface";
@@ -15,8 +17,10 @@ import {
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 export interface ComponentFormValues {
+  id: string;
   name: string;
   description: string;
   type: string;
@@ -30,7 +34,7 @@ interface ComponentFormProps {
   designSystems: DesignSystem[];
 }
 const ComponentForm = ({ component, designSystems }: ComponentFormProps) => {
-  const [isLoading, _] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const designSystemsOptions = designSystems.map((designSystem) => ({
@@ -51,7 +55,23 @@ const ComponentForm = ({ component, designSystems }: ComponentFormProps) => {
   });
 
   const onSubmit = async (data: ComponentFormValues) => {
-    console.log(data);
+    setIsLoading(true);
+    const formData = new FormData();
+
+    if (data.componentImage) {
+      formData.append("componentImage", data.componentImage[0]);
+    }
+    data.id = component.id ?? undefined;
+
+    const result = await createUpdateComponent(data, formData);
+    if (result?.ok) {
+      toast.success(result.message);
+      setIsLoading(false);
+      router.push("/dashboard/components");
+    } else {
+      toast.error(result.message);
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -96,7 +116,7 @@ const ComponentForm = ({ component, designSystems }: ComponentFormProps) => {
                 color="danger"
                 onPress={() => {
                   if (component.componentImage) {
-                    console.log(
+                    deleteComponentImage(
                       component.componentImage[0].id,
                       component.componentImage[0].url,
                     );
@@ -113,7 +133,7 @@ const ComponentForm = ({ component, designSystems }: ComponentFormProps) => {
           <Switch {...register("state")}>Estado del componente</Switch>
 
           <div className="flex">
-            <Button type="submit" variant="light" onPress={() => router.back()}>
+            <Button variant="light" onPress={() => router.back()}>
               Cancelar
             </Button>
             <Button type="submit" color="primary" isLoading={isLoading}>
