@@ -7,14 +7,22 @@ import { Component } from "@/interfaces/design-system-interface";
 interface IGetComponents {
   page: number;
   take?: number;
+  search?: string;
 }
 export const getComponents = async ({
   page = 1,
   take = 10,
+  search,
 }: IGetComponents) => {
   try {
     const req = new PrismaAdapter<Component[], IComponentFindMany>("Component");
     const response = await req.findMany({
+      where: {
+        name: {
+          contains: search,
+          mode: "insensitive",
+        },
+      },
       take,
       skip: (page - 1) * take,
       include: {
