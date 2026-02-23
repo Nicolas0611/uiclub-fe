@@ -12,9 +12,11 @@ export type IComponentFindMany = Prisma.ComponentFindManyArgs;
 export type IComponentCount = Prisma.ComponentCountArgs;
 export type IComponentFindFirst = Prisma.ComponentFindFirstArgs;
 export type IComponentImageDelete = Prisma.ComponentImageDeleteArgs;
+
 /* USER */
 export type IUserFindUnique = Prisma.UserFindUniqueArgs;
 export type IUserFindMany = Prisma.UserFindManyArgs;
+export type IUserUpdate = Prisma.UserUpdateArgs;
 
 /* COMPANY */
 export type ICompanyFindMany = Prisma.CompanyFindManyArgs;
@@ -35,4 +37,5 @@ export interface HttpsReq<RES_T, OPT_T> {
   findUnique(options?: OPT_T): Promise<RES_T>;
   delete(options?: OPT_T): Promise<RES_T>;
   count(options?: OPT_T): Promise<number>;
+  update(options?: OPT_T): Promise<RES_T>;
 }
