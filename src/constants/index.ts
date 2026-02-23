@@ -118,3 +118,14 @@ export const COMPONENT_TYPES = [
     value: "Form",
   },
 ];
+
+export const ROLES = [
+  {
+    label: "Admin",
+    value: "admin",
+  },
+  {
+    label: "User",
+    value: "user",
+  },
+];
