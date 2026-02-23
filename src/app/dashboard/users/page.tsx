@@ -1,10 +1,10 @@
 import { getAllUsers } from "@/actions/users/get-all-users";
 import { Card, CardHeader, Chip, User } from "@heroui/react";
+import EditModal from "./ui/EditModal";
 
 const UsersPage = async () => {
   const data = await getAllUsers();
   if (!data.ok) return <div>{data.message}</div>;
-  console.log({ users: data.users });
 
   return (
     <div className="grid grid-cols-1 gap-6 py-6 md:grid-cols-2 lg:grid-cols-3">
@@ -30,6 +30,7 @@ const UsersPage = async () => {
                 {user.role}
               </Chip>
             </div>
+            <EditModal user={user} />
           </CardHeader>
         </Card>
       ))}
