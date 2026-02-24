@@ -1961,6 +1961,12 @@ export const initialUsers = [
     password: bcryptjs.hashSync("Nscmcq9911**", 10),
     role: "admin" as const,
   },
+  {
+    name: "Gabriela Chauta",
+    email: "gchauta@gmail.com",
+    password: bcryptjs.hashSync("Pecas123**", 10),
+    role: "user" as const,
+  },
 ];
 
 export const initialComponentImages = [
