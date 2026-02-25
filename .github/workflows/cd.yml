@@ -30,6 +30,9 @@ jobs:
 
       - name: Destroy Database
         run: npx prisma migrate reset
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DIRECT_URL: ${{ secrets.DIRECT_URL }}
 
       # ✅ Use production database URL from GitHub Secrets
       - name: Run Prisma Migrations (Production Safe)
