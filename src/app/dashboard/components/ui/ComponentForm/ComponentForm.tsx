@@ -4,7 +4,11 @@ import { createUpdateComponent } from "@/actions/component/create-update-compone
 import { deleteComponentImage } from "@/actions/component/delete-component-image";
 import Dropzone from "@/components/shared/Inputs/Drozpone/Dropzone";
 import { COMPONENT_TYPES } from "@/constants";
-import { Component, DesignSystem } from "@/interfaces/design-system-interface";
+import {
+  Component,
+  ComponentImage,
+  DesignSystem,
+} from "@/interfaces/design-system-interface";
 import {
   Button,
   Image,
@@ -15,7 +19,7 @@ import {
   Textarea,
 } from "@heroui/react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
@@ -28,19 +32,43 @@ export interface ComponentFormValues {
   link: string;
   designSystemId: string;
   componentImage: FileList;
+  componentImageId: string | null;
 }
 interface ComponentFormProps {
   component: Component;
   designSystems: DesignSystem[];
+  componentImages: ComponentImage[];
 }
-const ComponentForm = ({ component, designSystems }: ComponentFormProps) => {
+const ComponentForm = ({
+  component,
+  designSystems,
+  componentImages,
+}: ComponentFormProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-  const designSystemsOptions = designSystems.map((designSystem) => ({
-    label: designSystem.name,
-    value: designSystem.id,
-  }));
+  const designSystemsOptions = useMemo(
+    () =>
+      designSystems.map((designSystem) => ({
+        label: designSystem.name,
+        value: designSystem.id,
+      })),
+    [designSystems],
+  );
+  const componentImagesOptions = useMemo(() => {
+    const emptyOption = {
+      image: "  ",
+      label: "Selecciona una imagen",
+      value: null,
+    };
+    const options = componentImages.map((componentImage) => ({
+      image: componentImage.url,
+      label: componentImage.name,
+      value: componentImage.id,
+    }));
+
+    return [emptyOption, ...options];
+  }, [componentImages]);
 
   const { register, handleSubmit } = useForm<ComponentFormValues>({
     defaultValues: {
@@ -51,6 +79,7 @@ const ComponentForm = ({ component, designSystems }: ComponentFormProps) => {
       link: component.link,
       designSystemId: component.designSystemId,
       componentImage: undefined,
+      componentImageId: component.componentImage?.id ?? "",
     },
   });
 
@@ -85,28 +114,42 @@ const ComponentForm = ({ component, designSystems }: ComponentFormProps) => {
         <div className="flex flex-row gap-2">
           <Select label="Tipo de componente" {...register("type")}>
             {COMPONENT_TYPES.map((type) => (
-              <SelectItem key={type.value} value={type.value}>
-                {type.label}
-              </SelectItem>
+              <SelectItem key={type.value}>{type.label}</SelectItem>
             ))}
           </Select>
           <Select label="Design System" {...register("designSystemId")}>
             {designSystemsOptions.map((designSystem) => (
-              <SelectItem key={designSystem.value} value={designSystem.value}>
+              <SelectItem key={designSystem.value}>
                 {designSystem.label}
               </SelectItem>
             ))}
           </Select>
         </div>
-
         <Input label="Link del componente" {...register("link")} />
+        <Select label="Imagen del componente" {...register("componentImageId")}>
+          {componentImagesOptions.map((componentImage) => (
+            <SelectItem
+              startContent={
+                <Image
+                  src={componentImage.image}
+                  alt={componentImage.label}
+                  width={30}
+                  height={30}
+                />
+              }
+              key={componentImage.value}
+            >
+              {componentImage.label}
+            </SelectItem>
+          ))}
+        </Select>
         <div className="flex flex-row gap-2">
           <Dropzone register={register} name="componentImage" />
-          {component.componentImage?.[0] && (
+          {component.componentImage && (
             <div className="flex items-center flex-col gap-2">
               <Image
-                src={component.componentImage[0].url}
-                alt={component.componentImage[0].name}
+                src={component.componentImage.url}
+                alt={component.componentImage.name}
                 width={600}
               />
               <Button
@@ -117,8 +160,9 @@ const ComponentForm = ({ component, designSystems }: ComponentFormProps) => {
                 onPress={() => {
                   if (component.componentImage) {
                     deleteComponentImage(
-                      component.componentImage[0].id,
-                      component.componentImage[0].url,
+                      component.componentImage.id,
+                      component.componentImage.url,
+                      component.id,
                     );
                   }
                 }}
