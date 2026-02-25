@@ -116,7 +116,8 @@ model Component {
   designSystem        DesignSystem    @relation(fields: [designSystemId], references: [id])
   designSystemId      String  
 
-  componentImage      ComponentImage[]
+  componentImage      ComponentImage? @relation(fields: [componentImageId], references: [id])
+  componentImageId    String?
 
 }
 
@@ -184,6 +185,6 @@ model ComponentImage {
   url                 String              @db.VarChar(255)  
   name                String              @db.VarChar(100)
   //Relations
-  component Component @relation(fields: [componentId], references: [id])
-  componentId String
+
+  components          Component[]
 }
