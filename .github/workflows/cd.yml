@@ -28,6 +28,12 @@ jobs:
       - name: Run Linter
         run: npm run lint
 
+      - name: Destroy Database
+        run: npx prisma migrate reset --force
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DIRECT_URL: ${{ secrets.DIRECT_URL }}
+
       # ✅ Use production database URL from GitHub Secrets
       - name: Run Prisma Migrations (Production Safe)
         run: npx prisma migrate deploy

@@ -39,7 +39,7 @@ const ComponentsGrid = async ({
               className="w-full object-cover h-[140px]"
               src={
                 isWebsiteHref
-                  ? component.componentImage[0]?.url
+                  ? component?.componentImage?.url
                   : `/assets/${component.name}.png`
               }
               width={1000}

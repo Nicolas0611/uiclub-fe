@@ -13,6 +13,9 @@ export type IComponentCount = Prisma.ComponentCountArgs;
 export type IComponentFindFirst = Prisma.ComponentFindFirstArgs;
 export type IComponentImageDelete = Prisma.ComponentImageDeleteArgs;
 
+/* COMPONENT IMAGE */
+export type IComponentImageFindMany = Prisma.ComponentImageFindManyArgs;
+
 /* USER */
 export type IUserFindUnique = Prisma.UserFindUniqueArgs;
 export type IUserFindMany = Prisma.UserFindManyArgs;

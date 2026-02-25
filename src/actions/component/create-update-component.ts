@@ -17,6 +17,7 @@ const componentSchema = z.object({
   state: z.boolean(),
   link: z.string().min(3).max(255),
   designSystemId: z.string(),
+  componentImageId: z.string().optional(),
 });
 export const createUpdateComponent = async (
   component: ComponentFormValues,
@@ -25,69 +26,113 @@ export const createUpdateComponent = async (
   const componentImage = formData?.get("componentImage");
   const componentParsed = componentSchema.safeParse(component);
 
-  if (!componentImage) {
-    return {
-      message: "La imagen del componente es requerida",
-      ok: false,
-    };
-  }
-
+  console.log({ componentImage });
   if (!componentParsed.success) {
     return {
       message: componentParsed.error.message,
       ok: false,
     };
   }
-
   const componentData = componentParsed.data;
-  const { id, name, description, type, state, link, designSystemId } =
-    componentData;
+  const {
+    id,
+    name,
+    description,
+    type,
+    state,
+    link,
+    designSystemId,
+    componentImageId,
+  } = componentData;
+
   try {
     const prismaTx = await prisma.$transaction(async (tx) => {
       let component: Component;
 
+      // Actualizar component si no tiene una nueva imagen cargada, sino es una imagen que ya existe del modelo ComponentImage
       if (id) {
-        component = await tx.component.update({
-          where: { id: id },
-          data: {
-            name: name,
-            description: description,
-            type: type as Types,
-            state: state,
-            link: link,
-            designSystemId: designSystemId,
-          },
-        });
-        console.log({ updatedComponent: component });
-      } else {
-        component = await tx.component.create({
-          data: {
-            name: name,
-            description: description,
-            type: type as Types,
-            state: state,
-            link: link,
-            designSystemId: designSystemId,
-          },
-        });
-      }
-      // Proceso de carga y guardado de imagenes
-      if (componentImage && componentImage instanceof File) {
-        const componentImageUrl = await uploadImage(
-          componentImage as File,
-          "/components",
-        );
-        if (!componentImageUrl) {
-          throw new Error("Error al subir la imagen del componente");
+        if (componentImage && componentImage instanceof File) {
+          const componentImageUrl = await uploadImage(
+            componentImage as File,
+            "/components",
+          );
+          if (!componentImageUrl) {
+            throw new Error("Error al subir la imagen del componente");
+          }
+          const componentImageCreated = await tx.componentImage.create({
+            data: {
+              url: componentImageUrl,
+              name: name,
+            },
+          });
+          component = await tx.component.update({
+            where: { id: id },
+            data: {
+              name: name,
+              description: description,
+              type: type as Types,
+              state: state,
+              link: link,
+              designSystemId: designSystemId,
+              componentImageId: componentImageCreated.id,
+            },
+          });
+        } else {
+          component = await tx.component.update({
+            where: { id: id },
+            data: {
+              name: name,
+              description: description,
+              type: type as Types,
+              state: state,
+              link: link,
+              designSystemId: designSystemId,
+              componentImageId: componentImageId,
+            },
+          });
         }
-        await tx.componentImage.create({
-          data: {
-            url: componentImageUrl,
-            name: component.name,
-            componentId: component.id,
-          },
-        });
+      } else {
+        // Crear componente y imagen si no existe
+        if (componentImage && componentImage instanceof File) {
+          const componentImageUrl = await uploadImage(
+            componentImage as File,
+            "/components",
+          );
+          if (!componentImageUrl) {
+            throw new Error("Error al subir la imagen del componente");
+          }
+          const componentImageCreated = await tx.componentImage.create({
+            data: {
+              url: componentImageUrl,
+              name: name,
+            },
+          });
+          component = await tx.component.create({
+            data: {
+              name: name,
+              description: description,
+              type: type as Types,
+              state: state,
+              link: link,
+              designSystemId: designSystemId,
+              componentImageId: componentImageCreated.id,
+            },
+          });
+        } else {
+          component = await tx.component.create({
+            data: {
+              name: name,
+              description: description,
+              type: type as Types,
+              state: state,
+              link: link,
+              designSystemId: designSystemId,
+              componentImageId: componentImageId ?? "",
+            },
+          });
+        }
       }
+
       return component;
     });
     revalidatePath(`/dashboard/components`);

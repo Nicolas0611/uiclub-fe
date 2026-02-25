@@ -68,7 +68,7 @@ export interface Component {
   link: string;
   designSystem?: DesignSystem;
   designSystemId: string;
-  componentImage?: ComponentImage[];
+  componentImage?: ComponentImage;
 }
 
 export interface FigmaLinks {
@@ -84,7 +84,7 @@ export interface ComponentImage {
 }
 
 export interface ComponentType extends Component {
-  componentImage: ComponentImage[];
+  componentImage: ComponentImage;
   name: string;
   description: string;
   category: string;
