@@ -28,6 +28,9 @@ jobs:
       - name: Run Linter
         run: npm run lint
 
+      - name: Destroy Database
+        run: npx prisma migrate reset
+
       # ✅ Use production database URL from GitHub Secrets
       - name: Run Prisma Migrations (Production Safe)
         run: npx prisma migrate deploy
