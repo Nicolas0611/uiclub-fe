@@ -1,8 +1,6 @@
 "use server";
 
-import { PrismaAdapter } from "@/adapters/PrismaAdapter";
-import { IComponentImageDelete } from "@/interfaces/adapters/prisma-adapter-interface";
-import { ComponentImage } from "@/interfaces/design-system-interface";
+import { prisma } from "@/lib/prisma";
 import { v2 as cloudinary } from "cloudinary";
 import { revalidatePath } from "next/cache";
 cloudinary.config(process.env.CLOUDINARY_URL || "");
@@ -10,6 +8,7 @@ cloudinary.config(process.env.CLOUDINARY_URL || "");
 export const deleteComponentImage = async (
   imageId: string,
   imageUrl: string,
+  componentId: string,
 ) => {
   if (!imageUrl.startsWith("http")) {
     return {
@@ -20,20 +19,27 @@ export const deleteComponentImage = async (
   const imageName = imageUrl.split("/").pop()?.split(".")[0] || "";
 
   try {
-    const result = await cloudinary.uploader.destroy(`components/${imageName}`);
-    if (result.result === "not found") {
-      return {
-        ok: false,
-        message: "No se pudo eliminar la imagen",
-      };
-    }
-    const req = new PrismaAdapter<ComponentImage, IComponentImageDelete>(
-      "ComponentImage",
-    );
-    await req.delete({
-      where: { id: imageId },
+    await prisma.$transaction(async (tx) => {
+      await tx.component.update({
+        where: { id: componentId },
+        data: { componentImageId: null },
+      });
+
+      const result = await cloudinary.uploader.destroy(
+        `components/${imageName}`,
+      );
+
+      if (result.result === "not found") {
+        throw new Error("La imagen no existe en Cloudinary");
+      }
+
+      await tx.componentImage.delete({
+        where: { id: imageId },
+      });
     });
+
     revalidatePath(`/dashboard/components`);
+    revalidatePath(`/dashboard/components/${componentId}`);
     return {
       message: "Imagen del componente eliminada exitosamente",
       ok: true,
