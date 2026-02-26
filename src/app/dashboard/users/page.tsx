@@ -1,5 +1,6 @@
 import { getAllUsers } from "@/actions/users/get-all-users";
 import { Card, CardHeader, Chip, User } from "@heroui/react";
+import DeleteModal from "./ui/DeleteModal";
 import EditModal from "./ui/EditModal";
 
 const UsersPage = async () => {
@@ -30,7 +31,10 @@ const UsersPage = async () => {
                 {user.role}
               </Chip>
             </div>
-            <EditModal user={user} />
+            <div className="w-full flex justify-end padding-top-2">
+              <DeleteModal user={user} />
+              <EditModal user={user} />
+            </div>
           </CardHeader>
         </Card>
       ))}
