@@ -20,6 +20,7 @@ export type IComponentImageFindMany = Prisma.ComponentImageFindManyArgs;
 export type IUserFindUnique = Prisma.UserFindUniqueArgs;
 export type IUserFindMany = Prisma.UserFindManyArgs;
 export type IUserUpdate = Prisma.UserUpdateArgs;
+export type IUserDelete = Prisma.UserDeleteArgs;
 
 /* COMPANY */
 export type ICompanyFindMany = Prisma.CompanyFindManyArgs;
