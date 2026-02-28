@@ -24,7 +24,7 @@ export default function StatCard({
 }: StatCardProps) {
   const baseClass =
     "group h-full gap-4 p-5 flex flex-col justify-between border border-gray-200 transition-colors rounded-2xl";
-  const invertedClass = "bg-primary_light hover:bg-primary";
+  const invertedClass = "bg-primary-50 hover:bg-primary";
   const hoverTextClass = "group-hover:text-white transition-colors";
 
   // Brand display logic

@@ -1,5 +1,5 @@
 import { fetchComponentList } from "@/actions/component/component-action";
-import InputSearch from "@/components/custom/component-page/InputSearch";
+import InputSearch from "@/components/custom/component-page/InputSearch/InputSearch";
 import ComponentsGrid from "@/components/custom/design-systems/ComponentsGrid/ComponentsGrid";
 import { Metadata } from "next";
 
