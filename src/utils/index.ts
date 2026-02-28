@@ -1,12 +1,10 @@
-//todo: SOLUCION MOMENTANEA
-
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 export function handleSearch(
   term: string,
   router: AppRouterInstance,
   pathname: string,
-  searchParams: URLSearchParams
+  searchParams: URLSearchParams,
 ) {
   const params = new URLSearchParams(searchParams);
   if (term) {

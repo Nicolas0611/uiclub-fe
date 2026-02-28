@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     title: "UI Club — A Curated Repository of Design Systems",
     description:
       "Explore top-rated UI components with previews, specs, and usage guides. Build better, faster.",
-    url: "https://uiclub-fe.vercel.app",
+    url: "https://uiclub.vercel.app",
     siteName: "UI Club",
     type: "website",
   },
