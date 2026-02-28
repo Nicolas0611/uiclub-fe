@@ -47,6 +47,8 @@ const ComponentForm = ({
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
+  //Todo: Verificar si la imagen ya existe en el componente y hacer un switch para habilitar el dropzone o no
+
   const designSystemsOptions = useMemo(
     () =>
       designSystems.map((designSystem) => ({
