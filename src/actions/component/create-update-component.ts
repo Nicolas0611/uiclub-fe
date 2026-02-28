@@ -4,7 +4,7 @@ import { ComponentFormValues } from "@/app/dashboard/components/ui/ComponentForm
 import { COMPONENT_TYPES } from "@/constants";
 import { Component } from "@/interfaces/design-system-interface";
 import { prisma } from "@/lib/prisma";
-import { Types } from "@prisma/client";
+import { Prisma, Types } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import z from "zod";
 import { uploadImage } from "../cloudinary/upload-image";
@@ -19,6 +19,9 @@ const componentSchema = z.object({
   designSystemId: z.string(),
   componentImageId: z.string().optional(),
 });
+
+//Refactorizar para que sea un solo endpoint
+
 export const createUpdateComponent = async (
   component: ComponentFormValues,
   formData: FormData | null,
@@ -26,7 +29,6 @@ export const createUpdateComponent = async (
   const componentImage = formData?.get("componentImage");
   const componentParsed = componentSchema.safeParse(component);
 
-  console.log({ componentImage });
   if (!componentParsed.success) {
     return {
       message: componentParsed.error.message,
@@ -49,92 +51,51 @@ export const createUpdateComponent = async (
     const prismaTx = await prisma.$transaction(async (tx) => {
       let component: Component;
 
+      const componentImageCreated = await resolveImage(
+        componentImage as File,
+        tx,
+        name,
+      );
+      /*Depende si la imagen ya esta creada o la van a subir hasta ahora ahi se define el iD */
+      const imageId = componentImageCreated?.id
+        ? componentImageCreated.id
+        : componentImageId;
+
+      if (!imageId) {
+        throw new Error(
+          "Error al subir la imagen del componente, se necesita subir una imagen",
+        );
+      }
       // Actualizar component si no tiene una nueva imagen cargada, sino es una imagen que ya existe del modelo ComponentImage
       if (id) {
-        if (componentImage && componentImage instanceof File) {
-          const componentImageUrl = await uploadImage(
-            componentImage as File,
-            "/components",
-          );
-          if (!componentImageUrl) {
-            throw new Error("Error al subir la imagen del componente");
-          }
-          const componentImageCreated = await tx.componentImage.create({
-            data: {
-              url: componentImageUrl,
-              name: name,
-            },
-          });
-          component = await tx.component.update({
-            where: { id: id },
-            data: {
-              name: name,
-              description: description,
-              type: type as Types,
-              state: state,
-              link: link,
-              designSystemId: designSystemId,
-              componentImageId: componentImageCreated.id,
-            },
-          });
-        } else {
-          component = await tx.component.update({
-            where: { id: id },
-            data: {
-              name: name,
-              description: description,
-              type: type as Types,
-              state: state,
-              link: link,
-              designSystemId: designSystemId,
-              componentImageId: componentImageId,
-            },
-          });
-        }
+        component = await tx.component.update({
+          where: { id: id },
+          data: {
+            name: name,
+            description: description,
+            type: type as Types,
+            state: state,
+            link: link,
+            designSystemId: designSystemId,
+            componentImageId: imageId,
+          },
+        });
       } else {
-        // Crear componente y imagen si no existe
-        if (componentImage && componentImage instanceof File) {
-          const componentImageUrl = await uploadImage(
-            componentImage as File,
-            "/components",
-          );
-          if (!componentImageUrl) {
-            throw new Error("Error al subir la imagen del componente");
-          }
-          const componentImageCreated = await tx.componentImage.create({
-            data: {
-              url: componentImageUrl,
-              name: name,
-            },
-          });
-          component = await tx.component.create({
-            data: {
-              name: name,
-              description: description,
-              type: type as Types,
-              state: state,
-              link: link,
-              designSystemId: designSystemId,
-              componentImageId: componentImageCreated.id,
-            },
-          });
-        } else {
-          component = await tx.component.create({
-            data: {
-              name: name,
-              description: description,
-              type: type as Types,
-              state: state,
-              link: link,
-              designSystemId: designSystemId,
-              componentImageId: componentImageId ?? "",
-            },
-          });
-        }
+        component = await tx.component.create({
+          data: {
+            name: name,
+            description: description,
+            type: type as Types,
+            state: state,
+            link: link,
+            designSystemId: designSystemId,
+            componentImageId: imageId,
+          },
+        });
       }
-
       return component;
     });
+
     revalidatePath(`/dashboard/components`);
     revalidatePath(`/dashboard/design-systems/${designSystemId}`);
 
@@ -147,4 +108,28 @@ export const createUpdateComponent = async (
     console.error(error);
     throw `Error creating component ${error}`;
   }
+};
+
+const resolveImage = async (
+  componentImage: File | null | undefined,
+  tx: Prisma.TransactionClient,
+  name: string,
+) => {
+  if (componentImage && componentImage instanceof File) {
+    const componentImageUrl = await uploadImage(
+      componentImage as File,
+      "/components",
+    );
+    if (!componentImageUrl) {
+      throw new Error("Error al subir la imagen del componente");
+    }
+    const componentImageCreated = await tx.componentImage.create({
+      data: {
+        url: componentImageUrl,
+        name: name,
+      },
+    });
+    return componentImageCreated;
+  }
+  return null;
 };
