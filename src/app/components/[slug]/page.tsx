@@ -11,6 +11,7 @@ import ComponentsGrid from "@/components/custom/design-systems/ComponentsGrid/Co
 import { Breadcrumb } from "@/components/shared";
 import { Chip } from "@heroui/react";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 
 export default async function ComponentDetailPage({
   params,
@@ -20,6 +21,9 @@ export default async function ComponentDetailPage({
   const { slug } = await params;
   const component = await fetchComponentTypeById({ slug });
 
+  if (!component) {
+    notFound();
+  }
   const componentTypes = await fetchRelatedCategories({
     type: component!.type,
   });
