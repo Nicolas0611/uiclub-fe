@@ -12,7 +12,7 @@ export default async function DesignDetailPage({
 }) {
   const { slug } = await params;
 
-  const designSystem = await fetchDesignSystemsBySlug(slug);
+  const designSystem = await fetchDesignSystemsBySlug(slug, true);
 
   const isUpdated = designSystem?.isUpdated
     ? { text: "Updated", color: "success" as const }

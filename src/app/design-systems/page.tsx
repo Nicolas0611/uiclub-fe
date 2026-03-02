@@ -22,7 +22,7 @@ async function DesignSystemsPage({
       "This list highlights the most popular Design Systems and UI libraries, serving as key benchmarks for thousands of companies, startups, designers, and developers worldwide. It is the result of extensive research, including a survey of hundreds of professionals from leading organizations like Google, Atlassian, Airbnb, and IBM.",
   };
 
-  const designSystems = await fetchDesignSystems(search);
+  const designSystems = await fetchDesignSystems(search, true);
   return (
     <section className="container mx-auto px-4 py-10 ">
       <div className="flex flex-col gap-5">

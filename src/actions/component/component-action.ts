@@ -6,6 +6,7 @@ import { ComponentType } from "@/interfaces/design-system-interface";
 
 export const fetchComponentList = async (
   search: string,
+  state?: boolean,
 ): Promise<ComponentType[]> => {
   try {
     const req = new PrismaAdapter<ComponentType[], IComponentTypeFindMany>(
@@ -16,6 +17,9 @@ export const fetchComponentList = async (
         name: {
           contains: search,
           mode: "insensitive",
+        },
+        state: {
+          equals: state,
         },
       },
     });

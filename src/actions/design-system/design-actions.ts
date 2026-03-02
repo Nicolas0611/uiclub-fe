@@ -9,6 +9,7 @@ import { DesignSystem } from "@/interfaces/design-system-interface";
 
 export const fetchDesignSystems = async (
   search?: string,
+  state?: boolean,
 ): Promise<DesignSystem[]> => {
   try {
     const req = new PrismaAdapter<DesignSystem[], IDesignSystemFindMany>(
@@ -17,6 +18,7 @@ export const fetchDesignSystems = async (
     const response = await req.findMany({
       where: {
         name: search,
+        state: state,
       },
       include: {
         company: {
@@ -44,6 +46,7 @@ export const fetchDesignSystems = async (
 
 export const fetchDesignSystemsBySlug = async (
   slug?: string,
+  componentState?: boolean,
 ): Promise<DesignSystem | null> => {
   try {
     const req = new PrismaAdapter<DesignSystem, IDesignSystemFindFirst>(
@@ -59,6 +62,9 @@ export const fetchDesignSystemsBySlug = async (
                 url: true,
               },
             },
+          },
+          where: {
+            state: componentState,
           },
         },
         company: true,
