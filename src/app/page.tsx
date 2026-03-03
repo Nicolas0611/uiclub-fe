@@ -12,7 +12,7 @@ interface ContentProps {
 }
 export default function Home() {
   const content: ContentProps = {
-    preTitle: "Last updated 15 Oct, 2025 ✨",
+    preTitle: "Last updated 02 Mar, 2026 ✨",
     title: "Welcome to UI Club",
     description:
       "UI Club is a curated repository of reusable UI components and design systems — a one-stop destination for designers and developers looking to explore, evaluate, and integrate quality UI elements into their projects.",

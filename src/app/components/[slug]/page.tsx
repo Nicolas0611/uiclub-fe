@@ -28,7 +28,7 @@ export default async function ComponentDetailPage({
     type: component!.type,
   });
 
-  const DESIGN_SYSTEM_TOTAL = 6;
+  const DESIGN_SYSTEM_TOTAL = 7;
 
   const componentStats = [
     {
