@@ -1,4 +1,5 @@
 import {
+  BookmarkIcon,
   BuildingStorefrontIcon,
   HomeIcon,
   LinkIcon,
@@ -49,6 +50,12 @@ export const menuItems = [
     key: "component-type",
     label: "Component Type",
     icon: <Square3Stack3DIcon className="size-5" />,
+    role: "all",
+  },
+  {
+    key: "figma",
+    label: "Figma",
+    icon: <BookmarkIcon className="size-5" />,
     role: "all",
   },
 ];
