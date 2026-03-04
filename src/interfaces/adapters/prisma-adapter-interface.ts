@@ -1,5 +1,9 @@
 import { Prisma } from "@prisma/client";
 
+/* Figma */
+export type IFigmaFindMany = Prisma.FigmaFindManyArgs;
+export type IFigmaFindFirst = Prisma.FigmaFindFirstArgs;
+
 /* DESIGN SYSTEM */
 export type IDesignSystemFindMany = Prisma.DesignSystemFindManyArgs;
 export type IDesignSystemFindFirst = Prisma.DesignSystemFindFirstArgs;

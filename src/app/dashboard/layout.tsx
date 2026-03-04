@@ -22,7 +22,7 @@ const DashboardLayout = async ({
           name: session.user.name || "Not found",
           email: session.user.email || "Not found",
         }}
-        role={session.user.role} // ✅ PASS ROLE FROM SERVER
+        role={session.user.role}
       />
       <section className="flex flex-col w-100 w-full">
         <Header />

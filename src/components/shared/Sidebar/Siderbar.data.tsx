@@ -1,9 +1,11 @@
 import {
+  BookmarkIcon,
   BuildingStorefrontIcon,
   HomeIcon,
   LinkIcon,
   PencilIcon,
   PuzzlePieceIcon,
+  Square3Stack3DIcon,
   UsersIcon,
 } from "@heroicons/react/24/outline";
 
@@ -42,6 +44,18 @@ export const menuItems = [
     key: "companies",
     label: "Companies",
     icon: <BuildingStorefrontIcon className="size-5" />,
+    role: "all",
+  },
+  {
+    key: "component-type",
+    label: "Component Type",
+    icon: <Square3Stack3DIcon className="size-5" />,
+    role: "all",
+  },
+  {
+    key: "figma",
+    label: "Figma",
+    icon: <BookmarkIcon className="size-5" />,
     role: "all",
   },
 ];
