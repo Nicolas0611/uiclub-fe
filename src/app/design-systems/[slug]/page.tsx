@@ -4,6 +4,7 @@ import ContainerLinks from "@/components/custom/design-systems/ContainerLinks/Co
 
 import { Breadcrumb, EmptyState } from "@/components/shared";
 import { Chip } from "@heroui/react";
+import { notFound } from "next/navigation";
 
 export default async function DesignDetailPage({
   params,
@@ -14,6 +15,9 @@ export default async function DesignDetailPage({
 
   const designSystem = await fetchDesignSystemsBySlug(slug, true);
 
+  if (!designSystem) {
+    notFound();
+  }
   const isUpdated = designSystem?.isUpdated
     ? { text: "Updated", color: "success" as const }
     : { text: "Outdated", color: "danger" as const };
