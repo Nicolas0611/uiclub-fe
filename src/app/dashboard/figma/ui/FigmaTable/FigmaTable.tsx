@@ -1,24 +1,27 @@
 "use client";
 
 import { FigmaLinks } from "@/interfaces/design-system-interface";
-import { EyeIcon } from "@heroicons/react/24/outline";
+import { EyeIcon, PencilIcon } from "@heroicons/react/24/outline";
 import {
   Button,
   Chip,
+  Link,
   Table,
   TableBody,
   TableCell,
   TableColumn,
   TableHeader,
   TableRow,
+  Tooltip,
 } from "@heroui/react";
 import { useCallback, useState } from "react";
-import FigmaModal from "./FigmaModal";
+import FigmaModal from "../FigmaModal/FigmaModal";
 
 export const columns = [
   { name: "Component", uid: "component" },
   { name: "Company", uid: "company" },
   { name: "Figma URL", uid: "url" },
+  { name: "Actions", uid: "actions" },
 ];
 
 interface FigmaTableProps {
@@ -68,6 +71,16 @@ const FigmaTable = ({ figmaLinks = [] }: FigmaTableProps) => {
           <Chip size="sm" color="warning" variant="flat">
             No URL
           </Chip>
+        );
+      case "actions":
+        return (
+          <div className="flex items-center gap-2 justify-center">
+            <Tooltip content="Edit">
+              <Link href={`/dashboard/figma/${figma.id}/`}>
+                <PencilIcon className="size-5 text-default-400" />
+              </Link>
+            </Tooltip>
+          </div>
         );
       default:
         return null;

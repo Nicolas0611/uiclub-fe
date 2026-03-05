@@ -1,7 +1,7 @@
 import { getFigma } from "@/actions/figma/get-figma";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { Button, Link } from "@heroui/react";
-import FigmaTable from "./ui/FigmaTable";
+import FigmaTable from "./ui/FigmaTable/FigmaTable";
 
 const FigmaPage = async () => {
   const { data } = await getFigma();

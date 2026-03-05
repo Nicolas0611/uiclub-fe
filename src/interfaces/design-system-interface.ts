@@ -73,6 +73,7 @@ export interface Component {
 
 export interface FigmaLinks {
   id: string;
+  state: boolean;
   company: Company;
   componentType: ComponentType;
   url: string;
