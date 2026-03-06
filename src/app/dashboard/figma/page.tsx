@@ -14,7 +14,7 @@ const FigmaPage = async () => {
           color="primary"
           variant="solid"
           as={Link}
-          href="/dashboard/design-systems/new"
+          href="/dashboard/figma/new"
         >
           <PlusIcon className="size-5" />
           Add Figma

@@ -1,3 +1,5 @@
+import { getCompanies } from "@/actions/company/get-companies";
+import { fetchComponentList } from "@/actions/component/component-action";
 import { getFigmaById } from "@/actions/figma/get-figma-by-id";
 import FormWrapper from "@/components/shared/FormWrapper/FormWrapper";
 import { FigmaLinks } from "@/interfaces/design-system-interface";
@@ -17,12 +19,18 @@ const FigmaDetailPage = async ({
       figma = data!;
     }
   }
+  const { companies } = await getCompanies();
+  const componentTypes = await fetchComponentList();
   return (
     <FormWrapper
       icon={<PencilIcon className="size-5 text-gray-500" />}
       title="Figma"
     >
-      <FigmaForm figma={figma} />
+      <FigmaForm
+        figma={figma}
+        companies={companies}
+        componentTypes={componentTypes}
+      />
     </FormWrapper>
   );
 };
