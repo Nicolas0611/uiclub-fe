@@ -13,7 +13,7 @@ export interface FigmaFormValues {
   id: string;
   url: string;
   state: boolean;
-  companyId: string;
+  companyId: number;
   componentTypeId: string;
 }
 
@@ -24,22 +24,16 @@ interface FigmaFormProps {
 }
 
 const FigmaForm = ({ figma, companies, componentTypes }: FigmaFormProps) => {
+  console.log(figma);
   const { register, handleSubmit } = useForm<FigmaFormValues>({
     defaultValues: {
       url: figma?.url,
       state: figma?.state,
-      companyId: figma?.company?.id.toString(),
-      componentTypeId: figma?.componentType?.id,
+      companyId: figma?.companyId,
+      componentTypeId: figma?.componentTypeId,
     },
   });
-  const companiesOptions = companies.map((company) => ({
-    label: company.name,
-    value: company.id,
-  }));
-  const componentTypesOptions = componentTypes.map((componentType) => ({
-    label: componentType.name,
-    value: componentType.id,
-  }));
+
   const router = useRouter();
 
   const onSubmit = async (data: FigmaFormValues) => {
@@ -51,16 +45,16 @@ const FigmaForm = ({ figma, companies, componentTypes }: FigmaFormProps) => {
       <div className="flex flex-col gap-4 pb-4">
         <Input label="URL de Figma" {...register("url")} />
         <Select label="Company" {...register("companyId")}>
-          {companiesOptions.map((company) => (
-            <SelectItem key={company.value} value={company.value}>
-              {company.label}
+          {companies.map((company) => (
+            <SelectItem key={company.id} value={company.id}>
+              {company.name}
             </SelectItem>
           ))}
         </Select>
         <Select label="Tipo de componente" {...register("componentTypeId")}>
-          {componentTypesOptions.map((componentType) => (
-            <SelectItem key={componentType.value} value={componentType.value}>
-              {componentType.label}
+          {componentTypes.map((componentType) => (
+            <SelectItem key={componentType.id} value={componentType.id}>
+              {componentType.name}
             </SelectItem>
           ))}
         </Select>
