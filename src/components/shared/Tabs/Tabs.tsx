@@ -11,7 +11,7 @@ const Tabs = <T extends FigmaLinks>({ items, placement }: Props<T>) => {
   return (
     <HeroTabs aria-label="Dynamic tabs" items={items} placement={placement}>
       {(item) => (
-        <Tab className="w-full" key={item.id} title={item.company.name}>
+        <Tab className="w-full" key={item.id} title={item.company?.name}>
           <IFrame link={item.url} />
         </Tab>
       )}
