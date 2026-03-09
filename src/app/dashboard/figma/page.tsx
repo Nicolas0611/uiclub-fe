@@ -1,7 +1,7 @@
 import { getFigma } from "@/actions/figma/get-figma";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { Button, Link } from "@heroui/react";
-import FigmaTable from "./ui/FigmaTable";
+import FigmaTable from "./ui/FigmaTable/FigmaTable";
 
 const FigmaPage = async () => {
   const { data } = await getFigma();
@@ -14,7 +14,7 @@ const FigmaPage = async () => {
           color="primary"
           variant="solid"
           as={Link}
-          href="/dashboard/design-systems/new"
+          href="/dashboard/figma/new"
         >
           <PlusIcon className="size-5" />
           Add Figma
