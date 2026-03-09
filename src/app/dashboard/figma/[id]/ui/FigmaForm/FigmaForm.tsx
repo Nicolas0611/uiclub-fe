@@ -1,5 +1,6 @@
 "use client";
 
+import { createUpdateFigma } from "@/actions/figma/create-update-figma";
 import {
   Company,
   ComponentType,
@@ -7,10 +8,12 @@ import {
 } from "@/interfaces/design-system-interface";
 import { Button, Input, Select, SelectItem, Switch } from "@heroui/react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 export interface FigmaFormValues {
-  id: string;
+  id?: string;
   url: string;
   state: boolean;
   companyId: number;
@@ -24,7 +27,6 @@ interface FigmaFormProps {
 }
 
 const FigmaForm = ({ figma, companies, componentTypes }: FigmaFormProps) => {
-  console.log(figma);
   const { register, handleSubmit } = useForm<FigmaFormValues>({
     defaultValues: {
       url: figma?.url,
@@ -33,11 +35,27 @@ const FigmaForm = ({ figma, companies, componentTypes }: FigmaFormProps) => {
       componentTypeId: figma?.componentTypeId,
     },
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
 
   const onSubmit = async (data: FigmaFormValues) => {
-    console.log(data);
+    setIsLoading(true);
+    const result = await createUpdateFigma({
+      id: figma?.id,
+      url: data.url,
+      state: data.state,
+      companyId: Number(data.companyId),
+      componentTypeId: data.componentTypeId,
+    });
+    if (result?.ok) {
+      toast.success(result.message);
+      router.push("/dashboard/figma");
+      setIsLoading(false);
+    } else {
+      toast.error(result.message);
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -66,7 +84,7 @@ const FigmaForm = ({ figma, companies, componentTypes }: FigmaFormProps) => {
           <Button variant="light" onPress={() => router.back()}>
             Cancelar
           </Button>
-          <Button type="submit" color="primary">
+          <Button isLoading={isLoading} type="submit" color="primary">
             Guardar
           </Button>
         </div>
