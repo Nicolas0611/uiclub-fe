@@ -20,6 +20,8 @@ async function main() {
     Amazon: "Cloudscape" as const,
     Adobe: "Spectrum" as const,
     ActiveCampaign: "Camp" as const,
+    Google: "Material Design" as const,
+    GitHub: "Primer" as const,
   } as Record<string, string>;
 
   const initialCleanComponent = initialComponentTypes.map(
