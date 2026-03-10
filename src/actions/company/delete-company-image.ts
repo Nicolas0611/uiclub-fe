@@ -1,5 +1,5 @@
 "use server";
-import { PrismaAdapter } from "@/adapters/PrismaAdapter";
+import { PrismaAdapter } from "@/adapters/PrismaAdapter/PrismaAdapter";
 import { ICompanyImageDelete } from "@/interfaces/adapters/prisma-adapter-interface";
 import { CompanyImage } from "@/interfaces/design-system-interface";
 import { v2 as cloudinary } from "cloudinary";

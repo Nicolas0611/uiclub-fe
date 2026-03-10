@@ -2,7 +2,7 @@ import bcryptjs from "bcryptjs";
 import NextAuth, { type NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { z } from "zod";
-import { PrismaAdapter } from "./adapters/PrismaAdapter";
+import { PrismaAdapter } from "./adapters/PrismaAdapter/PrismaAdapter";
 import { IUserFindUnique } from "./interfaces/adapters/prisma-adapter-interface";
 import { User } from "./interfaces/user-interface";
 
