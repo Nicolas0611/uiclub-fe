@@ -138,6 +138,9 @@ model ComponentType {
   relatedDesignSystems  DesignSystemComponentType[]
   figmaLinks            Figma[]
 
+  componentImage      ComponentImage? @relation(fields: [componentImageId], references: [id])
+  componentImageId    String?
+
 }
 
 model DesignSystemComponentType {
@@ -187,4 +190,5 @@ model ComponentImage {
   //Relations
 
   components          Component[]
+  componentTypes      ComponentType[]
 }
