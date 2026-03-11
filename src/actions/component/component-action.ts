@@ -5,14 +5,28 @@ import { IComponentTypeFindMany } from "@/interfaces/adapters/prisma-adapter-int
 import { ComponentType } from "@/interfaces/design-system-interface";
 
 export const fetchComponentList = async (
+  page?: number,
+  take?: number,
   search?: string,
   state?: boolean,
-): Promise<ComponentType[]> => {
+): Promise<{
+  currentPage: number;
+  components: ComponentType[];
+  totalPages: number;
+}> => {
   try {
     const req = new PrismaAdapter<ComponentType[], IComponentTypeFindMany>(
       "ComponentType",
     );
+    const pagination =
+      page && take
+        ? {
+            take,
+            skip: (page - 1) * take,
+          }
+        : {};
     const response = await req.findMany({
+      ...pagination,
       include: {
         componentImage: {
           select: {
@@ -31,9 +45,25 @@ export const fetchComponentList = async (
       },
     });
 
-    return response;
+    const totalCount = await req.count({
+      where: {
+        state: state,
+      },
+    });
+    const totalPages = Math.ceil(totalCount / (take || 10));
+
+    return {
+      currentPage: page || 1,
+      components: response,
+      totalPages: totalPages || 0,
+    };
   } catch (error) {
-    throw `Error fetching components ${error}`;
+    console.error(error);
+    return {
+      currentPage: 0,
+      components: [],
+      totalPages: 0,
+    };
   }
 };
 
