@@ -90,7 +90,7 @@ export const ComponentTypeTable = ({
           return (
             <div className="flex items-center gap-2 justify-center">
               <Tooltip content="Edit">
-                <Link href={`/dashboard/components/${componentType.id}/`}>
+                <Link href={`/dashboard/component-type/${componentType.id}/`}>
                   <PencilIcon className="size-5 text-default-400" />
                 </Link>
               </Tooltip>
