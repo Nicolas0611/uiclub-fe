@@ -1,3 +1,5 @@
+import { ChipProps } from "@heroui/react";
+
 export const IMAGES: Record<string, string> = {
   NAVIGATION: "Navigation",
   AVATAR: "Avatar",
@@ -129,3 +131,8 @@ export const ROLES = [
     value: "user",
   },
 ];
+
+export const statusColorMap: Record<string, ChipProps["color"]> = {
+  active: "success",
+  paused: "danger",
+};
