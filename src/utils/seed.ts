@@ -24,10 +24,10 @@ async function main() {
     GitHub: "Primer" as const,
   } as Record<string, string>;
 
-  const initialCleanComponent = initialComponentTypes.map(
+  /*  const initialCleanComponent = initialComponentTypes.map(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     ({ id, ...rest }) => rest,
-  );
+  ); */
 
   // Borra primero las relaciones hijas
   await prisma.user.deleteMany();
@@ -51,13 +51,38 @@ async function main() {
   await prisma.company.createMany({
     data: initialCompanyData,
   });
+  const componentImagesDB = await prisma.componentImage.createManyAndReturn({
+    data: initialComponentImages,
+  });
+
+  const componentImageMap = componentImagesDB.reduce(
+    (map, componentImage) => {
+      map[componentImage.name] = componentImage.id;
+      return map;
+    },
+    {} as Record<string, string>,
+  );
 
   await prisma.componentType.createMany({
-    data: initialCleanComponent,
+    data: initialComponentTypes.map(
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      ({ id, ...rest }) => ({
+        ...rest,
+        componentImageId: componentImageMap[rest.name],
+      }),
+    ),
   });
 
   const companyDB = await prisma.company.findMany();
   const componentTypeDB = await prisma.componentType.findMany();
+
+  const componentTypeMap = componentTypeDB.reduce(
+    (map, component) => {
+      map[component.name] = component.id;
+      return map;
+    },
+    {} as Record<string, string>,
+  );
 
   const companiesMap = companyDB.reduce(
     (map, company) => {
@@ -73,14 +98,6 @@ async function main() {
       companyId: companiesMap[image.name],
     })),
   });
-
-  const componentTypeMap = componentTypeDB.reduce(
-    (map, component) => {
-      map[component.name] = component.id;
-      return map;
-    },
-    {} as Record<string, string>,
-  );
 
   const dbDesignSystemData = initialDesignSystemData.map(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -100,20 +117,6 @@ async function main() {
   const designSystemMap = designSystemDB.reduce(
     (map, designSystem) => {
       map[designSystem.name] = designSystem.id;
-      return map;
-    },
-    {} as Record<string, string>,
-  );
-
-  await prisma.componentImage.createManyAndReturn({
-    data: initialComponentImages,
-  });
-
-  const componentImagesDB = await prisma.componentImage.findMany();
-
-  const componentImageMap = componentImagesDB.reduce(
-    (map, componentImage) => {
-      map[componentImage.name] = componentImage.id;
       return map;
     },
     {} as Record<string, string>,

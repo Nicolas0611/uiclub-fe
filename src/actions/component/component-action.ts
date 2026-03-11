@@ -13,6 +13,13 @@ export const fetchComponentList = async (
       "ComponentType",
     );
     const response = await req.findMany({
+      include: {
+        componentImage: {
+          select: {
+            url: true,
+          },
+        },
+      },
       where: {
         name: {
           contains: search,

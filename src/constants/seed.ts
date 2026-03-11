@@ -2040,7 +2040,7 @@ export const initialComponentTypes = [
   },
   {
     id: 28,
-    name: "Date Picker",
+    name: "Datepicker",
     type: "Input" as const,
     link: null,
   },
