@@ -1,10 +1,11 @@
 "use client";
 
+import { usePagination } from "@/app/hooks/usePagination";
+import { statusColorMap } from "@/constants";
 import type { Component } from "@/interfaces/design-system-interface";
 import { PencilIcon } from "@heroicons/react/24/outline";
 import {
   Chip,
-  ChipProps,
   Link,
   Pagination,
   Table,
@@ -16,8 +17,7 @@ import {
   Tooltip,
   User,
 } from "@heroui/react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 
 interface IComponentTable {
   components: Component[];
@@ -33,38 +33,9 @@ export const columns = [
   { name: "Website", uid: "website" },
   { name: "Actions", uid: "actions" },
 ];
-const statusColorMap: Record<string, ChipProps["color"]> = {
-  active: "success",
-  paused: "danger",
-};
 
 export const ComponentTable = ({ components, totalPages }: IComponentTable) => {
-  const pathName = usePathname();
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const params = new URLSearchParams(searchParams.toString());
-  const currentPage = Number(params.get("page")) || 1;
-
-  useEffect(() => {
-    if (currentPage > totalPages && totalPages > 0) {
-      const newParams = new URLSearchParams(searchParams.toString());
-      newParams.set("page", totalPages.toString());
-      router.push(`${pathName}?${newParams.toString()}`);
-    }
-  }, [currentPage, totalPages, pathName, router, searchParams]);
-
-  const createPageUrl = (pageNumber: number | string) => {
-    if (+pageNumber <= 0) {
-      return `${pathName}`;
-    }
-
-    if (+pageNumber > totalPages) {
-      return `${pathName}?${params.toString()}`;
-    }
-
-    params.set("page", pageNumber.toString());
-    return `${pathName}?${params.toString()}`;
-  };
+  const { currentPage, router, createPageUrl } = usePagination(totalPages);
 
   const renderCell = useCallback(
     (component: Component, columnKey: React.Key) => {
