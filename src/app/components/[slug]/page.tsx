@@ -60,11 +60,12 @@ export default async function ComponentDetailPage({
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-9">
           <Image
             alt={
+              component?.componentImage?.url ||
               `${component!.name}_img` ||
               component!.name.toLowerCase().replaceAll(" ", "")
             }
             className="w-full object-cover h-[140px]"
-            src={`/assets/${component!.name}.png`}
+            src={component?.componentImage?.url}
             width={1000}
             height={1000}
             quality={100}
