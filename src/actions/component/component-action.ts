@@ -4,12 +4,18 @@ import { PrismaAdapter } from "@/adapters/PrismaAdapter/PrismaAdapter";
 import { IComponentTypeFindMany } from "@/interfaces/adapters/prisma-adapter-interface";
 import { ComponentType } from "@/interfaces/design-system-interface";
 
-export const fetchComponentList = async (
-  page?: number,
-  take?: number,
-  search?: string,
-  state?: boolean,
-): Promise<{
+interface FetchComponentListProps {
+  page?: number;
+  take?: number;
+  search?: string;
+  state?: boolean;
+}
+export const fetchComponentList = async ({
+  page,
+  take,
+  search,
+  state,
+}: FetchComponentListProps): Promise<{
   currentPage: number;
   components: ComponentType[];
   totalPages: number;
@@ -110,6 +116,11 @@ export const fetchComponentTypeById = async ({
             },
           },
         },
+        componentImage: {
+          select: {
+            url: true,
+          },
+        },
       },
     });
     return response;
@@ -130,6 +141,13 @@ export const fetchRelatedCategories = async ({
     >("ComponentType");
 
     const response = await componentTypeReq.findMany({
+      include: {
+        componentImage: {
+          select: {
+            url: true,
+          },
+        },
+      },
       where: {
         type,
       },
