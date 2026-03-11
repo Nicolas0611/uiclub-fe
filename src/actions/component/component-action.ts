@@ -85,7 +85,7 @@ export const fetchComponentTypeById = async ({
 
     const response = await req.findFirst({
       where: {
-        name: {
+        link: {
           contains: slug,
           mode: "insensitive",
         },
