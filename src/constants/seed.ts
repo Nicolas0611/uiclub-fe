@@ -90,6 +90,32 @@ export const initialDesignSystemData = [
     /*     thumbnail_image:
       "http://localhost:8000/media/thumbnails/ActiveCapaign_1_Il29Szy.png", */
     slug: "camp",
+    isNew: false,
+  },
+  {
+    id: 7,
+    shortDescription:
+      "Material Design is a Design System built and supported by Google designers and developers. Material.io includes in-depth UX guidance and UI component implementations for Android, Flutter, and the Web.",
+    largeDescription:
+      "Google Design System is an adaptable system of guidelines, components, and tools that support the best practices of user interface design. Backed by open-source code, Material Design streamlines collaboration between designers and developers, and helps teams quickly build beautiful products.\n\nMaterial Design is a Design System built and supported by Google designers and developers. Material.io includes in-depth UX guidance and UI component implementations for Android, Flutter, and the Web.",
+    company: "Google",
+    name: "Material Design",
+    popularity: "HIGH" as const,
+    isUpdated: true,
+    slug: "mui",
+    isNew: false,
+  },
+  {
+    id: 8,
+    shortDescription:
+      "Primer is a design system developed by GitHub for designing interfaces. It provides a collection of open source principles, standards, and recommendations.",
+    largeDescription:
+      "Primer is a design system developed by GitHub for designing interfaces. It provides a collection of open source principles, standards, and recommendations. Primer's guidelines offer a common grammar and vocabulary to build projects.",
+    company: "GitHub",
+    name: "Primer",
+    popularity: "HIGH" as const,
+    isUpdated: true,
+    slug: "primer",
     isNew: true,
   },
 ];
@@ -112,6 +138,12 @@ export const initialCompanyData = [
   },
   {
     name: "ActiveCampaign",
+  },
+  {
+    name: "Google",
+  },
+  {
+    name: "GitHub",
   },
 ];
 
@@ -1477,6 +1509,330 @@ export const initialComponentData = [
     link: "https://design.brainly.com/8adfd5f36/p/10c2a5-button",
     id: 2,
   },
+  {
+    name: "Button",
+    description:
+      "Button is a reusable, interactive UI element that triggers a specific action when clicked. As a fundamental element of user interaction, it serves as an imperative tool for navigation, form submission, and functionality initiation.",
+    type: "Action" as const,
+    companyName: "Google" as const,
+    link: "https://m3.material.io/components/all-buttons",
+    id: 200,
+  },
+  {
+    name: "Checkbox",
+    description:
+      "Checkbox provides a visual representation of a binary choice, allowing users to choose between multiple options or toggle a single option on or off.",
+    type: "Input" as const,
+    companyName: "Google" as const,
+    link: "https://m3.material.io/components/checkbox/overview",
+    id: 201,
+  },
+  {
+    name: "Chip",
+    description:
+      "Chips is a compact, interactive element used to represent an input, attribute, or action. Chips serve various purposes such as allowing users to enter information, make selections, filter content, or trigger actions.",
+    type: "Status" as const,
+    companyName: "Google" as const,
+    link: "https://m3.material.io/components/chips/overview",
+    id: 202,
+  },
+  {
+    name: "Cards",
+    description:
+      "Cards serves as a universal container that holds content and actions related to a specific topic or subject. The purpose of using cards is to group information, allowing users to browse through a collection of related items or actions.",
+    type: "Layout" as const,
+    companyName: "Google" as const,
+    link: "https://m3.material.io/components/cards/overview",
+    id: 203,
+  },
+  {
+    name: "Datepicker",
+    description:
+      "Date picker component allows users to select dates, and in some cases, time, in a standardized and intuitive manner. It provides a visual, interactive calendar interface, eliminating the possibility of erroneous date formatting and ensuring a smooth, user-friendly experience.",
+    type: "Input" as const,
+    companyName: "Google" as const,
+    link: "https://m3.material.io/components/date-pickers/overview",
+    id: 204,
+  },
+  {
+    name: "Dialog",
+    description:
+      "Dialog is an interactive modal window that overlays the main content of a page. This component comes when a user action requires additional input or confirmation, delivering these scenarios without navigating away from the current context.",
+    type: "Overlays" as const,
+    companyName: "Google" as const,
+    link: "https://m3.material.io/components/dialogs/overview",
+    id: 205,
+  },
+  {
+    name: "Divider",
+    description:
+      "Divider component is typically a line or space and can be oriented horizontally or vertically, depending on the layout. Used to create clear distinctions between groups of related content, improving readability and helping users better understand the information hierarchy on the page.",
+    type: "Layout" as const,
+    companyName: "Google" as const,
+    link: "https://m3.material.io/components/divider/overview",
+    id: 206,
+  },
+  {
+    name: "Menu",
+    description:
+      "Menus serve as a space-efficient solution for presenting an array of choices, enabling users to execute actions, configure settings, or select from various options within a transient container.",
+    type: "Layout" as const,
+    companyName: "Google" as const,
+    link: "https://m3.material.io/components/menus/overview",
+    id: 207,
+  },
+  {
+    name: "Navigation bar",
+    description:
+      "Navigation bar enabling effortless user interaction by facilitating smooth transitions between top-level destinations in an app. Navigation bar is characterized by its ease of reach and the use of icons and text labels to represent different sections.",
+    type: "Navigation" as const,
+    companyName: "Google" as const,
+    link: "https://m3.material.io/components/navigation-bar/overview",
+    id: 208,
+  },
+  {
+    name: "Tabs",
+    description:
+      "Tabs is an interactive UI element that enables users to switch between different views or subsections of content within the same context.",
+    type: "Navigation" as const,
+    companyName: "Google" as const,
+    link: "https://m3.material.io/components/tabs/overview",
+    id: 209,
+  },
+  {
+    name: "Sidebar",
+    description:
+      "Sidebar is a navigational panel often used for seamless, ergonomic navigation within an app interface. It's typically used to house secondary actions, additional information, or a sub-navigation menu related to the active page or section.",
+    type: "Navigation" as const,
+    companyName: "Google" as const,
+    link: "https://m3.material.io/components/navigation-drawer/overview",
+    id: 210,
+  },
+  {
+    name: "Text field",
+    description:
+      "Text field allows users to input and edit a single line of plain text. It's an essential element in forms, enabling users to provide information like their name, email, password, and more.",
+    type: "Input" as const,
+    companyName: "Google" as const,
+    link: "https://m3.material.io/components/text-fields/overview",
+    id: 211,
+  },
+  {
+    name: "Tooltip",
+    description:
+      "Tooltip is a text label that acts as an informational aid by providing explanations or context about the function of a user interface element. It appears when users hover over, focus on, or touch an element, such as an icon, image, hyperlink, or text.",
+    type: "Overlays" as const,
+    companyName: "Google" as const,
+    link: "https://m3.material.io/components/tooltips/overview",
+    id: 212,
+  },
+  {
+    name: "Badge",
+    description:
+      "Badge is used to communicate status, notification count, or attribute labels. These are typically a circular or pill-shaped element with a number or short text, often overlaid on an icon or interface element.",
+    type: "Status" as const,
+    companyName: "Google" as const,
+    link: "https://m3.material.io/components/badges/overview",
+    id: 213,
+  },
+  {
+    name: "List",
+    description:
+      "Is a specialized list that offers a series of interactive options or commands for users to choose from. Each item in the Action list typically represents a different action that a user can perform, often related to a specific context or object within the application.",
+    type: "Navigation" as const,
+    companyName: "Google" as const,
+    link: "https://m3.material.io/components/lists/overview",
+    id: 214,
+  },
+  {
+    name: "App bar",
+    description:
+      "App bar is a horizontal bar located at the top of an application interface. It serves as the primary navigation header and typically contains elements like the application logo, page title, navigation links, and essential actions.",
+    type: "Navigation" as const,
+    companyName: "Google" as const,
+    link: "https://m3.material.io/components/app-bars/overview",
+    id: 215,
+  },
+  {
+    name: "Bottom sheet",
+    description:
+      "Bottom sheet is a surface that contains additional content and is anchored to the bottom of the screen. Designed primarily for mobile experiences, bottom sheets display supplementary information that complements the primary content on the screen.",
+    type: "Overlays" as const,
+    companyName: "Google" as const,
+    link: "https://m3.material.io/components/bottom-sheets/overview",
+    id: 216,
+  },
+  {
+    name: "Radio button",
+    description:
+      "Radio button is a visual control element used to allow users to make a single selection from a predefined set of mutually exclusive options. It is typically represented as a small circle, which is filled or highlighted when selected.",
+    type: "Input" as const,
+    companyName: "Google" as const,
+    link: "https://m3.material.io/components/radio-button/overview",
+    id: 217,
+  },
+  {
+    name: "Progress indicator",
+    description:
+      "Progress indicator is a visual indicator used to signify an ongoing operation that doesn't have a defined duration. Progress indicator reduces user uncertainty during wait times, providing reassurance that the system is working as expected.",
+    type: "Loading" as const,
+    companyName: "Google" as const,
+    link: "https://m3.material.io/components/progress-indicators/overview",
+    id: 218,
+  },
+  {
+    name: "Search",
+    description:
+      "Search is an interactive interface element that allows users to query and retrieve specific data from a larger dataset bypassing traditional navigation. Typically consists of a text field and button that initiates the search and may include auto-suggestions, recent searches, or voice search.",
+    type: "Input" as const,
+    companyName: "Google" as const,
+    link: "https://m3.material.io/components/search/overview",
+    id: 219,
+  },
+  {
+    name: "Slider",
+    description:
+      "Slider is an interactive UI element that allows users to select a single value or a range of values from a continuum. Usually designed as a horizontal track with a draggable handle, sliders are an intuitive and efficient way to adjust settings or specify a quantity within a defined range.",
+    type: "Input" as const,
+    companyName: "Google" as const,
+    link: "https://m3.material.io/components/sliders/overview",
+    id: 220,
+  },
+  {
+    name: "Side sheets",
+    description:
+      "Standard side sheets are supplementary surfaces used mostly in medium to expanded window sizes, like tablet and desktop. They provide a consistent and predictable surface for contextual actions and information.",
+    type: "Overlays" as const,
+    companyName: "Google" as const,
+    link: "https://m3.material.io/components/side-sheets/guidelines",
+    id: 221,
+  },
+  {
+    name: "Switch",
+    description:
+      "Switch is a toggle control that allows users to turn a single option on or off. Switch component is commonly used for binary settings, such as enabling or disabling features or modes.",
+    type: "Input" as const,
+    companyName: "Google" as const,
+    link: "https://m3.material.io/components/switch/overview",
+    id: 222,
+  },
+  {
+    name: "Action Bar",
+    description:
+      "A collection of horizontally aligned IconButtons. The IconButtons can be split into groups by adding a divider. When there is not enough space, IconButtons that don't fit will be added to an overflow menu.",
+    type: "Action" as const,
+    companyName: "GitHub" as const,
+    link: "https://primer.style/product/components/action-bar/",
+    id: 300,
+  },
+  {
+    name: "Banner",
+    description:
+      "Banner is a powerful communication tool used to display important messages prominently across the user interface. These messages can range from critical system-wide issues, such as errors or warnings, to informational or success messages.",
+    type: "Messaging" as const,
+    companyName: "GitHub" as const,
+    link: "https://primer.style/product/components/banner/",
+    id: 301,
+  },
+  {
+    name: "Checkbox",
+    description:
+      "Checkbox provides a visual representation of a binary choice, allowing users to choose between multiple options or toggle a single option on or off. This component enhances usability and provides a straightforward, intuitive means of user input.",
+    type: "Input" as const,
+    companyName: "GitHub" as const,
+    link: "https://primer.style/product/components/checkbox/",
+    id: 302,
+  },
+  {
+    name: "Avatar",
+    description:
+      "Avatar is a pre-designed element used to identify users or entities in a user interface. Avatars can take the form of an image, initials, or an icon, providing a visual connection to the user.",
+    type: "Images" as const,
+    companyName: "GitHub" as const,
+    link: "https://primer.style/product/components/avatar/",
+    id: 303,
+  },
+  {
+    name: "Badge",
+    description:
+      "Used to communicate status, notification count, or attribute labels. These are typically a circular or pill-shaped element with a number or short text, often overlaid on an icon or interface element. Badges are commonly used to draw attention to updates, or to signal unread messages or notifications.",
+    type: "Status" as const,
+    companyName: "GitHub" as const,
+    link: "https://primer.style/product/components/counter-label/",
+    id: 304,
+  },
+  {
+    name: "Breadcrumbs",
+    description:
+      "Breadcrumbs display the current page or context within the site, allowing them to navigate different levels of the hierarchy. By visually indicating the user's position, Breadcrumbs allow for easy navigation back through the levels or categories.",
+    type: "Navigation" as const,
+    companyName: "GitHub" as const,
+    link: "https://primer.style/product/components/breadcrumbs/",
+    id: 305,
+  },
+  {
+    name: "Button",
+    description:
+      "Button is used to initiate actions on a page or form. Consistent design and implementation of buttons ensure intuitive user experience, reducing cognitive load.",
+    type: "Action" as const,
+    companyName: "GitHub" as const,
+    link: "https://primer.style/product/components/button/",
+    id: 306,
+  },
+  {
+    name: "Button Group",
+    description:
+      "Button group encompasses a cohesive set of actions, aiming to provide users with swift and convenient access to closely related, frequently performed tasks.",
+    type: "Action" as const,
+    companyName: "GitHub" as const,
+    link: "https://primer.style/product/components/button-group/",
+    id: 307,
+  },
+  {
+    name: "Token",
+    description:
+      "Token is a compact representation of an object, and is typically used to show a collection of related metadata. Tokens are typically used in groups, either as read-only labels or for data entry.",
+    type: "Status" as const,
+    companyName: "GitHub" as const,
+    link: "https://primer.style/product/components/token/",
+    id: 308,
+  },
+  {
+    name: "Data Table",
+    description:
+      "Data table is a robust, structured way to present large amounts of information. It allows data to be organized in rows and columns, offering clear visibility and easy interpretation of complex datasets.",
+    type: "Data" as const,
+    companyName: "GitHub" as const,
+    link: "https://primer.style/product/components/data-table/",
+    id: 309,
+  },
+  {
+    name: "Dialog",
+    description:
+      "Dialog is a floating surface used to display transient content such as confirmation actions, selection options, and more.",
+    type: "Overlays" as const,
+    companyName: "GitHub" as const,
+    link: "https://primer.style/product/components/dialog/",
+    id: 310,
+  },
+  {
+    name: "Label",
+    description:
+      "Label is a text-based element used to identify an input field or any user interface object. It provides clear, concise descriptions of the corresponding field's purpose, thus guiding users to input appropriate data.",
+    type: "Status" as const,
+    companyName: "GitHub" as const,
+    link: "https://primer.style/product/components/label/",
+    id: 311,
+  },
+  {
+    name: "Autocomplete",
+    description:
+      "Autocomplete is an interactive UI element that allows users to quickly filter through a list of options and pick one or more values for a field. Is particularly useful when the range of possible entries is large or known, such as entering location names, tagging categories, or even navigating large datasets.",
+    type: "Input" as const,
+    companyName: "GitHub" as const,
+    link: "https://primer.style/product/components/autocomplete/",
+    id: 312,
+  },
 ];
 
 export const initialLinks = [
@@ -1510,7 +1866,8 @@ export const initialLinks = [
   },
   {
     state: true,
-    figma: null,
+    figma:
+      "https://www.figma.com/design/eegw224KRydVL8ilG3A3mT/Adobe-Spectrum-Design-System--Community-?node-id=355-42216&t=TWj0ANapzQ9s2QFG-0",
     web: "https://spectrum.adobe.com/",
     storybook:
       "https://storybook.js.org/showcase/adobe-spectrum-web-components",
@@ -1523,6 +1880,21 @@ export const initialLinks = [
     storybook:
       "https://storybook.activecampaign.design/?path=/docs/components-accordion--docs",
     name: "ActiveCampaign",
+  },
+  {
+    state: true,
+    figma:
+      "https://www.figma.com/files/team/1390692037410333126/resources/community/@materialdesign",
+    web: "https://m3.material.io/",
+    storybook: "",
+    name: "Google",
+  },
+  {
+    state: true,
+    figma: "https://www.figma.com/@primer",
+    web: "https://primer.style/",
+    storybook: "https://storybook.js.org/showcase/github-primer-react/",
+    name: "GitHub",
   },
 ];
 
@@ -1550,6 +1922,14 @@ export const initialCompanyImages = [
   {
     name: "Brainly",
     url: "https://res.cloudinary.com/archikola/image/upload/v1759716114/design-system-thumbs/Brainly_xhus3a.png",
+  },
+  {
+    name: "Google",
+    url: "https://res.cloudinary.com/archikola/image/upload/v1772072552/design-system-thumbs/itiqjdq2rkznsaw8bglb.png",
+  },
+  {
+    name: "GitHub",
+    url: "https://res.cloudinary.com/archikola/image/upload/v1773093783/design-system-thumbs/sawyznxlwwmt9zosjymw.png",
   },
 ];
 
@@ -1660,7 +2040,7 @@ export const initialComponentTypes = [
   },
   {
     id: 28,
-    name: "Date Picker",
+    name: "Datepicker",
     type: "Input" as const,
     link: null,
   },
@@ -2201,5 +2581,45 @@ export const initialComponentImages = [
   {
     name: "Checkbox",
     url: "https://res.cloudinary.com/archikola/image/upload/v1771370839/components/socfpi2x6saztbek1q1u.png",
+  },
+  {
+    name: "Bottom sheet",
+    url: "https://res.cloudinary.com/archikola/image/upload/v1772502154/components/wmjljz89lbrobzipvibq.png",
+  },
+  {
+    name: "Cards",
+    url: "https://res.cloudinary.com/archikola/image/upload/v1771370839/components/pgxlg6pqz1yzlvbjzrsj.png",
+  },
+  {
+    name: "Progress indicator",
+    url: "https://res.cloudinary.com/archikola/image/upload/v1771370843/components/v0r0nhngizkfjcexyp2f.png",
+  },
+  {
+    name: "Side sheets",
+    url: "https://res.cloudinary.com/archikola/image/upload/v1771370840/components/lodopfpeop6hoepmcmis.png",
+  },
+  {
+    name: "Switch",
+    url: "https://res.cloudinary.com/archikola/image/upload/v1771370845/components/gqmvfhamowgudhsqkka1.png",
+  },
+  {
+    name: "Token",
+    url: "https://res.cloudinary.com/archikola/image/upload/v1771370839/components/hk5k48di56cnx3z4tfeo.png",
+  },
+  {
+    name: "Data Table",
+    url: "https://res.cloudinary.com/archikola/image/upload/v1771370844/components/kyoow9quhi301jzjgjzf.png",
+  },
+  {
+    name: "Banner",
+    url: "https://res.cloudinary.com/archikola/image/upload/v1771370839/components/zpi8t69ctrnnps3dk2cm.png",
+  },
+  {
+    name: "Radio button",
+    url: "https://res.cloudinary.com/archikola/image/upload/v1771370843/components/rtbj58x08u3s0c2ghqew.png",
+  },
+  {
+    name: "Action Bar",
+    url: "https://res.cloudinary.com/archikola/image/upload/v1771370838/components/ocuyvkjl4fascvo2vfzw.png",
   },
 ];

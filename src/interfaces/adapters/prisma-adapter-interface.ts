@@ -39,6 +39,12 @@ export type ILinkFindFirst = Prisma.LinkFindFirstArgs;
 /* MODEL NAMES */
 export type IModelNames = Prisma.ModelName;
 
+/* DESIGN SYSTEM COMPONENT TYPE */
+export type IDesignSystemComponentTypeFindMany =
+  Prisma.DesignSystemComponentTypeFindManyArgs;
+export type IDesignSystemComponentTypeFindFirst =
+  Prisma.DesignSystemComponentTypeFindFirstArgs;
+
 export interface HttpsReq<RES_T, OPT_T> {
   findMany(options?: OPT_T): Promise<RES_T>;
   findFirst(options?: OPT_T): Promise<RES_T>;

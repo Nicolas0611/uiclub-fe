@@ -20,7 +20,7 @@ const FigmaDetailPage = async ({
     }
   }
   const { companies } = await getCompanies();
-  const componentTypes = await fetchComponentList();
+  const { components } = await fetchComponentList({});
   return (
     <FormWrapper
       icon={<PencilIcon className="size-5 text-gray-500" />}
@@ -29,7 +29,7 @@ const FigmaDetailPage = async ({
       <FigmaForm
         figma={figma}
         companies={companies}
-        componentTypes={componentTypes}
+        componentTypes={components}
       />
     </FormWrapper>
   );

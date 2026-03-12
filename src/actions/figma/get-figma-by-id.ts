@@ -1,6 +1,6 @@
 "use server";
 
-import { PrismaAdapter } from "@/adapters/PrismaAdapter";
+import { PrismaAdapter } from "@/adapters/PrismaAdapter/PrismaAdapter";
 import { IFigmaFindFirst } from "@/interfaces/adapters/prisma-adapter-interface";
 import { FigmaLinks } from "@/interfaces/design-system-interface";
 

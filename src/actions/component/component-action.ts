@@ -1,18 +1,45 @@
 "use server";
 
-import { PrismaAdapter } from "@/adapters/PrismaAdapter";
+import { PrismaAdapter } from "@/adapters/PrismaAdapter/PrismaAdapter";
 import { IComponentTypeFindMany } from "@/interfaces/adapters/prisma-adapter-interface";
 import { ComponentType } from "@/interfaces/design-system-interface";
 
-export const fetchComponentList = async (
-  search?: string,
-  state?: boolean,
-): Promise<ComponentType[]> => {
+interface FetchComponentListProps {
+  page?: number;
+  take?: number;
+  search?: string;
+  state?: boolean;
+}
+export const fetchComponentList = async ({
+  page,
+  take,
+  search,
+  state,
+}: FetchComponentListProps): Promise<{
+  currentPage: number;
+  components: ComponentType[];
+  totalPages: number;
+}> => {
   try {
     const req = new PrismaAdapter<ComponentType[], IComponentTypeFindMany>(
       "ComponentType",
     );
+    const pagination =
+      page && take
+        ? {
+            take,
+            skip: (page - 1) * take,
+          }
+        : {};
     const response = await req.findMany({
+      ...pagination,
+      include: {
+        componentImage: {
+          select: {
+            url: true,
+          },
+        },
+      },
       where: {
         name: {
           contains: search,
@@ -24,9 +51,25 @@ export const fetchComponentList = async (
       },
     });
 
-    return response;
+    const totalCount = await req.count({
+      where: {
+        state: state,
+      },
+    });
+    const totalPages = Math.ceil(totalCount / (take || 10));
+
+    return {
+      currentPage: page || 1,
+      components: response,
+      totalPages: totalPages || 0,
+    };
   } catch (error) {
-    throw `Error fetching components ${error}`;
+    console.error(error);
+    return {
+      currentPage: 0,
+      components: [],
+      totalPages: 0,
+    };
   }
 };
 
@@ -42,7 +85,7 @@ export const fetchComponentTypeById = async ({
 
     const response = await req.findFirst({
       where: {
-        name: {
+        link: {
           contains: slug,
           mode: "insensitive",
         },
@@ -73,6 +116,11 @@ export const fetchComponentTypeById = async ({
             },
           },
         },
+        componentImage: {
+          select: {
+            url: true,
+          },
+        },
       },
     });
     return response;
@@ -93,6 +141,13 @@ export const fetchRelatedCategories = async ({
     >("ComponentType");
 
     const response = await componentTypeReq.findMany({
+      include: {
+        componentImage: {
+          select: {
+            url: true,
+          },
+        },
+      },
       where: {
         type,
       },

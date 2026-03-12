@@ -37,11 +37,11 @@ jobs:
 
       # (Optional) Seed only if your seed script is safe for production
       # Otherwise remove this step
-      #- name: Run Seed
-      #  run: npm run seed
-      #  env:
-      #    DATABASE_URL: ${{ secrets.DATABASE_URL }}
-      #    DIRECT_URL: ${{ secrets.DIRECT_URL }}
+      - name: Run Seed
+        run: npm run seed
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DIRECT_URL: ${{ secrets.DIRECT_URL }}
 
       - name: Debug - List project test files
         run: |

@@ -1,6 +1,6 @@
 "use server";
 
-import { PrismaAdapter } from "@/adapters/PrismaAdapter";
+import { PrismaAdapter } from "@/adapters/PrismaAdapter/PrismaAdapter";
 import { auth } from "@/auth.config";
 import { IUserFindMany } from "@/interfaces/adapters/prisma-adapter-interface";
 import { User } from "@/interfaces/user-interface";

@@ -25,7 +25,6 @@ const LinkDetailPage = async ({
     label: designSystem.name,
     value: designSystem.id,
   }));
-  console.log(designSystemOptions);
 
   return (
     <FormWrapper

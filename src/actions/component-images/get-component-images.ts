@@ -1,6 +1,6 @@
 "use server";
 
-import { PrismaAdapter } from "@/adapters/PrismaAdapter";
+import { PrismaAdapter } from "@/adapters/PrismaAdapter/PrismaAdapter";
 import { IComponentImageFindMany } from "@/interfaces/adapters/prisma-adapter-interface";
 import { ComponentImage } from "@/interfaces/design-system-interface";
 

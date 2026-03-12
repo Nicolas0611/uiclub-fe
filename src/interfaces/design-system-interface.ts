@@ -98,3 +98,8 @@ export interface ComponentType extends Component {
   relatedDesignSystems: { designSystem: DesignSystem }[];
   id: string;
 }
+
+export interface DesignSystemComponentType {
+  designSystemId: string;
+  componentTypeId: string;
+}
