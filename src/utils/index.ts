@@ -14,3 +14,12 @@ export function handleSearch(
   }
   router.replace(`${pathname}?${params.toString()}`);
 }
+
+export function optionsMapper<T extends { name: string; id: string }>(
+  data: T[],
+) {
+  return data.map((item) => ({
+    label: item.name,
+    value: item.id,
+  }));
+}
