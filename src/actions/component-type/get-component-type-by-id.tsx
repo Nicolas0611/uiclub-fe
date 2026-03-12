@@ -5,6 +5,8 @@ import { IComponentTypeFindMany } from "@/interfaces/adapters/prisma-adapter-int
 import { ComponentType } from "@/interfaces/design-system-interface";
 
 export const getComponentTypeById = async ({ id }: { id: string }) => {
+  if (id === "new")
+    return { data: null, ok: true, message: "Component type found" };
   try {
     const req = new PrismaAdapter<ComponentType, IComponentTypeFindMany>(
       "ComponentType",
