@@ -27,7 +27,7 @@ const ComponenTypeDetailPage = async ({
   const componentsOptions = optionsMapper<ComponentType>(components);
   const designSystemsOptions = optionsMapper<DesignSystem>(designSystems);
 
-  if (!componentType) {
+  if (!componentType && id !== "new") {
     redirect("/dashboard/component-types");
   }
 
