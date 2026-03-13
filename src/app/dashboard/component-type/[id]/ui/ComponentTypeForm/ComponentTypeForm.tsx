@@ -8,11 +8,11 @@ import {
 } from "@/interfaces/design-system-interface";
 import {
   Button,
-  Checkbox,
   Image,
   Input,
   Select,
   SelectItem,
+  Switch,
   Textarea,
 } from "@heroui/react";
 import { useRouter } from "next/navigation";
@@ -49,13 +49,13 @@ const ComponentTypeForm = ({
 }: ComponentTypeFormProps) => {
   const { register, handleSubmit } = useForm<ComponentTypeFormValues>({
     defaultValues: {
-      name: componentType.name,
-      state: componentType.state,
-      description: componentType.description,
-      designSystemCount: componentType.designSystemCount,
-      link: componentType.link,
-      type: componentType.type,
-      usageCount: componentType.usageCount,
+      name: componentType?.name,
+      state: componentType?.state,
+      description: componentType?.description,
+      designSystemCount: componentType?.designSystemCount,
+      link: componentType?.link,
+      type: componentType?.type,
+      usageCount: componentType?.usageCount,
       componentImage: undefined,
 
       designSystemId: componentDesign?.designSystemId,
@@ -93,13 +93,6 @@ const ComponentTypeForm = ({
           ))}
         </Select>
 
-        <Checkbox
-          className="w-full"
-          defaultChecked={true}
-          {...register("state")}
-        >
-          Estado
-        </Checkbox>
         <div className="flex flex-row gap-2">
           <Dropzone register={register} name="componentImage" />
           {componentType?.componentImage && (
@@ -128,6 +121,9 @@ const ComponentTypeForm = ({
       {/* Related Components and Design Systems Form*/}
 
       <div className="flex flex-col gap-4 border-t border-gray-200 py-4">
+        <p className="text-xs text-gray-500">
+          Related Components with Design Systems
+        </p>
         <Select label="Componente" {...register("componentTypeId")}>
           {componentsOptions.map((component) => (
             <SelectItem key={component.value}>{component.label}</SelectItem>
@@ -142,13 +138,16 @@ const ComponentTypeForm = ({
         </Select>
       </div>
 
-      <div className="flex justify-end gap-4 border-t border-gray-200 pt-4">
-        <Button type="submit" variant="light" onPress={() => router.back()}>
-          Cancelar
-        </Button>
-        <Button type="submit" color="primary" /*  isLoading={isLoading} */>
-          Guardar
-        </Button>
+      <div className="flex justify-between items-center border-t border-gray-200 pt-4">
+        <Switch {...register("state")}>Estado del componente</Switch>
+        <div className="flex">
+          <Button type="submit" variant="light" onPress={() => router.back()}>
+            Cancelar
+          </Button>
+          <Button type="submit" color="primary" /*  isLoading={isLoading} */>
+            Guardar
+          </Button>
+        </div>
       </div>
     </form>
   );
