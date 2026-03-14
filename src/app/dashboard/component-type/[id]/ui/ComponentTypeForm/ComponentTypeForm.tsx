@@ -1,10 +1,11 @@
 "use client";
 
+import { createUpdateComponentType } from "@/actions/component-type/create-update-component-type";
 import Dropzone from "@/components/shared/Inputs/Drozpone/Dropzone";
 import { COMPONENT_TYPES } from "@/constants";
 import {
+  ComponentImage,
   ComponentType,
-  DesignSystemComponentType,
 } from "@/interfaces/design-system-interface";
 import {
   Button,
@@ -16,7 +17,9 @@ import {
   Textarea,
 } from "@heroui/react";
 import { useRouter } from "next/navigation";
+import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 export interface ComponentTypeFormValues {
   description: string;
@@ -29,24 +32,22 @@ export interface ComponentTypeFormValues {
   type: string;
   usageCount: number;
   componentImage: FileList;
-  designSystemId: string;
-  componentTypeId: string;
+  componentImageId: string;
 }
 
 interface ComponentTypeFormProps {
   componentType: ComponentType;
-  componentDesign: DesignSystemComponentType;
-  componentsOptions: { label: string; value: string }[]; //Todo: Review to make a global interface for options
-  designSystemsOptions: { label: string; value: string }[];
+  componentImages: ComponentImage[];
 }
 
 //TODO: REVIEW THIS REFACTOR https://claude.ai/chat/d87c5201-71ec-4e46-8662-87f7e7966aa9
 const ComponentTypeForm = ({
   componentType,
-  componentDesign,
-  componentsOptions,
-  designSystemsOptions,
+  componentImages,
 }: ComponentTypeFormProps) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+
   const { register, handleSubmit } = useForm<ComponentTypeFormValues>({
     defaultValues: {
       name: componentType?.name,
@@ -58,14 +59,43 @@ const ComponentTypeForm = ({
       usageCount: componentType?.usageCount,
       componentImage: undefined,
 
-      designSystemId: componentDesign?.designSystemId,
-      componentTypeId: componentDesign?.componentTypeId,
+      componentImageId: componentType?.componentImageId,
     },
   });
+
+  const componentImagesOptions = useMemo(() => {
+    const emptyOption = {
+      image: "  ",
+      label: "Selecciona una imagen",
+      value: null,
+    };
+    const options = componentImages.map((componentImage) => ({
+      image: componentImage.url,
+      label: componentImage.name,
+      value: componentImage.id,
+    }));
+
+    return [emptyOption, ...options];
+  }, [componentImages]);
+
   const onSubmit = async (data: ComponentTypeFormValues) => {
-    console.log(data);
+    setIsLoading(true);
+    const formData = new FormData();
+
+    if (data.componentImage) {
+      formData.append("componentImage", data.componentImage[0]);
+    }
+    data.id = componentType?.id ?? undefined;
+
+    const result = await createUpdateComponentType(data, formData);
+    if (result?.ok) {
+      toast.success(result.message);
+      router.push("/dashboard/component-type");
+    } else {
+      toast.error(result.message);
+    }
+    setIsLoading(false);
   };
-  const router = useRouter();
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -90,6 +120,24 @@ const ComponentTypeForm = ({
         <Select label="Tipo de componente" {...register("type")}>
           {COMPONENT_TYPES.map((type) => (
             <SelectItem key={type.value}>{type.label}</SelectItem>
+          ))}
+        </Select>
+
+        <Select label="Imagen del componente" {...register("componentImageId")}>
+          {componentImagesOptions.map((componentImage) => (
+            <SelectItem
+              startContent={
+                <Image
+                  src={componentImage.image}
+                  alt={componentImage.label}
+                  width={30}
+                  height={30}
+                />
+              }
+              key={componentImage.value}
+            >
+              {componentImage.label}
+            </SelectItem>
           ))}
         </Select>
 
@@ -118,33 +166,13 @@ const ComponentTypeForm = ({
         </div>
       </div>
 
-      {/* Related Components and Design Systems Form*/}
-
-      <div className="flex flex-col gap-4 border-t border-gray-200 py-4">
-        <p className="text-xs text-gray-500">
-          Related Components with Design Systems
-        </p>
-        <Select label="Componente" {...register("componentTypeId")}>
-          {componentsOptions.map((component) => (
-            <SelectItem key={component.value}>{component.label}</SelectItem>
-          ))}
-        </Select>
-        <Select label="Design System" {...register("designSystemId")}>
-          {designSystemsOptions.map((designSystem) => (
-            <SelectItem key={designSystem.value}>
-              {designSystem.label}
-            </SelectItem>
-          ))}
-        </Select>
-      </div>
-
       <div className="flex justify-between items-center border-t border-gray-200 pt-4">
         <Switch {...register("state")}>Estado del componente</Switch>
         <div className="flex">
-          <Button type="submit" variant="light" onPress={() => router.back()}>
+          <Button variant="light" onPress={() => router.back()}>
             Cancelar
           </Button>
-          <Button type="submit" color="primary" /*  isLoading={isLoading} */>
+          <Button type="submit" color="primary" isLoading={isLoading}>
             Guardar
           </Button>
         </div>
