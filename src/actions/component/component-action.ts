@@ -40,6 +40,9 @@ export const fetchComponentList = async ({
           },
         },
       },
+      orderBy: {
+        link: "asc",
+      },
       where: {
         name: {
           contains: search,

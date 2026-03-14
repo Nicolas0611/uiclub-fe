@@ -89,6 +89,7 @@ export interface ComponentImage {
 
 export interface ComponentType extends Component {
   componentImage: ComponentImage;
+  componentImageId: string;
   name: string;
   description: string;
   category: string;

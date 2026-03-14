@@ -19,7 +19,7 @@ const ComponentTypePage = async ({ searchParams }: IComponentTypePage) => {
     return <div>No component types found</div>;
   }
   return (
-    <div className="flex flex-col h-full gap-3">
+    <div className="flex flex-col h-full gap-3 pb-3">
       <div className="w-full flex items-center justify-end">
         <Button
           size="sm"
