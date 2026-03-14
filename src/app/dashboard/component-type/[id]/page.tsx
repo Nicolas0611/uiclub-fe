@@ -1,13 +1,6 @@
-import { getComponentDesign } from "@/actions/component-type/get-component-design";
+import { getComponentImages } from "@/actions/component-images/get-component-images";
 import { getComponentTypeById } from "@/actions/component-type/get-component-type-by-id";
-import { fetchComponentList } from "@/actions/component/component-action";
-import { fetchDesignSystems } from "@/actions/design-system/design-actions";
 import FormWrapper from "@/components/shared/FormWrapper/FormWrapper";
-import {
-  ComponentType,
-  DesignSystem,
-} from "@/interfaces/design-system-interface";
-import { optionsMapper } from "@/utils";
 import { BuildingStorefrontIcon } from "@heroicons/react/24/outline";
 import { redirect } from "next/navigation";
 import ComponentTypeForm from "./ui/ComponentTypeForm/ComponentTypeForm";
@@ -20,12 +13,7 @@ const ComponenTypeDetailPage = async ({
   const { id } = await params;
 
   const { data: componentType } = await getComponentTypeById({ id });
-  const { data: componentDesignData } = await getComponentDesign({ id });
-  const designSystems = await fetchDesignSystems();
-  const { components } = await fetchComponentList({});
-
-  const componentsOptions = optionsMapper<ComponentType>(components);
-  const designSystemsOptions = optionsMapper<DesignSystem>(designSystems);
+  const { images: componentImages } = await getComponentImages();
 
   if (!componentType && id !== "new") {
     redirect("/dashboard/component-types");
@@ -38,9 +26,7 @@ const ComponenTypeDetailPage = async ({
     >
       <ComponentTypeForm
         componentType={componentType!}
-        componentDesign={componentDesignData!}
-        componentsOptions={componentsOptions}
-        designSystemsOptions={designSystemsOptions}
+        componentImages={componentImages}
       />
     </FormWrapper>
   );
