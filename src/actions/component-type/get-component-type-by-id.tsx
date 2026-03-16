@@ -20,6 +20,7 @@ export const getComponentTypeById = async ({ id }: { id: string }) => {
         componentImage: {
           select: {
             url: true,
+            id: true,
           },
         },
       },
