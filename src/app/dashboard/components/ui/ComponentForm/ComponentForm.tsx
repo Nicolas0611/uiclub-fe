@@ -159,13 +159,20 @@ const ComponentForm = ({
                 type="button"
                 variant="flat"
                 color="danger"
-                onPress={() => {
+                onPress={async () => {
                   if (component.componentImage) {
-                    deleteComponentImage(
+                    const result = await deleteComponentImage(
                       component.componentImage.id,
                       component.componentImage.url,
                       component.id,
+                      "component",
                     );
+                    if (result?.ok) {
+                      toast.success(result.message);
+                      router.refresh();
+                    } else {
+                      toast.error(result?.message ?? "No se pudo eliminar la imagen");
+                    }
                   }
                 }}
               >

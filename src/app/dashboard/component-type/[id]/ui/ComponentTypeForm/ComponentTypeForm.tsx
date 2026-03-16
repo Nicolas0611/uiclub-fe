@@ -1,6 +1,7 @@
 "use client";
 
 import { createUpdateComponentType } from "@/actions/component-type/create-update-component-type";
+import { deleteComponentImage } from "@/actions/component/delete-component-image";
 import Dropzone from "@/components/shared/Inputs/Drozpone/Dropzone";
 import { COMPONENT_TYPES } from "@/constants";
 import {
@@ -155,8 +156,21 @@ const ComponentTypeForm = ({
                 type="button"
                 variant="flat"
                 color="danger"
-                onPress={() => {
-                  console.log("eliminar imagen");
+                onPress={async () => {
+                  if (componentType.componentImage) {
+                    const result = await deleteComponentImage(
+                      componentType.componentImage.id,
+                      componentType.componentImage.url,
+                      componentType.id,
+                      "componentType",
+                    );
+                    if (result?.ok) {
+                      toast.success(result.message);
+                      router.refresh();
+                    } else {
+                      toast.error(result?.message ?? "No se pudo eliminar la imagen");
+                    }
+                  }
                 }}
               >
                 Eliminar
