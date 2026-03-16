@@ -5,10 +5,13 @@ import { v2 as cloudinary } from "cloudinary";
 import { revalidatePath } from "next/cache";
 cloudinary.config(process.env.CLOUDINARY_URL || "");
 
+export type ComponentImageOwnerModel = "component" | "componentType";
+
 export const deleteComponentImage = async (
   imageId: string,
   imageUrl: string,
-  componentId: string,
+  entityId: string,
+  model: ComponentImageOwnerModel = "component",
 ) => {
   if (!imageUrl.startsWith("http")) {
     return {
@@ -20,10 +23,17 @@ export const deleteComponentImage = async (
 
   try {
     await prisma.$transaction(async (tx) => {
-      await tx.component.update({
-        where: { id: componentId },
-        data: { componentImageId: null },
-      });
+      if (model === "component") {
+        await tx.component.update({
+          where: { id: entityId },
+          data: { componentImageId: null },
+        });
+      } else {
+        await tx.componentType.update({
+          where: { id: entityId },
+          data: { componentImageId: null },
+        });
+      }
 
       const result = await cloudinary.uploader.destroy(
         `components/${imageName}`,
@@ -38,14 +48,23 @@ export const deleteComponentImage = async (
       });
     });
 
-    revalidatePath(`/dashboard/components`);
-    revalidatePath(`/dashboard/components/${componentId}`);
+    if (model === "component") {
+      revalidatePath(`/dashboard/components`);
+      revalidatePath(`/dashboard/components/${entityId}`);
+    } else {
+      revalidatePath(`/dashboard/component-type`);
+      revalidatePath(`/dashboard/component-type/${entityId}`);
+    }
+
     return {
-      message: "Imagen del componente eliminada exitosamente",
+      message: "Imagen eliminada exitosamente",
       ok: true,
     };
   } catch (error) {
     console.log(error);
-    throw `Error deleting component image ${error}`;
+    return {
+      ok: false,
+      message: `Error al eliminar la imagen: ${error}`,
+    };
   }
 };
