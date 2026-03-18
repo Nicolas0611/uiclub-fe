@@ -1,5 +1,6 @@
 "use client";
 
+import { createRelation } from "@/actions/component-type/create-relation";
 import {
   Button,
   Modal,
@@ -9,8 +10,15 @@ import {
   Select,
   SelectItem,
 } from "@heroui/react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { FormOptions } from "../ActionsBar/ActionsBar";
+
+export interface FormRelationData {
+  componentTypeId: string;
+  designSystemId: string;
+}
 
 interface Props {
   isOpen: boolean;
@@ -18,25 +26,34 @@ interface Props {
   onOpenChange: (open: boolean) => void;
   onClose: () => void;
 }
-interface FormData {
-  componentTypeId: string;
-  designSystemId: string;
-}
+
 const RelationModal = ({
   isOpen,
   formOptions,
   onOpenChange,
   onClose,
 }: Props) => {
-  const { register, handleSubmit } = useForm<FormData>({
+  const { register, handleSubmit } = useForm<FormRelationData>({
     defaultValues: {
       componentTypeId: "",
       designSystemId: "",
     },
   });
+  const [isLoading, setIsLoading] = useState(false);
 
-  const onSubmit = async (data: FormData) => {
-    console.log(data);
+  const onSubmit = async (data: FormRelationData) => {
+    if (!data) return;
+    setIsLoading(true);
+
+    const result = await createRelation(data);
+
+    if (result?.ok) {
+      toast.success(result.message);
+      onClose();
+    } else {
+      toast.error(result.message);
+    }
+    setIsLoading(false);
   };
   return (
     <Modal size="2xl" isOpen={isOpen} onOpenChange={onOpenChange}>
@@ -65,7 +82,7 @@ const RelationModal = ({
               <Button variant="light" onPress={onClose}>
                 Cancel
               </Button>
-              <Button type="submit" color="primary">
+              <Button type="submit" color="primary" isLoading={isLoading}>
                 Relación
               </Button>
             </div>
