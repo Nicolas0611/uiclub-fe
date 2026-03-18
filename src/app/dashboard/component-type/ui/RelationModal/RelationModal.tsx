@@ -47,8 +47,7 @@ const RelationModal = ({
   const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = async (data: FormRelationData) => {
-    if (!data) return;
-    setIsLoading(true);
+    if (!data.componentTypeId && !data.designSystemId) return;
 
     const result = await createRelation(data);
 
@@ -71,7 +70,7 @@ const RelationModal = ({
             onSubmit={handleSubmit(onSubmit)}
           >
             <Select
-              required={true}
+              required
               label="Component Type"
               {...register("componentTypeId")}
             >
@@ -82,7 +81,7 @@ const RelationModal = ({
               ))}
             </Select>
             <Select
-              required={true}
+              required
               label="Design System"
               {...register("designSystemId")}
             >
@@ -106,7 +105,7 @@ const RelationModal = ({
                 type="submit"
                 color="primary"
                 isLoading={isLoading}
-                isDisabled={isLoading || !isValid}
+                isDisabled={!isValid}
               >
                 Relación
               </Button>
