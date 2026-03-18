@@ -33,7 +33,12 @@ const RelationModal = ({
   onOpenChange,
   onClose,
 }: Props) => {
-  const { register, handleSubmit } = useForm<FormRelationData>({
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { isValid },
+  } = useForm<FormRelationData>({
     defaultValues: {
       componentTypeId: "",
       designSystemId: "",
@@ -49,6 +54,7 @@ const RelationModal = ({
 
     if (result?.ok) {
       toast.success(result.message);
+      reset();
       onClose();
     } else {
       toast.error(result.message);
@@ -64,14 +70,22 @@ const RelationModal = ({
             className="flex flex-col gap-4 pb-4"
             onSubmit={handleSubmit(onSubmit)}
           >
-            <Select label="Component Type" {...register("componentTypeId")}>
+            <Select
+              required={true}
+              label="Component Type"
+              {...register("componentTypeId")}
+            >
               {formOptions.componentTypes.map((componentType) => (
                 <SelectItem key={componentType.value}>
                   {componentType.label}
                 </SelectItem>
               ))}
             </Select>
-            <Select label="Design System" {...register("designSystemId")}>
+            <Select
+              required={true}
+              label="Design System"
+              {...register("designSystemId")}
+            >
               {formOptions.designSystems.map((designSystem) => (
                 <SelectItem key={designSystem.value}>
                   {designSystem.label}
@@ -79,10 +93,21 @@ const RelationModal = ({
               ))}
             </Select>
             <div className="flex justify-end gap-4 border-t border-gray-200 pt-4">
-              <Button variant="light" onPress={onClose}>
+              <Button
+                variant="light"
+                onPress={() => {
+                  reset();
+                  onClose();
+                }}
+              >
                 Cancel
               </Button>
-              <Button type="submit" color="primary" isLoading={isLoading}>
+              <Button
+                type="submit"
+                color="primary"
+                isLoading={isLoading}
+                isDisabled={isLoading || !isValid}
+              >
                 Relación
               </Button>
             </div>
