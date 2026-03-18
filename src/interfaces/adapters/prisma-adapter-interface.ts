@@ -42,8 +42,12 @@ export type IModelNames = Prisma.ModelName;
 /* DESIGN SYSTEM COMPONENT TYPE */
 export type IDesignSystemComponentTypeFindMany =
   Prisma.DesignSystemComponentTypeFindManyArgs;
+
 export type IDesignSystemComponentTypeFindFirst =
   Prisma.DesignSystemComponentTypeFindFirstArgs;
+
+export type IDesignSystemComponentTypeCreate =
+  Prisma.DesignSystemComponentTypeCreateArgs;
 
 export interface HttpsReq<RES_T, OPT_T> {
   findMany(options?: OPT_T): Promise<RES_T>;
@@ -51,5 +55,6 @@ export interface HttpsReq<RES_T, OPT_T> {
   findUnique(options?: OPT_T): Promise<RES_T>;
   delete(options?: OPT_T): Promise<RES_T>;
   count(options?: OPT_T): Promise<number>;
+  create(options?: OPT_T): Promise<RES_T>;
   update(options?: OPT_T): Promise<RES_T>;
 }

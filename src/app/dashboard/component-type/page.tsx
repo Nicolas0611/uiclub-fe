@@ -1,7 +1,6 @@
 import { fetchComponentList } from "@/actions/component/component-action";
-import { PlusIcon } from "@heroicons/react/24/outline";
-import { Button, Link } from "@heroui/react";
-import { ComponentTypeTable } from "./ui/ComponentTypeTable";
+import ActionsBar from "./ui/ActionsBar/ActionsBar";
+import { ComponentTypeTable } from "./ui/ComponentTypeTable/ComponentTypeTable";
 
 interface IComponentTypePage {
   searchParams: Promise<{ page: number; search: string }>;
@@ -18,20 +17,10 @@ const ComponentTypePage = async ({ searchParams }: IComponentTypePage) => {
   if (!components) {
     return <div>No component types found</div>;
   }
+
   return (
     <div className="flex flex-col h-full gap-3 pb-3">
-      <div className="w-full flex items-center justify-end">
-        <Button
-          size="sm"
-          color="primary"
-          variant="solid"
-          as={Link}
-          href="/dashboard/component-type/new"
-        >
-          <PlusIcon className="size-5" />
-          Add Component Type
-        </Button>
-      </div>
+      <ActionsBar />
       <ComponentTypeTable componentTypes={components} totalPages={totalPages} />
     </div>
   );
