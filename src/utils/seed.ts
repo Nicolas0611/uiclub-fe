@@ -1,3 +1,4 @@
+import { prisma } from "../lib/prisma";
 import {
   initialCompanyData,
   initialCompanyImages,
@@ -9,8 +10,7 @@ import {
   initialFigmaLink,
   initialLinks,
   initialUsers,
-} from "../constants/seed";
-import { prisma } from "../lib/prisma";
+} from "../seed";
 
 async function main() {
   const companyNames = {
