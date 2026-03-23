@@ -9,8 +9,7 @@ import StatCard from "@/components/custom/component-page/StatCard/StatCard";
 import ComponentsGrid from "@/components/custom/design-systems/ComponentsGrid/ComponentsGrid";
 
 import { Breadcrumb } from "@/components/shared";
-import { Chip } from "@heroui/react";
-import Image from "next/image";
+import { Chip, Image } from "@heroui/react";
 import { notFound } from "next/navigation";
 
 export default async function ComponentDetailPage({
@@ -68,7 +67,6 @@ export default async function ComponentDetailPage({
             src={component?.componentImage?.url}
             width={1000}
             height={1000}
-            quality={100}
             style={{ height: "100%" }}
             loading="lazy"
           />
@@ -98,8 +96,8 @@ export default async function ComponentDetailPage({
             style={{ height: "100%", width: "100%" }}
             width={1000}
             height={2000}
-            quality={100}
           />
+
           <div className="flex flex-row items-center gap-2 absolute top-5 left-5 bg-white border border-gray-200 p-3 rounded-full">
             <p className="text-gray-800 text-base sm:text-sm">
               Highlighted by:
@@ -109,7 +107,9 @@ export default async function ComponentDetailPage({
         </div>
 
         <div className="pt-5">
-          <Splitter component={component!} />
+          {component.figmaLinks.length > 0 && (
+            <Splitter component={component!} />
+          )}
         </div>
 
         <div className="mt-5 border border-gray-200 rounded-lg shadow-sm p-4">
