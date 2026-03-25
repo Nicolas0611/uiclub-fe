@@ -54,7 +54,10 @@ const FigmaFileCard = ({ figmaFile }: Props) => {
           radius="full"
           size="sm"
           variant={isFollowed ? "bordered" : "solid"}
-          onPress={() => setIsFollowed(!isFollowed)}
+          onPress={() => {
+            setIsFollowed(!isFollowed);
+            window.open(figmaFile.links?.figma, "_blank");
+          }}
           startContent={<EyeIcon className="size-4" />}
         >
           {isFollowed ? "Viewed" : "View"}
