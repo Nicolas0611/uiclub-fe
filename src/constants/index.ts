@@ -9,7 +9,7 @@ export const LINKS = [
   {
     path: "/figma",
     title: "Figma",
-    isDisabled: true,
+    isDisabled: false,
   },
   {
     path: "/components",
