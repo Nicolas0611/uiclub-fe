@@ -24,7 +24,6 @@ export interface Link {
   designSystemId: string;
 }
 
-//TODO: Fix the design system interface
 export interface DesignSystem {
   id: string;
   companyId: number;
@@ -46,7 +45,7 @@ export interface DesignSystem {
   isNew: boolean;
 }
 
-type Type =
+type ComponentCategory =
   | "Overlays"
   | "Data"
   | "Input"
@@ -63,7 +62,7 @@ export interface Component {
   id: string;
   name: string;
   description: string;
-  type: Type;
+  type: ComponentCategory;
   state: boolean;
   link: string;
   designSystem?: DesignSystem;

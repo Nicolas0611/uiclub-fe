@@ -26,20 +26,16 @@ export const createUpdateLink = async (link: LinkFormValues) => {
       let link: Link;
 
       if (id) {
-        // Actualizar link
         link = await tx.link.update({
           where: { id: id },
           data: { figma, web, storybook, designSystemId },
         });
-
-        console.log({ updatedLink: link });
       } else {
-        //Crear link
         link = await tx.link.create({
           data: { figma, web, storybook, designSystemId },
         });
-        console.log({ createdLink: link });
       }
+      return link;
     });
 
     revalidatePath(`/dashboard/links`);

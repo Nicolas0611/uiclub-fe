@@ -20,8 +20,6 @@ const componentSchema = z.object({
   componentImageId: z.string().optional(),
 });
 
-//Refactorizar para que sea un solo endpoint
-
 export const createUpdateComponent = async (
   component: ComponentFormValues,
   formData: FormData | null,
@@ -56,7 +54,7 @@ export const createUpdateComponent = async (
         tx,
         name,
       );
-      /*Depende si la imagen ya esta creada o la van a subir hasta ahora ahi se define el iD */
+      // Use the newly uploaded image id, or fall back to the existing ComponentImage id
       const imageId = componentImageCreated?.id
         ? componentImageCreated.id
         : componentImageId;
@@ -66,7 +64,6 @@ export const createUpdateComponent = async (
           "Error al subir la imagen del componente, se necesita subir una imagen",
         );
       }
-      // Actualizar component si no tiene una nueva imagen cargada, sino es una imagen que ya existe del modelo ComponentImage
       if (id) {
         component = await tx.component.update({
           where: { id: id },
@@ -101,7 +98,7 @@ export const createUpdateComponent = async (
 
     return {
       ok: true,
-      product: prismaTx,
+      data: prismaTx,
       message: "Componente creado/actualizado exitosamente",
     };
   } catch (error) {

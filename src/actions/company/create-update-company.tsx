@@ -44,7 +44,6 @@ export const createUpdateCompany = async (
       let company: Company;
 
       if (id) {
-        //Actualizar producto
         company = await tx.company.update({
           where: { id: Number(id) },
           data: {
@@ -52,19 +51,15 @@ export const createUpdateCompany = async (
             state: state,
           },
         });
-        console.log({ updatedCompany: company });
       } else {
-        //Crear empresa
         company = await tx.company.create({
           data: {
             name: name,
             state: state,
           },
         });
-        console.log({ createdCompany: company });
       }
-      // Proceso de carga y guardado de imagenes
-      // Recorrer imagenes y guardarlas
+      // Upload and save the company image if provided
       if (companyImage && companyImage instanceof File) {
         const companyImageUrl = await uploadImage(
           companyImage as File,
@@ -88,7 +83,7 @@ export const createUpdateCompany = async (
 
     return {
       ok: true,
-      product: prismaTx,
+      data: prismaTx,
       message: "Compañía creada/actualizado exitosamente",
     };
   } catch (error) {

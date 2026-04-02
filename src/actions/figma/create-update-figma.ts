@@ -33,16 +33,15 @@ export const createUpdateFigma = async (data: FigmaFormValues) => {
           where: { id: id },
           data: { url, state, companyId, componentTypeId },
         });
-        console.log({ updatedFigma: figma });
       } else {
         figma = await tx.figma.create({
           data: { url, state, companyId, componentTypeId },
         });
-        console.log({ createdFigma: figma });
       }
       if (!figma) {
-        throw new Error("Error al crear/actualizar el figma");
+        throw new Error("Error creating/updating Figma link");
       }
+      return figma;
     });
 
     revalidatePath(`/dashboard/figma`);

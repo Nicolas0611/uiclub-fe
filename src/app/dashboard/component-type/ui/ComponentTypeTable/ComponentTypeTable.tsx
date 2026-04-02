@@ -1,6 +1,6 @@
 "use client";
 
-import { usePagination } from "@/app/hooks/usePagination";
+import { usePagination } from "@/hooks/usePagination";
 import { statusColorMap } from "@/constants";
 import { ComponentType } from "@/interfaces/design-system-interface";
 import { PencilIcon } from "@heroicons/react/24/outline";

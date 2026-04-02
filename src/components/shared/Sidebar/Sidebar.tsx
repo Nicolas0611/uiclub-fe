@@ -15,12 +15,12 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import User, { UserProps } from "../User/User";
-import { menuItems } from "./Siderbar.data";
+import { menuItems } from "./Sidebar.data";
 
 // Basic Sidebar Component
 interface SidebarProps {
   user: UserProps;
-  role: string /* "admin" | "user" */;
+  role: string;
 }
 
 export const Sidebar = ({ user, role }: SidebarProps) => {

@@ -14,12 +14,12 @@ export const uploadImage = async (file: File, folder: string) => {
       })
       .then((result) => result.secure_url)
       .catch((error) => {
-        console.log(error);
+        console.error(error);
         return null;
       });
     return result;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return null;
   }
 };

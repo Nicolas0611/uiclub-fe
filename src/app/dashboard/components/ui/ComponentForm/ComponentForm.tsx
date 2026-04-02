@@ -2,7 +2,7 @@
 
 import { createUpdateComponent } from "@/actions/component/create-update-component";
 import { deleteComponentImage } from "@/actions/component/delete-component-image";
-import Dropzone from "@/components/shared/Inputs/Drozpone/Dropzone";
+import Dropzone from "@/components/shared/Inputs/Dropzone/Dropzone";
 import { COMPONENT_TYPES } from "@/constants";
 import {
   Component,

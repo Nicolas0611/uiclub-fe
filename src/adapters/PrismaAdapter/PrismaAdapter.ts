@@ -1,11 +1,13 @@
 import {
-  HttpsReq,
+  DatabaseRepository,
   IModelNames,
 } from "@/interfaces/adapters/prisma-adapter-interface";
 import { prisma } from "@/lib/prisma";
 import { PrismaClient } from "@prisma/client/extension";
 
-export class PrismaAdapter<RES_T, OPT_T> implements HttpsReq<RES_T, OPT_T> {
+export class PrismaAdapter<RES_T, OPT_T>
+  implements DatabaseRepository<RES_T, OPT_T>
+{
   private prisma: PrismaClient = prisma;
   private modelName: IModelNames;
   constructor(modelName: IModelNames) {

@@ -39,7 +39,6 @@ export const createUpdateDesignSystem = async (
       let designSystem: DesignSystem;
 
       if (id) {
-        // Actualizar design system
         designSystem = await tx.designSystem.update({
           where: { id: id },
           data: {
@@ -47,24 +46,22 @@ export const createUpdateDesignSystem = async (
             companyId: Number(companyId),
           },
         });
-        console.log({ updatedDesignSystem: designSystem });
       } else {
-        //Crear empresa
         designSystem = await tx.designSystem.create({
           data: {
             ...rest,
             companyId: Number(companyId),
           },
         });
-        console.log({ createdDesignSystem: designSystem });
       }
+      return designSystem;
     });
 
     revalidatePath(`/dashboard/design-systems`);
 
     return {
       ok: true,
-      product: prismaTx,
+      data: prismaTx,
       message: "Compañía creada/actualizado exitosamente",
     };
   } catch (error) {

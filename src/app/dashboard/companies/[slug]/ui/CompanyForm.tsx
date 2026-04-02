@@ -2,7 +2,7 @@
 
 import { createUpdateCompany } from "@/actions/company/create-update-company";
 import { deleteCompanyImage } from "@/actions/company/delete-company-image";
-import Dropzone from "@/components/shared/Inputs/Drozpone/Dropzone";
+import Dropzone from "@/components/shared/Inputs/Dropzone/Dropzone";
 import { Company } from "@/interfaces/company-interface";
 import { Button, Checkbox, Image, Input } from "@heroui/react";
 import { useRouter } from "next/navigation";

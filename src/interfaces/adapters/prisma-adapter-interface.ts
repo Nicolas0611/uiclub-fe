@@ -49,7 +49,7 @@ export type IDesignSystemComponentTypeFindFirst =
 export type IDesignSystemComponentTypeCreate =
   Prisma.DesignSystemComponentTypeCreateArgs;
 
-export interface HttpsReq<RES_T, OPT_T> {
+export interface DatabaseRepository<RES_T, OPT_T> {
   findMany(options?: OPT_T): Promise<RES_T>;
   findFirst(options?: OPT_T): Promise<RES_T>;
   findUnique(options?: OPT_T): Promise<RES_T>;
