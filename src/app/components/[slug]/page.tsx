@@ -9,7 +9,9 @@ import StatCard from "@/components/custom/component-page/StatCard/StatCard";
 import ComponentsGrid from "@/components/custom/design-systems/ComponentsGrid/ComponentsGrid";
 
 import { Breadcrumb } from "@/components/shared";
-import { Chip, Image } from "@heroui/react";
+import { Chip } from "@heroui/react";
+import Image from "next/image";
+
 import { notFound } from "next/navigation";
 
 export default async function ComponentDetailPage({
@@ -96,6 +98,7 @@ export default async function ComponentDetailPage({
             style={{ height: "100%", width: "100%" }}
             width={1000}
             height={2000}
+            quality={100}
           />
 
           <div className="flex flex-row items-center gap-2 absolute top-5 left-5 bg-white border border-gray-200 p-3 rounded-full">
